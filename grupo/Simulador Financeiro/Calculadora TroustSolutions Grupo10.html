@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+    
+    <style>
+
+    .red{
+        color: rgb(228, 37, 97);
+    }
+
+    .green{
+        color: rgb(19, 182, 103);
+    }
+
+    .blue{
+        color: rgb(77, 51, 244);
+    }
+
+    </style>
+
+</head>
+<body>
+    <h1>Simulador Financeiro - Troust Solutions</h1>
+
+    Quantidade de alevinos (filhotes de peixe) que possui:
+    <input id="input_quantidade" type="number" placeholder="e.g. 10000"><br><br>
+    Valor do Kg da truta em R$:
+    <input id="input_valorKg" type="number" placeholder="e.g. 20.50"><br><br>
+    Massa (peso) média da truta para venda em gramas:
+    <input id="input_peso" type="number" placeholder="e.g. 300"><br><br>
+    
+    <select id="select_calculo">
+        <option value="#" selected disabled>Selecione uma opção</option>
+        <option value="2">Diferença Acumulada</option>
+        <option value="1">Sem Sensor</option>
+        <option value="3">Com Sensor</option>
+    </select>
+
+    <button onclick="calcular()">Calcular</button>
+    <button onclick="limpar()">Clear</button> <br><br>
+
+ 
+<div id="div_mensagem"></div><br><br>
+
+</body>
+</html>
+
+<script>
+    var percentViveSem = 0.05; // mudar a porcentagem
+    var percentViveCom = 0.7;
+    var aumentoMassa = (1 + 0.25);
+    var receitaCom = 0;
+    var receitaSem = 0;    
+    var lote = 0;
+    var diferencaAcumulada = 0;
+    var viveComAcumulado = 0;
+    var viveSemAcumulado = 0;
+    var qtAcumulada =0;
+
+       
+    function calcular(){
+        var selecao = Number(select_calculo.value);
+        
+        if (selecao <= 2) {
+            var quantidade = Number(input_quantidade.value);
+            var valorGrama = (Number(input_valorKg.value) / 1000);
+            var peso = Number(input_peso.value);
+            var viveSem = (quantidade * percentViveSem);
+            receitaSem = (viveSem * peso * valorGrama);
+
+
+            div_mensagem.innerHTML = `<span class="red">
+            ------------------------------------------------------------------------------------------<br>
+            Das <b>${quantidade}</b> trutas que você tem,<br><br>
+            Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o monitoramento de temperatura! (taxa de sobrevivência = 5%, segundo EMBRAPA)<br><br>
+            Sua receita será de <b>${receitaSem.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>.<br><br>
+            A massa (peso) média da sua truta para venda continuará igual, <b>${peso}g</b>.<br>
+            ------------------------------------------------------------------------------------------<br></span><br>
+            <img style='width:300px' src = 'Tanque com poucas trutas.png'><br><br>`
+
+            
+        }
+        
+        if (selecao >= 2) {
+            var quantidade = Number(input_quantidade.value);
+            var valorGrama = (Number(input_valorKg.value) / 1000);
+            var peso = Number(input_peso.value);
+            var viveCom = (quantidade * percentViveCom);
+            peso *= aumentoMassa;
+            receitaCom = (viveCom * peso * valorGrama);
+
+            div_mensagem.innerHTML = `<span class="green">
+            ------------------------------------------------------------------------------------------<br>
+            Das <b>${quantidade}</b> trutas que você tem,<br><br>
+            <b>${viveCom.toFixed(0)}</b> sobreviverão com o monitoramento de temperatura! (taxa de sobrevivência = 70%, segundo EMBRAPA)<br><br>
+            <b>Você terá de receita ${receitaCom.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}!!!</b><br><br>
+            A massa (peso) média da sua truta para venda aumentará em 25% (segundo EMBRAPA) para <b>${peso}g</b>.<br>
+            ------------------------------------------------------------------------------------------<br></span><br>
+            <img style='width:300px' src = 'Tanque com resfriamento.png'><br><br>`   
+            
+            
+
+        }
+        
+        if (selecao == 2) {
+            lote ++;
+            diferencaAcumulada += receitaCom - receitaSem;
+            viveComAcumulado += viveCom;
+            viveSemAcumulado += viveSem;
+            qtAcumulada += quantidade;
+            var porcentagem = (((viveComAcumulado - viveSemAcumulado) / qtAcumulada) * 100);
+
+
+            div_mensagem.innerHTML = `<span class="blue"> Dos <b>${qtAcumulada}</b> alevinos, <b>${viveComAcumulado.toFixed(0)}</b> sobreviverão caso a temperatura seja monitorada.<br><br>
+            O número de trutas que sobreviverão a mais em relação ao resultado sem o monitoramento da temperatura é de <b>${(viveComAcumulado - viveSemAcumulado).toFixed(0)}</b>,<br><br>
+             o que equivale a <b>${porcentagem.toFixed(2)}%</b>.<br><br>
+            A diferença acumulada entre os ganhos de ter monitoramento de temperatura em relação a não ter monitoramento com <b>${lote} lote(s)</b>,<br><br>
+            é de <b>${diferencaAcumulada.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>.<br><br></span>
+               <a href="https://www.figma.com/design/B9UJ5vjbpqp2RiNlBbmxdv/Untitled?node-id=0-1&m=dev&t=QjL0ghhZ2ZPfk6LW-1"><button> Compre agora.</button></a><br><br>`
+        }
+        
+        
+    }
+
+    function limpar(){
+        div_mensagem.innerHTML = `Você tinha um total acumulado de <b>${diferencaAcumulada.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>,<br><br>
+            agora você tem <b>R$0</b> acumulado.`
+
+            diferencaAcumulada = 0;
+            viveComAcumulado = 0;
+            viveSemAcumulado = 0;
+            qtAcumulada =0;
+
+    }
+
+
+</script>
+
