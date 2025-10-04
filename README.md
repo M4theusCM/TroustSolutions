@@ -1,2 +1,7 @@
-# TroustSolutions
-Projeto de PI - 1CCOK TroustSolutions 
+# **TrutCultura**
+
+*Projeto de pesquisa e inovação*
+
+### 📁 Estrutura
+- 👥 Grupo: Versão principal do projeto  
+- 🙋 Individuais: Versão de prototipos e etapas do projeto
