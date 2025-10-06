@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+}
+
+/*Importação da fonte Poppins*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* 
+    Variaveis de cores, vc usa "--nome-var" para definir 
+    para usar só precisa colocar "var(--nome-var)"
+*/
+:root {
+    --roxo-fundo: #420F65;
+    --roxo-2: #A70FFF;
+    --branco-fundo: #FFFFFF;
+    --tamanho-vw-banner: 55%
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* banner colorido */
+.banner {
+    width: var(--tamanho-vw-banner);
+    height: 100%;
+    background-color: var(--roxo-fundo);
+}
+
+.luzes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: -1;
+}
+
+.efeito1 {
+    background-color: #5996B6;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin-bottom: 20vh;
+    filter: blur(100px);
+    align-self: flex-end;
+}
+
+.efeito2 {
+    background-color: #A70FFF;
+    width: 300px;
+    height: 300px;
+    border-radius: 0 0vw 100% 0px;
+    filter: blur(120px);
+    margin-right: 50px;
+}
+
+.efeito3 {
+    background-color: #B6AA59;
+    width: 150px;
+    height: 150px;
+    border-radius: 100% 100%;
+    filter: blur(80px);
+    opacity: 75%;
+    margin-top: 20%;
+    margin-left: 15%;
+}
+
+.efeito4 {
+    background-color: #E30FFF;
+    width: 150px;
+    height: 150px;
+    border-radius: 100% 0 0 0;
+    filter: blur(100px);
+    align-self: flex-end;
+}
+
+.frase-banner {
+    width: var(--tamanho-vw-banner);
+    height: 100%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0px 150px;
+    text-align: center;
+}
+
+.frase-banner h1 {
+    font-size: 44px;
+    filter: drop-shadow(0px 4px 10px #9915FF);
+}
+
+.frase-banner h2 {
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+
+.formularios {
+    z-index: 1;
+    width: 45%;
+    height: 100%;
+    background-color: var(--branco-fundo);
+    padding: 0px 6vw;
+
+}
+
+.forms {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forms-login {
+    padding-top: 30%;
+}
+
+.forms h1 {
+    font-size: 44px;
+    font-weight: 100;
+}
+
+.forms label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 25px;
+    /* background-color: #5996B6; */
+    margin-bottom: 3vh;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 100;
+    padding: 0px 5px;
+}
+
+.enviar {
+    width: 100%;
+    height: 50px;
+    font-size: 25px;
+    font-weight: 100;
+    color: var(--roxo-2);
+    border: solid 2px var(--roxo-2);
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.7s;
+    margin-bottom: 2vh;
+}
+
+.enviar:hover {
+    background-color: #a70fff26;
+    cursor: pointer;
+}
+
+.links-uteis {
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 2vh;
+}
+
+.links-uteis a {
+    color: black;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.links-uteis span {
+    color: var(--roxo-2);
+    font-weight: 600;
+}
+
+.links-uteis .a-senha {
+    text-decoration: underline;
+}
