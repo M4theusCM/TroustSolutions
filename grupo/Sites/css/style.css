@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    /*variaves de cores*/
+    --bg-branco: #F4F5FF;
+    /*Branco meio roxo*/
+    --color-branco: #FFFFFF;
+    /*Branco para fonte*/
+    --bg-roxo: #A70FFF;
+    /*Roxo mais usado*/
+    --bg-roxo-escuro: #420E65;
+    /*Roxo escuro*/
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: var(--bg-branco);
+}
+
+nav {
+    background-color: red;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    /*valor mais auto para ser na frente*/
+}
+
+footer {
+    background-color: rgb(13, 255, 0);
+    height: 600px;
+    width: 100%;
+}
+
+/*para facilitar quando precisar ocultar algo*/
+.d-none {
+    display: none;
+}
+
+
+/*Primeira parte apresentação*/
+.container-banner {
+    z-index: -1;
+}
+
+.banner-fundo {
+    background-color: var(--bg-roxo-escuro);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    /*Coloca como fundo de tudo*/
+    z-index: 0;
+}
+
+.banner-fundo .efeito1 {
+    background-color: #8300E7;
+    width: 300px;
+    height: 300px;
+    border-radius: 0 0vw 100% 0px;
+    filter: blur(150px);
+}
+
+.banner-fundo .efeito2 {
+    background-color: #ca79b89d;
+    width: 100px;
+    height: 100px;
+    border-radius: 100% 100%;
+    filter: blur(60px);
+    opacity: 75%;
+    margin-top: 15%;
+    margin-left: 15%;
+}
+
+.banner-fundo .efeito3 {
+    background-color: #6300CE;
+    width: 220px;
+    height: 220px;
+    border-radius: 100% 0 0 0;
+    filter: blur(100px);
+    align-self: flex-end;
+    margin-bottom: 50px;
+}
+
+.banner-escrita {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /*Colaca em cima*/
+    z-index: 1;
+}
+.banner-escrita h1{
+    color: white;
+}
+
