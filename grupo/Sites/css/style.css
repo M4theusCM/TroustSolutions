@@ -100,7 +100,128 @@ footer {
     /*Colaca em cima*/
     z-index: 1;
 }
-.banner-escrita h1{
+
+.banner-escrita h1 {
     color: white;
 }
 
+
+
+
+/*Noticias e relatos*/
+.container-noti-rela {
+    flex-direction: column;
+}
+
+.valores {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 100px;
+    margin-bottom: 5vh;
+    height: 30%;
+}
+
+.valores .card {
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    text-align: center;
+    padding: 0 2%;
+    border-radius: 10px;
+    border: solid 2px var(--bg-roxo);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.403);
+    overflow: hidden;
+}
+
+.valores .card-bolinha {
+    background-color: var(--bg-roxo);
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 50%;
+    margin-top: 1vh;
+    z-index: 2;
+}
+
+.valores p {
+    margin: 0;
+    z-index: 1;
+}
+
+.valores .card .titulo {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.valores .card .desc {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.valores .card .numero {
+    font-size: 90px;
+    font-weight: 400;
+    align-self: self-start;
+    margin-top: -30%;
+    color: #B5B5B5;
+}
+
+.noticias-relatos {
+    height: 70%;
+    width: 100%;
+    background-color: var(--bg-roxo);
+    padding: 1% 5%;
+}
+
+.noticias-relatos h1 {
+    color: #fff
+}
+
+.carrossel-relatos{
+    display: flex;
+    justify-content: space-between;
+}
+
+.carrossel-relatos .card {
+    width: 400px;
+    height: 250px;
+    border-radius: 20px;
+    padding: 1% 2%;
+    background-color: #fff;
+}
+
+.carrossel-relatos .card .header-card {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    /* background-color: black ; */
+}
+
+.carrossel-relatos .header-card .div-bolinha {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-roxo);
+    margin-right: 1vw;
+}
+
+.carrossel-relatos .card .conteudo-card {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+}
+.carrossel-relatos .card .encaminhar-card {
+    margin-top: auto;
+    text-align: end;
+}
+.carrossel-relatos p{
+    margin: 10px;
+}
+.carrossel-relatos a{
+    text-decoration: none;
+    color: var(--bg-roxo);
+}
