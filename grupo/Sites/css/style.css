@@ -42,9 +42,9 @@ footer {
 }
 
 /*para facilitar quando precisar ocultar algo*/
-/* .d-none {
+.d-none {
     display: none;
-} */
+}
 
 
 /*Primeira parte apresentação*/
@@ -120,7 +120,6 @@ footer {
 
 .banner-escrita h2 {
     font-weight: 300;
-    font-family: inter;
     font-size: medium;
     color: white;
     margin-left: 40px;
@@ -206,7 +205,10 @@ footer {
     border: transparent;
     align-items: center;
 }
-
+.idioma option{
+    background-color: var(--bg-roxo-escuro);
+    border: none;
+}
 /*Noticias e relatos*/
 .container-noti-rela {
     flex-direction: column;

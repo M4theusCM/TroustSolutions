@@ -5,55 +5,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+    <link rel="icon" type="image/x-icon" href="./src/Logo-icon.png">
     <link rel="stylesheet" href="./css/acessos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="banner">
-            <div class="luzes">
-                <div class="efeito1"></div>
-                <div class="efeito2"></div>
-                <div class="efeito3"></div>
-                <div class="efeito4"></div>
-                <div class="frase-banner">
-                    <h1>Junte-se a nós</h1>
-                    <h2>Insira as informações da empresa para realizar o cadastro e se juntar a nossa equipe</h2>
+    <div id="cad_1" class="container">
+        <div class="container-img">
+            <img src="./src/homem-tabelas.svg" alt="img bonitinha">
+        </div>
+        <div class="container-forms">
+            <div class="topo-cad">
+                <div class="topo">
+                    <h1>Cadastre-se</h1>
+                    <img class="logo" src="./src/Logo-icon.png" alt="TroustSolutions">
+                </div>
+                <div class="sub-topo">
+                    <h2>Empresa</h2>
+                    <div class="progresso">
+                        <div class="bolinha ativo"></div>
+                        <div class="linha"></div>
+                        <div class="bolinha"></div>
+                        <div class="linha"></div>
+                        <div class="bolinha"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="formularios">
-            <div class="forms-cadastro">
-              
-                    <h1>Cadastro</h1>
-                <div class="cadastro">
-                    <div class="fase1">1</div>
-                    <div class="fase2">2</div>
+            <div class="div-forms-cad">
+                <div class="linha-input">
+                    <label class="w-60">
+                        <span>Nome Fantasia:</span>
+                        <input type="text" id="ipt_nome_fantasia" placeholder="Ex: TroustSolutions">
+                    </label>
+                    <label class="w-40">
+                        <span>CNPJ:</span>
+                        <input type="text" id="ipt_cnpj" placeholder="Ex: 5515155251">
+                    </label>
                 </div>
-                <label>
-                    Nome da empresa:
-                    <input type="text" placeholder="TrustSolution">
-                </label>
-                <label>
-                    CNPJ:
-                    <input type="text" placeholder="12.345.678/9101-12">
-                </label>
-                <label>
-                    Telefone:
-                    <input type="text" placeholder="(11) 99999-9999">
-                </label>
-                <label>
-                    Nome Representante:
-                    <input type="text" placeholder="">
-                </label>
-                <button onclick="" class="enviar-cadastro">Próximo</button>
-                <div class="links-uteis-cadastro">
-                    <a href="#">Já possui conta? <span>Faça login</span></a>
-                    <a href="#" class="a-senha"></a>
+                <div class="linha-input">
+                    <label class="w-100">
+                        <span>Razão Social:</span>
+                        <input type="text" id="inp_razao_social" placeholder="">
+                    </label>
                 </div>
+                <div class="linha-input">
+                    <label class="w-50">
+                        <span>Telefone Pincipal:</span>
+                        <input id="ipt_telefone" placeholder="(11) 98255-1524">
+                    </label>
+                    <label class="w-50">
+                        <span>Telefone Pincipal:</span>
+                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-33">
+                        <span>CEP:</span>
+                        <input type="text" id="inp_cep" placeholder="">
+                    </label>
+                    <label class="w-33">
+                        <span>Número:</span>
+                        <input type="text" id="inp_numero_ende" placeholder="">
+                    </label>
+                    <label class="w-33">
+                        <span>Complemento:</span>
+                        <input type="text" id="inp_complemento" placeholder="">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-50">
+                        <span>Rua:</span>
+                        <input type="text" id="inp_rua" placeholder="">
+                    </label>
+                    <label class="w-50">
+                        <span>Bairro:</span>
+                        <input type="text" id="inp_bairro" placeholder="">
+                    </label>
+                </div>
+            </div>
+            <div class="outros-links">
+                <div class="container-btn">
+                    <button onclick="avancar_p1()" class="btn-etapa">Próximo</button>
+                </div>
+                <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
             </div>
         </div>
     </div>
+    <div id="cad_2" class="container">
+        <div class="container-img">
+            <img src="./src/homem-quadro-branco.svg" alt="img bonitinha">
+        </div>
+        <div class="container-forms">
+            <div class="topo-cad">
+                <div class="topo">
+                    <h1>Cadastre-se</h1>
+                    <img class="logo" src="./src/Logo-icon.png" alt="TroustSolutions">
+                </div>
+                <div class="sub-topo">
+                    <h2>Supervisor</h2>
+                    <div class="progresso">
+                        <div class="bolinha ativo"></div>
+                        <div class="linha ativo"></div>
+                        <div class="bolinha ativo"></div>
+                        <div class="linha"></div>
+                        <div class="bolinha"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="div-forms-cad">
+                <div class="linha-input">
+                    <label class="w-40">
+                        <span>Nome:</span>
+                        <input type="text" id="ipt_nome_supervisor" placeholder="Ex: TroustSolutions">
+                    </label>
+                    <label class="w-60">
+                        <span>Sobrenome:</span>
+                        <input type="text" id="ipt_sobrenome" placeholder="Ex: 5515155251">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-100">
+                        <span>Email:</span>
+                        <input type="text" id="inp_email" placeholder="supervisor@troustsolutions.com">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-100">
+                        <span>Senha:</span>
+                        <input type="text" id="ipt_senha" placeholder="S3nh4_fort*">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-100">
+                        <span>Confitme sua Senha:</span>
+                        <input type="password" id="inp_confirme_senha" placeholder="">
+                    </label>
+                </div>
+            </div>
+            <div class="outros-links">
+                <div class="container-btn">
+                    <button onclick="voltar_p1()" class="btn-etapa">Voltar</button>
+                    <button onclick="avancar_p2()" class="btn-etapa">Próximo</button>
+                </div>
+                <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
+            </div>
+        </div>
+    </div>
+    <div id="cad_3" class="container">
+        <div class="container-img">
+            <img src="./src/mulher-aquario.svg" alt="img bonitinha">
+        </div>
+        <div class="container-forms">
+            <div class="topo-cad">
+                <div class="topo">
+                    <h1>Cadastre-se</h1>
+                    <img class="logo" src="./src/Logo-icon.png" alt="TroustSolutions">
+                </div>
+                <div class="sub-topo">
+                    <h2>Tanque</h2>
+                    <div class="progresso">
+                        <div class="bolinha ativo"></div>
+                        <div class="linha ativo"></div>
+                        <div class="bolinha ativo"></div>
+                        <div class="linha ativo"></div>
+                        <div class="bolinha ativo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="div-forms-cad">
+                <div class="linha-input">
+                    <label class="w-60">
+                        <span>Nome:</span>
+                        <input type="text" id="ipt_nome_tanque" placeholder="Ex: Tanque 1A">
+                    </label>
+                    <label class="w-40">
+                        <span>Quantidade de sensores:</span>
+                        <input type="text" id="ipt_qtd_sensore" placeholder="Ex: 5">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-33">
+                        <span>Temperatura Máxima:</span>
+                        <input type="text" id="inp_temp_max" placeholder="25°C">
+                    </label>
+                    <label class="w-33">
+                        <span>Temperatura Minima:</span>
+                        <input type="text" id="inp_temp_min" placeholder="08°C">
+                    </label>
+                    <label class="w-33">
+                        <span>Sensor:</span>
+                        <select id="slc_sensor">
+                            <option value="lm35" selected>LM35</option>
+                            <option value="dht11">DHT11</option>
+                            <option value="ds18b20">DS18B20</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-40">
+                        <span>CEP:</span>
+                        <input type="text" id="ipt_cep_tanque" placeholder="">
+                    </label>
+                    <label class="w-25">
+                        <span>Número:</span>
+                        <input type="text" id="ipt_num_tanque" placeholder="">
+                    </label>
+                    <label class="w-40">
+                        <span>Complemento:</span>
+                        <input type="text" id="ipt_complemento_tanque" placeholder="">
+                    </label>
+                </div>
+                <div class="linha-input">
+                    <label class="w-50">
+                        <span>Rua:</span>
+                        <input type="password" id="inp_rua_tanque" placeholder="">
+                    </label>
+                    <label class="w-50">
+                        <span>Bairro:</span>
+                        <input type="password" id="inp_bairro_tanque" placeholder="">
+                    </label>
+                </div>
+            </div>
+            <div class="outros-links">
+                <div class="container-btn">
+                    <button onclick="voltar_p2()" class="btn-etapa">Voltar</button>
+                    <button onclick="cadastrar()" class="btn-cadastrar">cadastrar</button>
+                </div>
+                <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
+            </div>
+        </div>
+    </div>
+   
 </body>
-
+<script>
+    function avancar_p1() {
+        cad_1.style.display = 'none';
+        cad_2.style.display = 'flex';
+    }
+    function avancar_p2() {
+        cad_2.style.display = 'none';
+        cad_3.style.display = 'flex';
+    }
+    function voltar_p1(){
+        cad_1.style.display = 'flex';
+        cad_2.style.display = 'none';
+    }
+    function voltar_p2(){
+        cad_2.style.display = 'flex';
+        cad_3.style.display = 'none';
+    }
+    function cadastrar(){
+        window.location.href = './index.html' 
+    }
+</script>
 </html>

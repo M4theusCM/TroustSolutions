@@ -5,42 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="./src/Logo-icon.png">
     <link rel="stylesheet" href="./css/acessos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="banner">
-            <div class="luzes">
-                <div class="efeito1"></div>
-                <div class="efeito2"></div>
-                <div class="efeito3"></div>
-                <div class="efeito4"></div>
-                <div class="frase-banner">
-                    <h1>Bem-Vindo!</h1>
-                    <h2>Para continuar faça login com as informações da empresa</h2>
-                </div>
-            </div>
+    <div id="login" class="container">
+        <div class="container-img">
+            <img src="./src/homem-graficos.svg" alt="img bonitinha">
         </div>
-        <div class="formularios">
-            <div class="forms forms-login">
-                <h1>Login</h1>
-                <label>
-                    Email:
-                    <input type="text" placeholder="usuario@gmail.com">
+        <div class="container-forms login">
+            <div class="topo">
+                <h1>Acesse sua conta</h1>
+                <img class="logo" src="./src/Logo-icon.png" alt="TroustSolutions">
+            </div>
+            <div class="div-forms-login">
+                <label for="">
+                   <span>Email:</span>
+                    <input type="text" placeholder="seuemail@gmail.com" id="ipt_email">
                 </label>
-                <label>
-                    Senha:
-                    <input type="password" placeholder="senha:">
+                <label for="">
+                    <span>Senha:</span>
+                    <input type="password" placeholder="SenhaForte" id="ipt_senha">
                 </label>
-                <button onclick="" class="enviar">Login</button>
-                <div class="links-uteis">
-                    <a href="#">Não possui conta? <span>Cadastre-se</span></a>
-                    <a href="#" class="a-senha">Esqueci minha senha</a>
-                </div>
+                <button onclick="entrar()" class="btn-login">Login</button>
+                <button onclick="entarGmail()" class="btn-google">
+                    <img src="./src/logo_google.png" alt="G">
+                    continuar com o Google
+                </button>
+            </div>
+            <div class="outros-links">
+                <p><a href="./cadastro.html">Não possui uma conta? <span>Cadastre-se</span></a></p>
+                <p><a class="senha-link" href="./index.html">Esqueci minha senha</a></p>
             </div>
         </div>
     </div>
 </body>
-
 </html>
