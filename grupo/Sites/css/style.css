@@ -326,3 +326,83 @@ footer {
     text-decoration: none;
     color: var(--bg-roxo);
 }
+
+/* Tela Contato*/
+.container-contatoGeral{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: var(--bg-branco);
+}
+.container-contato{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+}
+.container-contatoGeral h2 {
+    color: var(--bg-roxo);
+    font-size: 36px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.contato {
+    display: flex;
+    border: 2px solid var(--bg-roxo);
+    border-radius: 10px;
+    flex-direction: column;
+    width: 40%;
+    padding: 8px;
+}
+
+.contato h3 {
+    color: var(--bg-roxo);
+    font-size: 20px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--bg-roxo);
+    border-radius: 4px;
+    background-color: var(--bg-branco);
+}
+
+textarea {
+    height: 100px;
+}
+.botao{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.formulario button {    
+    margin-top: 16px;
+    background-color: var(--bg-roxo);
+    color: var(--bg-branco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sobreNos {
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    width: 40%;
+    height: 80%;
+}
+
+.box {
+    border: 2px solid var(--bg-roxo);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 8px;
+    background-color: var(--bg-branco);
+}
+.open {
+    background-color: #d46fff51;
+}
+
