@@ -27,10 +27,10 @@ body {
 }
 
 nav {
-    background-color: red;
+    border-bottom: white solid 2px;
     height: 100px;
     width: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 999;
     /*valor mais auto para ser na frente*/
 }
@@ -42,9 +42,9 @@ footer {
 }
 
 /*para facilitar quando precisar ocultar algo*/
-.d-none {
+/* .d-none {
     display: none;
-}
+} */
 
 
 /*Primeira parte apresentação*/
@@ -92,9 +92,14 @@ footer {
 }
 
 .banner-escrita {
+    flex-direction: column;   /* coloca h1 e h2 em coluna (um embaixo do outro) */
+    align-items: flex-start;  /* alinha à esquerda (ou canto escolhido) */
+    justify-content: flex-start;
+    font-size: x-large;
     display: flex;
     position: absolute;
-    align-items: center;
+    /* align-items: center; */
+    top: 250px;
     width: 100vw;
     height: 100vh;
     /*Colaca em cima*/
@@ -102,11 +107,105 @@ footer {
 }
 
 .banner-escrita h1 {
+    font-weight: 400;
     color: white;
+    margin-left: 40px;
+    text-shadow: 
+    0 0 10px #ffffff,
+    0 0 0px #ffffff,
+    0 0 0px #ffffff,
+    0 0 40px #c7e7e4;
+    
 }
 
+.banner-escrita h2 {
+    font-weight: 300;
+    font-family: inter;
+    font-size: medium;
+    color: white;
+    margin-left: 40px;
+}
 
+.banner-escrita span{
+    text-shadow: 
+    0 0 10px #7cf8e5,
+    0 0 0px #7cf8e5,
+    0 0 0px #00ffe0,
+    0 0 40px #00ffe0;
+    color: #7CF8E5;
+}
 
+.botao-saíba a {
+    color: var(--bg-branco);
+    list-style: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.botao-saíba {
+    cursor: pointer;
+    font-size: medium;
+    margin-left: 40px;
+    color: #F4F4F9;
+    border: solid 2px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 15px;
+    border-radius: 5px;
+}
+
+.navbar a{
+    color: var(--bg-branco);
+    list-style: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.navbar ul {
+    display: flex;              
+    list-style: none;           
+    padding: 0;   
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar .acesso {
+    display: flex;
+    margin-left: auto;         
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+} 
+
+.navbar .acesso .login {
+    font-weight: 400;
+    cursor: pointer;
+    border: solid white 2px;
+    border-radius: 5px;
+    padding: 10px 50px;
+}
+
+.navbar .acesso .cadastro {
+    font-weight: 400;
+    cursor: pointer;
+    background-color: var(--bg-roxo);
+    border: solid transparent;
+    border-radius: 5px;
+    padding: 10px 40px;
+}
+
+.idioma {
+    text-align: center;
+    justify-content: center;
+    color: var(--bg-branco);
+    background-color: transparent;
+    border: transparent;
+    align-items: center;
+}
 
 /*Noticias e relatos*/
 .container-noti-rela {
