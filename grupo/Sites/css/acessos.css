@@ -206,9 +206,37 @@ body {
 }
 
 .linha-input label>input:hover,
-.linha-input label>select:hover{
+.linha-input label>select:hover {
     background-color: var(--cinza-2);
 }
+.barra-senha{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    margin-top: 1vh;
+    margin-bottom: -1vh;
+}
+
+.barra-forca-senha {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.barra-forca-senha .barra{
+    min-width: 19%;
+    min-height: 5px;
+    border-radius: 20px;
+    background-color: var(--cinza-2);
+}
+.barra-forca-senha .barra-1{
+    background-color: rgb(255, 0, 0);
+}
+.barra-senha .forca{
+    font-size: 14px;
+    margin-left: 0.5vw;
+    color: red;
+}
+
 
 /*Tamanhos para os input*/
 .w-100 {
@@ -252,6 +280,7 @@ body {
     border-radius: 5px;
     transition: 0.2s;
     margin-bottom: 2vh;
+    margin-top: 2vh;
 }
 
 /*efeito do botão*/
@@ -320,16 +349,41 @@ body {
     cursor: pointer;
 }
 
-/*Display*/
-#login{
-    display: flex;
-}
-#cad_1{
-    display: flex;
-}
-#cad_2{
+/*Erros*/
+.msg-erros {
+    color: red;
+    font-weight: 500;
+    margin: none;
+    font-size: 18px;
+    animation: tremer 0.5s;
+    text-align: center;
     display: none;
 }
-#cad_3{
+
+@keyframes tremer {
+    0% { margin-left: 0px;}
+    15% { margin-left: -5px;}
+    30% { margin-left: 0px;}
+    45% { margin-left: 5px;}
+    60% { margin-left: 0px;}
+    75% { margin-left: -5px;}
+    90% { margin-left: 0px;}
+    95% { margin-left: 5px;}
+}
+
+/*Display*/
+#login {
+    display: flex;
+}
+
+#cad_1 {
+    display: flex;
+}
+
+#cad_2 {
+    display: none;
+}
+
+#cad_3 {
     display: none;
 }

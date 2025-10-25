@@ -21,39 +21,45 @@
 
 <body>
     <nav class="navbar">
-        <ul>
-            <img src="./src/logo-icon.png">
-            <li class="agora">
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">Nossa Missão</a>
-            </li>
-            <li>
-                <a href="#">Relatos</a>
-            </li>
-            <li>
-                <a href="#telaContato">Contato</a>
-            </li>
-        </ul>
-        <ul class="acesso">
-            <li><img height="40px"
-                    src="https://images.vexels.com/media/users/3/188941/isolated/preview/755b411a7e27a783044993b1e085fbe4-curso-do-planeta-terra-colorida.png">
-                <select name="" id="" class="idioma">
-                    <option value="BRA">PT-BR</option>
-                    <option value="ESP">ESP</option>
-                    <option value="ING">ING</option>
-                </select>
-            </li>
-            <li class="login">
-                <a href="login.html">Login</a>
-            </li>
-            <li class="cadastro">
-                <a href="cadastro.html">Cadastro</a>
-            </li>
-        </ul>
+        <div class="logo">
+            <a href="#home"><img src="./src/Logo-icon.png" alt="Logo"></a>
+        </div>
+        <div class="links">
+            <ul>
+                <li class="agora">
+                    <a href="#home">Home</a>
+                </li>
+                <li>
+                    <a href="#nossa_missao">Nossa Missão</a>
+                </li>
+                <li>
+                    <a href="#relatos">Relatos</a>
+                </li>
+                <li>
+                    <a href="#telaContato">Contato</a>
+                </li>
+            </ul>
+        </div>
+        <div class="acessos">
+            <!-- <div class="acesso-img">
+                <img src="./src/planeta-idioma.png">
+            </div>
+            <ul class="acesso">
+                <li>
+                    <select name="" id="" class="idioma">
+                        <option value="BRA" selected>PT-BR</option>
+                        <option value="ESP">ESP</option>
+                        <option value="ING">ING</option>
+                    </select>
+                </li>
+            </ul> -->
+            <div class="botoes">
+                <button onclick="login()" class="login"><span>Login</span></button>
+                <button onclick="cadastro()" class="cadastro"><span>Cadastro</span></button>
+            </div>
+        </div>
     </nav>
-    <div class="container container-banner">
+    <div class="container container-banner" id="home">
         <div class="banner-fundo">
             <div class="efeito1"></div>
             <div class="efeito2"></div>
@@ -62,15 +68,67 @@
         <div class="banner-escrita">
             <h1>Troust<span>Solution</span></h1>
             <h2>Somos uma equipe de desenvolvimento, para auxiliar os <br>truticultores a terem uma receita maior:</h2>
-            <div class="botao-saíba">
-                <a href="#">Saíba Mais <img height="10px"
-                        src="https://static.vecteezy.com/system/resources/thumbnails/045/546/602/small_2x/white-arrow-road-sign-colorful-transparent-png.png"></a>
-            </div>
+            <button class="botao-saíba">
+                saiba mais
+                <img height="10px"
+                    src="https://static.vecteezy.com/system/resources/thumbnails/045/546/602/small_2x/white-arrow-road-sign-colorful-transparent-png.png"></a>
+            </button>
         </div>
 
     </div>
-    <div class="container"></div>
-    <div class="container container-noti-rela">
+    <div class="missao" id="nossa_missao">
+        <h2>Nossa Missão</h2>
+        <div class="caixas">
+            <div class="primeira-parte">
+                <div class="caixa1">
+                    <img src="./src/imagens/agua.png" alt="agua">
+                    <h3>Decisão</h3>
+                    <p>Se a temperatura
+                        registrada pelo sensor ultrapassar a faixa
+                        segura, o servidor envia um alerta,
+                        facilitando a equipe na tomada de
+                        descição.</p>
+                </div>
+                <div class="caixa2">
+                    <img src="./src/imagens/melhoria-continua.png" alt="agua">
+                    <h3>Economia</h3>
+
+                    <p>A automação da analise
+                        de temperatura e a diminuição da
+                        necessidade de monitoramento manual
+                        reduzem os custos operacionais e de
+                        mão de obra.</p>
+                </div>
+            </div>
+            <div class="primeira-parte">
+                <div class="caixa3">
+                    <img src="./src/imagens/peixe.png" alt="agua">
+                    <h3>Monitoramento</h3>
+
+                    <p>Os sensores instalados
+                        nos tanques são responsáveis por
+                        coletar a temperatura da água, pois, as
+                        trutas são animais que não regulam sua
+                        temperatura corporal e precisam que a
+                        temperatura da água seja
+                        monitorada.</p>
+                </div>
+                <div class="caixa4">
+                    <img src="./src/imagens/dinheiro.png" alt="agua">
+                    <h3>Segurança e
+                        Dados</h3>
+
+                    <p>O registro de dados
+                        oferece uma poderosa ferramenta de
+                        gestão. O truticultor pode analisar
+                        tendências, a temperatura e tomar
+                        decisões baseadas em dados
+                        concretos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container container-noti-rela" id="relatos">
         <div class="valores">
             <div class="card">
                 <div class="card-bolinha"></div>
@@ -143,30 +201,32 @@
             </div>
         </div>
     </div>
-    <div class="container"></div>
-    <div class="container"></div>
+
 
     <div class="container" id="telaContato">
         <div class="container-contatoGeral">
             <h2>Contato</h2>
             <div class="container-contato">
-                <div class="contato">
-                    <h3>Fale conosco</h3>
-                    <div class="formulario">
-                        <span>Email:</span>
-                        <input type="email">
-                        <span>Nome:</span>
-                        <input type="text">
-                        <span>Assunto:</span>
-                        <textarea></textarea>
-                        <div class="botao"><button>Enviar</button></div>
-                    </div>
-                </div>
+                <form class="container-forms">
+                    <fieldset class="contato">
+                        <legend>
+                            <h3>Fale conosco</h3>
+                        </legend>
+                        <div class="formulario">
+                            <span>Email:</span>
+                            <input type="email">
+                            <span>Nome:</span>
+                            <input type="text">
+                            <span>Assunto:</span>
+                            <textarea></textarea>
+                            <div class="botao"><button>Enviar</button></div>
+                        </div>
+                    </fieldset>
+                </form>
                 <div class="sobreNos">
-                    <div class="box">
+                    <div class="box" onclick="foi()" value="a" id="div_aaa">
                         <p>O que é Truta Arco-íris?</p>
                     </div>
-
                     <div class="box open">
                         <h4>O que é a TroustSolutions?</h4>
                         <p>
@@ -174,11 +234,9 @@
                             receita maior, com um menor taxa de mortalidade de suas trutas.
                         </p>
                     </div>
-
                     <div class="box">
                         <p>Por que a TroustSolutions?</p>
                     </div>
-
                     <div class="box">
                         <p>Qual o valor?</p>
                     </div>
@@ -186,7 +244,87 @@
             </div>
         </div>
     </div>
-    <footer></footer>
+    <footer>
+        <div class="container-inscrever-se">
+            <div>
+                <input type="text" class="inp-inscrever-se" placeholder="Digite seu e-mail">
+                <button>Inscrever-se</button>
+            </div>
+            <div>
+                <input type="checkbox" id="checkbox-inscricao" class="checkbox-inscricao">
+                <label for="checkbox-inscricao">
+                    <span>Quero receber informações, noticias eventos etc.</span>
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-footer">
+            <div class="topo">
+                <div class="logo">
+                    <img src="src/Logo-icon.png" alt="Logo">
+                    <h2><span>Troust</span>Solutions</h2>
+                </div>
+            </div>
+            <div class="meio">
+
+                <div class="coluna">
+                    <p>
+                        Somos uma equipe de desenvolvimento que está aqui para auxiliar os truticultores a terem uma
+                        receita
+                        maior, com uma menor taxa de mortalidade de suas trutas.
+                    </p>
+                </div>
+
+                <div class="coluna">
+                    <h3>Contato</h3>
+                    <p><a href="#">(11) 0000-1111</a></p>
+                    <p><a href="#">(11) 4002-8922</a></p>
+                    <p><a href="#">troustsolutions@hotmail.com</a></p>
+                </div>
+
+                <div class="coluna">
+                    <h3>Soluções</h3>
+                    <p><a href="#">comercial@troustsolutions.com</a></p>
+                    <p><a href="#">Sensor de temperatura</a></p>
+                    <p><a href="#">Calculadora Financeira</a></p>
+                </div>
+
+                <div class="coluna">
+                    <h3>Links Uteis</h3>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#nossa_missao">Nossa Missão</a></p>
+                    <p><a href="#relatos">Relatos</a></p>
+                    <p><a href="#telaContato">Contato</a></p>
+                </div>
+            </div>
+            <div class="fim">
+                <div class="coluna redes">
+                    <h3>Nossas Redes Sociais</h3>
+                    <div class="icones">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+                        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-copy">
+            <p> © Copyright 2025 TroustSolutions. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
 </body>
+<script>
+    function login() {
+        window.location.href = './login.html'
+
+    }
+    function cadastro() {
+        window.location.href = './cadastro.html'
+    }
+    function foi() {
+    }
+</script>
 
 </html>

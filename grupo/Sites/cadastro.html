@@ -33,12 +33,13 @@
                         <div class="bolinha ativo"></div>
                         <div class="linha"></div>
                         <div class="bolinha"></div>
-                        <div class="linha"></div>
-                        <div class="bolinha"></div>
+                        <!-- <div class="linha"></div>
+                        <div class="bolinha"></div> -->
                     </div>
                 </div>
             </div>
             <div class="div-forms-cad">
+                <div class="msg-erros" id="div_msg_erros"> <!--erros aqui--> </div>
                 <div class="linha-input">
                     <label class="w-60">
                         <span>Nome Fantasia:</span>
@@ -46,47 +47,48 @@
                     </label>
                     <label class="w-40">
                         <span>CNPJ:</span>
-                        <input type="text" id="ipt_cnpj" placeholder="Ex: 5515155251">
+                        <input type="text" id="ipt_cnpj" placeholder="Ex: 00.000.000/0000-00" maxlength="18" onkeyup="formartarCNPJ()">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-100">
                         <span>Razão Social:</span>
-                        <input type="text" id="inp_razao_social" placeholder="">
+                        <input type="text" id="ipt_razao_social"
+                            placeholder="Troust Solutions Desenvolvimento e Inovação Ltda">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-50">
-                        <span>Telefone Pincipal:</span>
-                        <input id="ipt_telefone" placeholder="(11) 98255-1524">
+                        <span>Telefone Fixo:</span>
+                        <input id="ipt_telefone" placeholder="(11) 8255-1524" maxlength="14">
                     </label>
                     <label class="w-50">
-                        <span>Telefone Pincipal:</span>
-                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524">
+                        <span>Telefone Celular:</span>
+                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524" maxlength="15">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-33">
                         <span>CEP:</span>
-                        <input type="text" id="inp_cep" placeholder="">
+                        <input type="text" id="ipt_cep" placeholder="02612-190" maxlength="9">
                     </label>
                     <label class="w-33">
                         <span>Número:</span>
-                        <input type="text" id="inp_numero_ende" placeholder="">
+                        <input type="text" id="ipt_numero_ende" placeholder="598A">
                     </label>
                     <label class="w-33">
                         <span>Complemento:</span>
-                        <input type="text" id="inp_complemento" placeholder="">
+                        <input type="text" id="ipt_complemento" placeholder="Apto. 1">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-50">
                         <span>Rua:</span>
-                        <input type="text" id="inp_rua" placeholder="">
+                        <input type="text" id="ipt_rua" placeholder="Rua Joaquim Alves Torres">
                     </label>
                     <label class="w-50">
                         <span>Bairro:</span>
-                        <input type="text" id="inp_bairro" placeholder="">
+                        <input type="text" id="ipt_bairro" placeholder="Vila Nova Cachoeirinha">
                     </label>
                 </div>
             </div>
@@ -114,51 +116,64 @@
                         <div class="bolinha ativo"></div>
                         <div class="linha ativo"></div>
                         <div class="bolinha ativo"></div>
-                        <div class="linha"></div>
-                        <div class="bolinha"></div>
+                        <!-- <div class="linha"></div>
+                        <div class="bolinha"></div> -->
                     </div>
                 </div>
             </div>
             <div class="div-forms-cad">
+                <div class="msg-erros" id="div_msg_erros_2"> <!--erros aqui--> </div>
                 <div class="linha-input">
                     <label class="w-40">
                         <span>Nome:</span>
-                        <input type="text" id="ipt_nome_supervisor" placeholder="Ex: TroustSolutions">
+                        <input type="text" id="ipt_nome_supervisor" placeholder="Ex: Matheus">
                     </label>
                     <label class="w-60">
                         <span>Sobrenome:</span>
-                        <input type="text" id="ipt_sobrenome" placeholder="Ex: 5515155251">
+                        <input type="text" id="ipt_sobrenome" placeholder="Ex: Silva">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-100">
                         <span>Email:</span>
-                        <input type="text" id="inp_email" placeholder="supervisor@troustsolutions.com">
+                        <input type="text" id="ipt_email" placeholder="supervisor@troustsolutions.com">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-100">
                         <span>Senha:</span>
-                        <input type="text" id="ipt_senha" placeholder="S3nh4_fort*">
+                        <input type="password" id="ipt_senha" placeholder="S3nh4_fort*" onkeyup="Validar_forca_senha()">
+                        <div class="barra-senha" id="div_forca_senha">
+                            <div class="forca"><span id="span_forca_senha">Insegura</span></div>
+                            <div class="barra-forca-senha">
+                                <div class="barra barra-1" id="div_barra_0"></div>
+                                <div class="barra" id="div_barra_1"></div>
+                                <div class="barra" id="div_barra_2"></div>
+                                <div class="barra" id="div_barra_3"></div>
+                                <div class="barra" id="div_barra_4"></div>
+                                <!-- <div class="barra" id="div_barra_4"></div> -->
+                            </div>
+                        </div>
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-100">
                         <span>Confitme sua Senha:</span>
-                        <input type="password" id="inp_confirme_senha" placeholder="">
+                        <input type="password" id="ipt_confirme_senha" placeholder="">
                     </label>
                 </div>
             </div>
             <div class="outros-links">
                 <div class="container-btn">
                     <button onclick="voltar_p1()" class="btn-etapa">Voltar</button>
-                    <button onclick="avancar_p2()" class="btn-etapa">Próximo</button>
+                    <button onclick="avancar_p2()" class="btn-cadastrar">Cadastrar</button>
                 </div>
                 <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
             </div>
         </div>
     </div>
-    <div id="cad_3" class="container">
+
+    <!-- <div id="cad_3" class="container">
         <div class="container-img">
             <img src="./src/mulher-aquario.svg" alt="img bonitinha">
         </div>
@@ -241,28 +256,228 @@
                 <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
             </div>
         </div>
-    </div>
-   
+    </div> -->
+
 </body>
 <script>
+    /* Parte 1*/
+    var nomeFantasiaEmpresa = ''
+    var cnpjEmpresa = ''
+    var razaoSocialEmpresa = ''
+    var tellFixoEmpresa = ''
+    var tellCellEmpresa = ''
+    var cepEmpresa = ''
+    var numEndeEmpresa = ''
+    var compEndeEmpresa = ''
+    var ruaEndeEmpresa = ''
+    var bairoEndeEmpresa = ''
+
+    /* Parte 2*/
+    var nomeCompletoFunc = ''
+    var emailFunc = ''
+    var senhaFunc = ''
+
+    var forcaSenha = ''
+
     function avancar_p1() {
-        cad_1.style.display = 'none';
-        cad_2.style.display = 'flex';
+        nomeFantasiaEmpresa = ipt_nome_fantasia.value
+        cnpjEmpresa = ipt_cnpj.value
+        razaoSocialEmpresa = ipt_razao_social.value
+        tellFixoEmpresa = ipt_telefone.value
+        tellCellEmpresa = ipt_telefone_2.value
+        cepEmpresa = ipt_cep.value
+        numEndeEmpresa = ipt_numero_ende.value
+        compEndeEmpresa = ipt_complemento.value
+        ruaEndeEmpresa = ipt_rua.value
+        bairoEndeEmpresa = ipt_bairro.value
+
+        // tirando formatação
+        cnpjEmpresa = cnpjEmpresa.replaceAll('.' ,'').replaceAll('/', '').replace('-','')
+        tellFixoEmpresa = tellFixoEmpresa.replace('(', '').replace(')','').replace(' ', '').replace('-', '')
+        tellCellEmpresa = tellCellEmpresa.replace('(', '').replace(')','').replace(' ', '').replace('-', '')
+        cepEmpresa = cepEmpresa.replace('-', '')
+
+        var msg = ''
+        if ( /*Campo Vazio*/
+            nomeFantasiaEmpresa == '' ||
+            razaoSocialEmpresa == '' ||
+            cnpjEmpresa == '' ||
+            tellFixoEmpresa == '' ||
+            tellCellEmpresa == '' ||
+            cepEmpresa == '' ||
+            numEndeEmpresa == '' ||
+            // compEndeEmpresa == '' || //Desejavel mas não obrigatorio//
+            ruaEndeEmpresa == '' ||
+            bairoEndeEmpresa == ''
+        ) {
+            msg = 'Preencha todos os campos'
+            // cad_1.style.display = 'none';
+            // cad_2.style.display = 'flex';
+
+        } else if (cnpjEmpresa.length != 14) {
+            msg = 'CNPJ invalido'
+        } else if (tellCellEmpresa.length != 11 || tellFixoEmpresa.length != 10) {
+            msg = 'Telefones invalidos'
+        } else if (cepEmpresa.length != 8) {
+            msg = 'CEP invalido'
+        } else {
+            cad_1.style.display = 'none';
+            cad_2.style.display = 'flex';
+        }
+        div_msg_erros.style.display = 'block'
+        div_msg_erros.innerHTML = msg
     }
+
     function avancar_p2() {
-        cad_2.style.display = 'none';
-        cad_3.style.display = 'flex';
+        var nomeFunc = ipt_nome_supervisor.value
+        var sobrenomeFunc = ipt_sobrenome.value
+        emailFunc = ipt_email.value
+        var senhaProvisoriaFunc = ipt_senha.value
+        var confirmarSenhaFunc = ipt_confirme_senha.value
+        var msg = ''
+
+        if (
+            nomeFunc == '' ||
+            sobrenomeFunc == '' ||
+            emailFunc == '' ||
+            senhaProvisoriaFunc == '' ||
+            confirmarSenhaFunc == ''
+        ) {
+            msg = 'Preencha todos os campos'
+        } else if (emailFunc.includes('@') == false || emailFunc.includes('.') == false) {
+            msg = 'Email precisa incluir "@" e "."'
+        } else if (
+            forcaSenha == 'Insegura' ||
+            forcaSenha == 'Fraca'
+        ) {
+            msg = 'A senha deve ser mais forte'
+        } else if (senhaProvisoriaFunc != confirmarSenhaFunc) {
+            msg = 'Senha e confirmação de senha devem ser iguais'
+        } else {
+            nomeFunc = nomeFunc.replace(' ', '')
+            nomeCompletoFunc = nomeFunc + ' ' + 'sobrenome'
+            senhaFunc = senhaProvisoriaFunc
+            // cad_2.style.display = 'none';
+            // cad_3.style.display = 'flex';
+            cadastrar()
+        }
+        div_msg_erros_2.style.display = 'block'
+        div_msg_erros_2.innerHTML = msg
+
     }
-    function voltar_p1(){
+
+    function voltar_p1() {
         cad_1.style.display = 'flex';
         cad_2.style.display = 'none';
     }
-    function voltar_p2(){
+    function voltar_p2() {
         cad_2.style.display = 'flex';
         cad_3.style.display = 'none';
     }
-    function cadastrar(){
-        window.location.href = './index.html' 
+    function cadastrar() {
+        window.location.href = './index.html'
     }
+
+    function Validar_forca_senha() {
+        var senhaProvisoriaFunc = ipt_senha.value
+        if (senhaProvisoriaFunc.length > 0) {
+            var criterios = -1
+            var barraVetor = [
+                div_barra_0,
+                div_barra_1,
+                div_barra_2,
+                div_barra_3,
+                div_barra_4,
+            ]
+            var caracterEspeciaisVetor = [
+                '@', '#', '$',
+                '%', '&', '*',
+                '!', '?', '/'
+            ]
+            var corVetor = [
+                'rgb(255, 0, 0)',
+                'rgb(255, 100, 10)',
+                '#e4dd0ffd',
+                '#5bff03fd',
+                '#033afffd',
+            ]
+            var fraseVetor = [
+                'Insegura',
+                'Fraca',
+                'Média',
+                'Segura',
+                'Muito Segura',
+            ]
+
+            if (senhaProvisoriaFunc.length >= 6) {
+                criterios++
+            }
+            if (senhaProvisoriaFunc.toLocaleLowerCase() != senhaProvisoriaFunc) {
+                criterios++
+            }
+            if (senhaProvisoriaFunc.toUpperCase() != senhaProvisoriaFunc) {
+                criterios++
+            }
+            var contNumeros = 0
+            var contCaracterEspeciais = 0
+
+            for (var cont = 0; cont <= 9; cont++) {
+                if (senhaProvisoriaFunc.includes(cont)) {
+                    contNumeros++
+                }
+                if (senhaProvisoriaFunc.includes(caracterEspeciaisVetor[cont])) {
+                    contCaracterEspeciais++ // Validar isso a
+                }
+            }
+            if (contNumeros > 0) {
+                criterios++
+            }
+            if (contCaracterEspeciais > 0) {
+                criterios++
+            }
+
+            for (var reinicar = 1; reinicar < 5; reinicar++) {
+                barraVetor[reinicar].style.background = '#c4c4c4'
+
+            }
+
+            var i = 0
+
+            for (; i <= criterios; i++) {
+                barraVetor[i].style.background = corVetor[criterios]
+            }
+
+            console.log(i)
+            span_forca_senha.style.color = corVetor[criterios]
+            span_forca_senha.innerHTML = fraseVetor[i - 1]
+            forcaSenha = fraseVetor[i]
+        }
+
+
+    }
+
+    /* Formatação de dos numeros */
+    // function formartarCNPJ() {
+    //     var cnpjTemp = ipt_cnpj.value
+    //     var tamanho = cnpjTemp.length
+    //     var i = 0
+    //     var cnpjFormatado = ''
+    //     while (i <= 3){
+    //         if((i == 3 || i == 7) && cnpjTemp[i] != '.'){
+    //             cnpjFormatado += '.';
+    //             console.log(cnpjTemp[i])
+    //         }// else if((i == 0) && cnpjTemp[i] != '/'){
+    //         //     cnpjFormatado += '/';
+    //         // }else if((i == 0) && cnpjTemp[i] != '-'){
+    //         //     cnpjFormatado += '-';
+    //         // }else{
+    //         //     cnpjFormatado += cnpjTemp[i];
+    //         // }
+
+    //         i++
+    //     }
+    //     ipt_cnpj.value = cnpjFormatado
+    // }
 </script>
+
 </html>

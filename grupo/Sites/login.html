@@ -27,15 +27,16 @@
                 <img class="logo" src="./src/Logo-icon.png" alt="TroustSolutions">
             </div>
             <div class="div-forms-login">
-                <label for="">
+                <div class="msg-erros" id="div_msg_erros"> <!--erros aqui--> </div>
+                <label>
                    <span>Email:</span>
                     <input type="text" placeholder="seuemail@gmail.com" id="ipt_email">
                 </label>
-                <label for="">
+                <label>
                     <span>Senha:</span>
                     <input type="password" placeholder="SenhaForte" id="ipt_senha">
                 </label>
-                <button onclick="entrar()" class="btn-login">Login</button>
+                <button onclick="validar()" class="btn-login">Login</button>
                 <button onclick="entarGmail()" class="btn-google">
                     <img src="./src/logo_google.png" alt="G">
                     continuar com o Google
@@ -48,4 +49,28 @@
         </div>
     </div>
 </body>
+<script>
+    function validar() {
+        var email = ipt_email.value
+        var senha = ipt_senha.value
+        var msg = ''
+        var emailFixo = 'matheus@gmail.com'
+        var senhaFixo = '123'
+        if(email == '' || senha == ''){
+            msg = 'Preencha todos os campos'
+        }else if(email != emailFixo || senha != senhaFixo){
+            msg = 'Email ou senha errados'
+        }else{
+            msg = 'Passou'
+            login();
+        }
+        div_msg_erros.style.display = 'block'
+        div_msg_erros.innerHTML = msg
+    }
+
+    function login() {
+        window.location.href = './dashboard/index.html'
+    }
+
+</script>
 </html>

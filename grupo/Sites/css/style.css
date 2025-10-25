@@ -12,6 +12,11 @@
     /*Roxo mais usado*/
     --bg-roxo-escuro: #420E65;
     /*Roxo escuro*/
+    --bg-roxo-nav: #420e65aa;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -19,6 +24,7 @@ body {
     overflow-x: hidden;
 }
 
+/*Bases*/
 .container {
     width: 100vw;
     height: 100vh;
@@ -30,15 +36,20 @@ nav {
     border-bottom: white solid 2px;
     height: 100px;
     width: 100%;
-    position: absolute;
+    display: flex;
+    position: fixed;
     z-index: 999;
-    /*valor mais auto para ser na frente*/
+    /*Valor para ficar na frente*/
+    background-color: var(--bg-roxo-nav);
+    backdrop-filter: blur(5px);
 }
 
 footer {
-    background-color: rgb(13, 255, 0);
-    height: 600px;
-    width: 100%;
+    height: 550px;
+    width: 100vw;
+    padding: 0% 2%;
+    color: white;
+    background-color: var(--bg-roxo-escuro);
 }
 
 /*para facilitar quando precisar ocultar algo*/
@@ -46,6 +57,126 @@ footer {
     display: none;
 }
 
+/*Nav*/
+.navbar .logo {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .links {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .acessos {
+    height: 100%;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .logo img {
+    width: 75px;
+    height: 75px;
+}
+
+.navbar .acesso-img {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar .acessos img {
+    width: 40px;
+}
+
+.navbar .idioma {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.navbar a {
+    color: var(--bg-branco);
+    list-style: none;
+    outline: none;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #f1e0ff;
+    filter: drop-shadow(0 0 10px #6f00ff);
+    /*Coloca */
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+
+.navbar .acessos .login {
+    font-weight: 400;
+    cursor: pointer;
+    background-color: var(--bg-branco);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 50px;
+}
+
+.navbar .acessos .cadastro {
+    font-weight: 400;
+    cursor: pointer;
+    background-color: var(--bg-roxo);
+    color: white;
+    border: solid transparent;
+    border-radius: 5px;
+    padding: 10px 40px;
+}
+
+.navbar .botoes button {
+    font-size: 15px;
+    font-weight: 400;
+    transition: 0.3s;
+    margin: 0 5px;
+}
+
+.idioma {
+    text-align: center;
+    justify-content: center;
+    color: var(--bg-branco);
+    background-color: transparent;
+    border: transparent;
+    align-items: center;
+}
+
+.idioma option {
+    background-color: var(--bg-roxo-escuro);
+    border: none;
+}
+
+.navbar .login:hover {
+    background-color: rgb(230, 230, 230);
+    color: var(--bg-roxo);
+}
+
+.navbar .cadastro:hover {
+    background-color: #830dc7;
+}
 
 /*Primeira parte apresentação*/
 .container-banner {
@@ -60,6 +191,7 @@ footer {
     justify-content: space-between;
     /*Coloca como fundo de tudo*/
     z-index: 0;
+    overflow: hidden;
 }
 
 .banner-fundo .efeito1 {
@@ -92,8 +224,10 @@ footer {
 }
 
 .banner-escrita {
-    flex-direction: column;   /* coloca h1 e h2 em coluna (um embaixo do outro) */
-    align-items: flex-start;  /* alinha à esquerda (ou canto escolhido) */
+    flex-direction: column;
+    /* coloca h1 e h2 em coluna (um embaixo do outro) */
+    align-items: flex-start;
+    /* alinha à esquerda (ou canto escolhido) */
     justify-content: flex-start;
     font-size: x-large;
     display: flex;
@@ -110,12 +244,12 @@ footer {
     font-weight: 400;
     color: white;
     margin-left: 40px;
-    text-shadow: 
-    0 0 10px #ffffff,
-    0 0 0px #ffffff,
-    0 0 0px #ffffff,
-    0 0 40px #c7e7e4;
-    
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 0px #ffffff,
+        0 0 0px #ffffff,
+        0 0 40px #c7e7e4;
+
 }
 
 .banner-escrita h2 {
@@ -125,12 +259,12 @@ footer {
     margin-left: 40px;
 }
 
-.banner-escrita span{
-    text-shadow: 
-    0 0 10px #7cf8e5,
-    0 0 0px #7cf8e5,
-    0 0 0px #00ffe0,
-    0 0 40px #00ffe0;
+.banner-escrita span {
+    text-shadow:
+        0 0 10px #7cf8e5,
+        0 0 0px #7cf8e5,
+        0 0 0px #00ffe0,
+        0 0 40px #00ffe0;
     color: #7CF8E5;
 }
 
@@ -145,6 +279,7 @@ footer {
     cursor: pointer;
     font-size: medium;
     margin-left: 40px;
+    background-color: transparent;
     color: #F4F4F9;
     border: solid 2px;
     padding: 5px;
@@ -153,62 +288,120 @@ footer {
     border-radius: 5px;
 }
 
-.navbar a{
-    color: var(--bg-branco);
-    list-style: none;
-    outline: none;
-    text-decoration: none;
+.botao-saíba:hover {
+    background-color: rgba(219, 219, 219, 0.389);
 }
 
-.navbar ul {
-    display: flex;              
-    list-style: none;           
-    padding: 0;   
-}
 
-.navbar li {
-    margin: 0 15px;
-}
-
-.navbar .acesso {
+/*Nossa Missão*/
+.missao {
+    width: 100%;
     display: flex;
-    margin-left: auto;         
+    flex-direction: column;
+    background-color: var(--bg-branco);
 }
 
-.navbar {
+.missao h2 {
+    margin: 1% 5%;
+    font-size: 35px;
+    color: var(--bg-roxo);
+
+}
+
+.caixas {
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: center;
-} 
-
-.navbar .acesso .login {
-    font-weight: 400;
-    cursor: pointer;
-    border: solid white 2px;
-    border-radius: 5px;
-    padding: 10px 50px;
-}
-
-.navbar .acesso .cadastro {
-    font-weight: 400;
-    cursor: pointer;
-    background-color: var(--bg-roxo);
-    border: solid transparent;
-    border-radius: 5px;
-    padding: 10px 40px;
-}
-
-.idioma {
-    text-align: center;
     justify-content: center;
-    color: var(--bg-branco);
-    background-color: transparent;
-    border: transparent;
-    align-items: center;
+    flex-direction: column;
+    color: white;
 }
-.idioma option{
-    background-color: var(--bg-roxo-escuro);
-    border: none;
+
+.primeira-parte {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
+.caixas img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+
+
+}
+
+.caixas h3 {
+    color: var(--bg-roxo);
+    font-weight: 400;
+    font-size: 26px;
+    margin: 10px 20px 0px 20px;
+
+}
+
+.caixas p {
+    font-size: 17px;
+    padding: 0px 20px;
+
+}
+
+.caixa1 {
+    margin: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: var(--bg-roxo);
+    width: 35%;
+    height: 35%;
+    border-radius: 20px;
+    padding: 33px;
+}
+
+.caixa2 {
+    margin: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: rgb(60, 60, 60);
+    width: 35%;
+    height: 25%;
+    border-radius: 20px;
+    padding: 33px;
+}
+
+.caixa3 {
+    margin: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: rgb(60, 60, 60);
+    width: 35%;
+    height: 25%;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.caixa4 {
+    margin: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: var(--bg-roxo);
+    width: 35%;
+    height: 25%;
+    border-radius: 20px;
+    padding: 33px;
+}
+
+.caixa4 h3 {
+    color: white;
+}
+
+.caixa1 h3 {
+    color: white;
+}
+
+
 /*Noticias e relatos*/
 .container-noti-rela {
     flex-direction: column;
@@ -282,7 +475,7 @@ footer {
     color: #fff
 }
 
-.carrossel-relatos{
+.carrossel-relatos {
     display: flex;
     justify-content: space-between;
 }
@@ -315,30 +508,40 @@ footer {
     font-weight: 300;
     margin: 0;
 }
+
 .carrossel-relatos .card .encaminhar-card {
     margin-top: auto;
     text-align: end;
 }
-.carrossel-relatos p{
+
+.carrossel-relatos p {
     margin: 10px;
 }
-.carrossel-relatos a{
+
+.carrossel-relatos a {
     text-decoration: none;
     color: var(--bg-roxo);
 }
 
+
+
 /* Tela Contato*/
-.container-contatoGeral{
+.container-contatoGeral {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     background-color: var(--bg-branco);
+    width: 100%;
 }
-.container-contato{
+
+.container-contato {
     flex-direction: row;
     display: flex;
     justify-content: space-around;
+    align-items: start;
+    width: 100%;
 }
+
 .container-contatoGeral h2 {
     color: var(--bg-roxo);
     font-size: 36px;
@@ -346,12 +549,18 @@ footer {
     margin-left: 5%;
 }
 
+.container-forms {
+    width: 40%;
+    height: 100%;
+}
+
 .contato {
     display: flex;
     border: 2px solid var(--bg-roxo);
     border-radius: 10px;
     flex-direction: column;
-    width: 40%;
+    width: 100%;
+    height: 100%;
     padding: 8px;
 }
 
@@ -360,7 +569,8 @@ footer {
     font-size: 20px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 8px;
     border: 2px solid var(--bg-roxo);
@@ -371,12 +581,14 @@ input, textarea {
 textarea {
     height: 100px;
 }
-.botao{
+
+.botao {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
-.formulario button {    
+
+.formulario button {
     margin-top: 16px;
     background-color: var(--bg-roxo);
     color: var(--bg-branco);
@@ -401,8 +613,164 @@ textarea {
     margin-bottom: 12px;
     padding: 8px;
     background-color: var(--bg-branco);
+    width: 100%;
 }
+
 .open {
     background-color: #d46fff51;
 }
 
+/*FOOTER*/
+.container-inscrever-se {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.container-inscrever-se div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1vh 0;
+}
+
+.container-inscrever-se .inp-inscrever-se {
+    width: 350px;
+    height: 35px;
+    margin-right: 0.7vw;
+    font-weight: 200;
+    color: white;
+    background-color: var(--bg-roxo-escuro);
+    border: solid 2px white;
+    border-radius: 0;
+}
+
+.container-inscrever-se .inp-inscrever-se::placeholder {
+    color: white;
+    font-weight: 200;
+}
+
+.container-inscrever-se button {
+    background-color: white;
+    color: var(--bg-roxo);
+    width: 200px;
+    height: 35px;
+    border: none;
+    font-size: 20px;
+    font-weight: 300;
+    transition: 0.5s;
+}
+.container-inscrever-se button:hover {
+    background-color: rgb(233, 233, 233);
+    cursor: pointer;
+}
+
+.checkbox-inscricao {
+    width: 15px;
+    height: 15px;
+}
+
+.container-inscrever-se span {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+
+.conteudo-footer {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    border-top: solid 1px white;
+    border-bottom: solid 1px white;
+    margin: 0;
+    padding: 0px 2vw;
+}
+
+.conteudo-footer .topo {
+    height: auto;
+}
+
+.conteudo-footer .meio {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0;
+    padding-right: 10%;
+}
+
+.conteudo-footer .fim {
+    display: flex;
+    margin: 0;
+    justify-content: end;
+    
+}
+
+.coluna {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.coluna h3 {
+    color: #f5e9ff;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.coluna p,
+.coluna a {
+    font-size: 14px;
+    color: #ddd;
+    text-decoration: none;
+    line-height: 1.6;
+    margin: 2px;
+}
+
+.coluna a:hover {
+    color: white;
+    text-decoration: underline;
+
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.logo h2 {
+    color: #7df0ff;
+    font-weight: normal;
+}
+
+
+.redes {
+    text-align: right;
+}
+
+.redes h3 {
+    margin-bottom: 10px;
+}
+
+.icones img {
+    width: 28px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.icones img:hover {
+    transform: scale(1.2);
+}
+
+.container-copy{
+    text-align: center;
+    font-size: 14px;
+}
