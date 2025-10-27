@@ -47,7 +47,8 @@
                     </label>
                     <label class="w-40">
                         <span>CNPJ:</span>
-                        <input type="text" id="ipt_cnpj" placeholder="Ex: 00.000.000/0000-00" maxlength="18" onkeyup="formartarCNPJ()">
+                        <input type="text" id="ipt_cnpj" placeholder="Ex: 00.000.000/0000-00" maxlength="18"
+                            onkeyup="formatarCnpj()">
                     </label>
                 </div>
                 <div class="linha-input">
@@ -60,17 +61,17 @@
                 <div class="linha-input">
                     <label class="w-50">
                         <span>Telefone Fixo:</span>
-                        <input id="ipt_telefone" placeholder="(11) 8255-1524" maxlength="14">
+                        <input id="ipt_telefone" placeholder="(11) 8255-1524" maxlength="14" onkeyup="formatarTellFixo()">
                     </label>
                     <label class="w-50">
                         <span>Telefone Celular:</span>
-                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524" maxlength="15">
+                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524" maxlength="15" onkeyup="formatarTellCell()">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-33">
                         <span>CEP:</span>
-                        <input type="text" id="ipt_cep" placeholder="02612-190" maxlength="9">
+                        <input type="text" id="ipt_cep" placeholder="02612-190" maxlength="9" onkeyup="formatarCep()">
                     </label>
                     <label class="w-33">
                         <span>Número:</span>
@@ -292,9 +293,9 @@
         bairoEndeEmpresa = ipt_bairro.value
 
         // tirando formatação
-        cnpjEmpresa = cnpjEmpresa.replaceAll('.' ,'').replaceAll('/', '').replace('-','')
-        tellFixoEmpresa = tellFixoEmpresa.replace('(', '').replace(')','').replace(' ', '').replace('-', '')
-        tellCellEmpresa = tellCellEmpresa.replace('(', '').replace(')','').replace(' ', '').replace('-', '')
+        cnpjEmpresa = cnpjEmpresa.replaceAll('.', '').replaceAll('/', '').replace('-', '')
+        tellFixoEmpresa = tellFixoEmpresa.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
+        tellCellEmpresa = tellCellEmpresa.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
         cepEmpresa = cepEmpresa.replace('-', '')
 
         var msg = ''
@@ -456,28 +457,79 @@
 
     }
 
-    /* Formatação de dos numeros */
-    // function formartarCNPJ() {
-    //     var cnpjTemp = ipt_cnpj.value
-    //     var tamanho = cnpjTemp.length
-    //     var i = 0
-    //     var cnpjFormatado = ''
-    //     while (i <= 3){
-    //         if((i == 3 || i == 7) && cnpjTemp[i] != '.'){
-    //             cnpjFormatado += '.';
-    //             console.log(cnpjTemp[i])
-    //         }// else if((i == 0) && cnpjTemp[i] != '/'){
-    //         //     cnpjFormatado += '/';
-    //         // }else if((i == 0) && cnpjTemp[i] != '-'){
-    //         //     cnpjFormatado += '-';
-    //         // }else{
-    //         //     cnpjFormatado += cnpjTemp[i];
-    //         // }
 
-    //         i++
-    //     }
-    //     ipt_cnpj.value = cnpjFormatado
-    // }
+    function formatarCnpj() {
+        var cnpj = ipt_cnpj.value
+        var tamanho = cnpj.length
+        var cnpjFormatado = ''
+        for (var i = 1; i <= tamanho; i++) {
+            if (i == 3 && cnpj[i - 1] != '.') {
+                cnpjFormatado += '.'
+            } else if (i == 7 && cnpj[i - 1] != '.') {
+                cnpjFormatado += '.'
+            } else if (i == 11 && cnpj[i - 1] != '/') {
+                cnpjFormatado += '/'
+            } else if (i == 16 && cnpj[i - 1] != '-') {
+                cnpjFormatado += '-'
+            }
+            cnpjFormatado += cnpj[i - 1]
+        }
+        ipt_cnpj.value = cnpjFormatado
+    }
+
+    function formatarTellFixo() {
+        var tellFixo = ipt_telefone.value
+        var tamanho = tellFixo.length
+        var tellFixoFormatado = ''
+        for (var i = 1; i <= tamanho; i++) {
+            if (i == 1 && tellFixo[i - 1] != '(') {
+                tellFixoFormatado += '('
+            } else if (i == 4 && tellFixo[i - 1] != ')') {
+                tellFixoFormatado += ')'
+            } else if (i == 5 && tellFixo[i - 1] != ' ') {
+                tellFixoFormatado += ' '
+            } else if (i == 10 && tellFixo[i - 1] != '-') {
+                tellFixoFormatado += '-'
+            }
+            tellFixoFormatado += tellFixo[i - 1]
+        }
+        ipt_telefone.value = tellFixoFormatado
+    }
+
+    function formatarTellCell() {
+        var tellCell = ipt_telefone_2.value
+        var tamanho = tellCell.length
+        var tellCellFormatado = ''
+        for (var i = 1; i <= tamanho; i++) {
+            if (i == 1 && tellCell[i - 1] != '(') {
+                tellCellFormatado += '('
+            } else if (i == 4 && tellCell[i - 1] != ')') {
+                tellCellFormatado += ')'
+            } else if (i == 5 && tellCell[i - 1] != ' ') {
+                tellCellFormatado += ' '
+            } else if (i == 11 && tellCell[i - 1] != '-') {
+                tellCellFormatado += '-'
+            }
+            tellCellFormatado += tellCell[i - 1]
+        }
+        ipt_telefone_2.value = tellCellFormatado
+    }
+
+
+    function formatarCep() {
+        var cep = ipt_cep.value
+        var tamanho = cep.length
+        var cepFormatado = ''
+        for (var i = 1; i <= tamanho; i++) {
+            if (i % 6 == 0 && cep[i - 1] != '-') {
+                cepFormatado += '-'
+            }
+            cepFormatado += cep[i - 1]
+        }
+        ipt_cep.value = cepFormatado
+    }
+
+
 </script>
 
 </html>
