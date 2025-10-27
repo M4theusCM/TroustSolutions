@@ -1,0 +1,287 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    /*variaves de cores*/
+    --bg-branco: #F4F5FF;
+    /*Branco meio roxo*/
+    --color-branco: #FFFFFF;
+    /*Branco para fonte*/
+    --bg-roxo: #A70FFF;
+    /*Roxo mais usado*/
+    --bg-roxo-escuro: #420E65;
+    /*Roxo escuro*/
+    --bg-roxo-nav: #420e65aa;
+    /* Cinza */
+    --fundo: #efefef;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+nav {
+    border-bottom: white solid 2px;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    z-index: 999;
+    /*Valor para ficar na frente*/
+    background-color: var(--bg-roxo-nav);
+    backdrop-filter: blur(5px);
+    border-bottom: 0;
+}
+
+footer {
+    height: 550px;
+    width: 100vw;
+    padding: 0% 2%;
+    color: white;
+    background-color: var(--bg-roxo-escuro);
+}
+
+.red {
+    color: rgb(228, 37, 97);
+}
+
+.green {
+    color: rgb(19, 182, 103);
+}
+
+.blue {
+    color: rgb(77, 51, 244);
+}
+
+input {
+    width: 250px;
+}
+
+.navbar {
+    position: relative;
+    background-image: linear-gradient(to right, var(--bg-roxo-escuro), var(--bg-roxo-nav));
+}
+
+/*Nav*/
+.navbar .logo {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .links {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .acessos {
+    height: 100%;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .logo img {
+    width: 75px;
+    height: 75px;
+}
+
+.navbar .acesso-img {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar .acessos img {
+    width: 40px;
+}
+
+.navbar .idioma {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.navbar a {
+    color: var(--bg-branco);
+    list-style: none;
+    outline: none;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #f1e0ff;
+    filter: drop-shadow(0 0 10px #6f00ff);
+    /*Coloca */
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar .acessos .login {
+    font-weight: 400;
+    cursor: pointer;
+    background-color: var(--bg-branco);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 50px;
+}
+
+.navbar .acessos .cadastro {
+    font-weight: 400;
+    cursor: pointer;
+    background-color: var(--bg-roxo);
+    color: white;
+    border: solid transparent;
+    border-radius: 5px;
+    padding: 10px 40px;
+}
+
+.navbar .botoes button {
+    font-size: 15px;
+    font-weight: 400;
+    transition: 0.3s;
+    margin: 0 5px;
+}
+
+.navbar .login:hover {
+    background-color: rgb(230, 230, 230);
+    color: var(--bg-roxo);
+}
+
+.navbar .cadastro:hover {
+    background-color: #830dc7;
+}
+
+.main {
+    display: flex;
+    height: 720px;
+    width: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.tela-calculo {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+}
+
+input {
+    border-radius: 5px;
+    border: 1px solid var(--bg-roxo);
+}
+
+.boxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 50px;
+}
+
+label {
+    text-align: center;
+}
+
+select {
+    text-align: center;
+    width: 40%;
+    border-color: var(--bg-roxo);
+    border-radius: 5px;
+}
+
+.tela-calculo button {
+    font-size: 25px;
+    border-radius: 5px;
+    background-color: var(--bg-roxo);
+    color: var(--color-branco);
+    border: none;
+    padding: 5px 20px;
+    width: 80%;
+}
+
+.select-sensor {
+    display: flex;
+    font-size: small;
+    width: 10%;
+}
+
+.tela-resultado {
+    display: flex;
+    width: 50%;
+    min-height: 100%;
+    background-color: var(--bg-roxo-escuro);
+    flex-direction: column;
+    padding: 20px;
+}
+
+.resultado {
+    display: flex;
+    flex-direction: column;
+}
+
+.tela-resultado h1 {
+    color: var(--color-branco);
+}
+
+h3 {
+    color: var(--color-branco);
+}
+
+.tela-resultado button {
+    font-size: 25px;
+    border-radius: 5px;
+    background-color: var(--bg-branco);
+    color: var(--bg-roxo);
+    border: none;
+    padding: 5px 20px;
+}
+
+.tela-comparar {
+    position: absolute;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.div_comparar{
+    display: flex;
+    background-color: skyblue;
+    width: 400px;
+    height: 400px;
+}
