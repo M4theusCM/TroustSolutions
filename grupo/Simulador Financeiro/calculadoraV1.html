@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador Financeiro</title>
+    <link rel="stylesheet" href="../Sites/css/style.css">
+
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family: "Poppins";
+        }
+
+        body {
+            font-family: "Poppins";
+        }
+      .red {
+        color: rgb(228, 37, 97);
+      }
+
+      .green {
+        color: rgb(19, 182, 103);
+      }
+
+      .blue {
+        color: rgb(77, 51, 244);
+      }
+      input{
+        width: 250px;
+      }
+    
+      .navbar{
+        position: relative;
+        background-image: linear-gradient(to right, var(--bg-roxo-escuro), var(--bg-roxo-nav));
+      }
+      .main{
+        display: flex;
+        flex-direction: column;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+     <nav class="navbar">
+        <div class="logo">
+            <a href="#home"><img src="../Sites/src/Logo-icon.png" alt="Logo"></a>
+        </div>
+        <div class="links">
+            <ul>
+                <li class="agora">
+                    <a href="../Sites/index.html">Home</a>
+                </li>
+                <li>
+                    <a href="../Sites/index.html">Nossa Missão</a>
+                </li>
+                <li>
+                    <a href="../Sites/index.html">Relatos</a>
+                </li>
+                <li>
+                    <a href="../Sites/index.html">Contato</a>
+                </li>
+            </ul>
+        </div>
+        <div class="acessos">
+            <div class="botoes">
+                <button onclick="login()" class="login"><span>Login</span></button>
+                <button onclick="cadastro()" class="cadastro"><span>Cadastro</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+      <h1>Simulador Financeiro - Troust Solutions</h1><br>
+      <p>Nossos dados e calculos são baseados um diversos artigos sobre o cultivo da truta, um deles sendo o artigo <a href="https://share.google/IcmvHlB3KLzm8TSB9">Instituto da Pesca</a>(Truta arco-iris)</p>
+      <label for="sensor">Simule com ou sem sensor</label>
+      <select  id="sensor">
+          <option value="1">Com sensor</option>
+          <option value="2">Sem sensor</option>
+      </select><br><br>
+      <label for="ipt_alevinos">Total de Alevinos no tanque:</label>
+      <br>
+      <input type="number" id="ipt_alevinos" />
+      <br ><br >
+      <label for="ipt_CustoAlevinos">Custo de compra por alevinos:</label> <br>
+      <input type="number" id="ipt_CustoAlevinos" />
+      <br><br>
+      <label for="ipt_RacaoKG">Custo da ração (em KG):</label> <br>
+      <input type="number" id="ipt_RacaoKG">
+      <br><br>
+      <label for="ipt_VendaKG">Valor da venda por kg de truta:</label> <br>
+      <input type="number" id="ipt_VendaKG" />
+      <br><br>
+      <label for="ipt_CustoOperacao">Custo de operação por mês:</label> <br>
+      <input type="number" id="ipt_CustoOperacao" />
+      <br><br>
+      <label for="ipt_cultivoSem">Tempo de cultivo (em meses)</label><br>
+      <input type="number" id="ipt_cultivoSem" />
+      <br><br>
+      <button onclick="calcular()">Calcular</button>
+      <div id="msg"></div>
+      <br><br>
+    </div>
+  </body>
+</html>
+<script>
+
+var cor = "";
+
+function calcular() {
+  var mensagem = "";
+  var totalAlevino = Number(ipt_alevinos.value);
+  var custoAlevino = Number(ipt_CustoAlevinos.value);
+  var custoRacao = Number(ipt_RacaoKG.value);
+  var vendaTrutaKG = Number(ipt_VendaKG.value);
+  var custoOperacao = Number(ipt_CustoOperacao.value);
+  var MesesSem = Number(ipt_cultivoSem.value);
+  var simule = sensor.value;
+  var MesesCom = MesesSem - 2;
+
+  if (
+    totalAlevino == 0 ||
+    custoAlevino == 0 ||
+    vendaTrutaKG == 0 ||
+    custoOperacao == 0 || 
+    MesesSem == 0 || 
+    custoRacao == 0
+  ) {
+    mensagem = `Preencha todos os campos para validação`;
+  } else if (
+    totalAlevino < 0 ||
+    custoAlevino < 0 ||
+    vendaTrutaKG < 0 ||
+    custoOperacao < 0 ||
+    MesesSem < 0 ||
+    custoRacao < 0
+  ) {
+    mensagem = `Os valores precisam ser positivos para validação`;
+  } else {
+
+    /*Produção */
+
+    var colheitaSem = totalAlevino * (1 - 0.15);
+    var colheitaCom = totalAlevino * (1 - 0.05);
+
+    var pesoColheitaComKG = (colheitaCom * 300) / 1000;
+    var pesoColheitaSemKG = (colheitaCom * 300) / 1000;
+
+    /*Custos*/
+
+    var custoRacaoSem = pesoColheitaSemKG * (1.7 * custoRacao);
+    var custoRacaoCom = pesoColheitaComKG * (1.4 * custoRacao);
+
+    var custoOpSem = custoOperacao * MesesSem;
+    var custoOpCom = custoOperacao * MesesCom;
+
+    var custoOpTotalSem = (totalAlevino * custoAlevino) + custoRacaoSem + custoOpSem;
+    var custoOpTotalCom = (totalAlevino * custoAlevino) + custoRacaoCom + custoOpCom;
+
+    /* Renda */
+
+    var rendaTotalSem = pesoColheitaSemKG * vendaTrutaKG;
+    var liquidoSem = rendaTotalSem - custoOpTotalSem;
+
+    var rendaTotalCom = pesoColheitaComKG * vendaTrutaKG;
+    var liquidoCom = rendaTotalCom - custoOpTotalCom;
+
+    /* Lucros */
+
+    var mortalidadeSem = 15;
+    var racaoSem = custoRacaoSem;
+    var tempoSem = MesesSem;
+
+    var mortalidadeCom = 5;
+    var racaoCom = custoRacaoCom;
+    var tempoCom = MesesCom;
+
+    if (liquidoSem < 0 || liquidoCom < 0) {
+      cor = 'red';
+    } else {
+      cor = 'green';
+    }
+    if(simule == '2' ){
+        mensagem = `<h3 style="color: blue;">Resultado simulação:<br><br>
+      <b><p>Total de Alevinos colhido: ${colheitaSem.toFixed(
+        2
+      )}</p></b>
+      <b><p>Peso total de Trutas: ${pesoColheitaSemKG.toFixed(
+        2
+      )}Kg</p></b>
+      Custo total da Operação: <span style="color: red;">${custoOpTotalSem
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</span>
+      Renda total estimada: <span style="color: green;">${rendaTotalSem
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</span>
+      Valor liquido estimado: <span style="color: ${cor};">${liquidoSem
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</span><br><br>
+      Estimativas dos dados:<br>
+      Mortalidade: ${mortalidadeSem}%<br>
+      Custo de Ração: ${racaoSem.toLocaleString("pt-br", {style: "currency", currency: "BRL"})}<br>
+      Tempo de Cultivo: ${tempoSem}
+      `;
+
+  }
+  if(simule == '1'){
+
+    mensagem = `<h3 style="color: blue;">Resultado simulação:<br><br>
+      <b><p>Total de Alevinos colhido: ${colheitaCom.toFixed(
+        2
+      )}</p></b>
+      <b><p>Peso total de Trutas: ${pesoColheitaComKG.toFixed(
+        2
+      )}Kg</p></b>
+      Custo total da Operação: <span style="color: red;">${custoOpTotalCom
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</span>
+      Renda total estimada: <span style="color: green;">${rendaTotalCom
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</span>
+      Valor liquido estimado: <span style="color: ${cor};">${liquidoCom
+        .toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}</span><br><br>
+      Estimativas dos dados:<br>
+      Mortalidade: ${mortalidadeCom}%<br>
+      Custo de Ração: ${racaoCom.toLocaleString("pt-br", {style: "currency", currency: "BRL"})}<br>
+      Tempo de Cultivo: ${tempoCom}
+      `;
+  }
+
+msg.innerHTML = mensagem;
+  }
+
+    }
+    function login() {
+        window.location.href = '../Sites/login.html'
+
+    }
+    function cadastro() {
+        window.location.href = '../Sites/cadastro.html'
+    }
+
+</script>
+
