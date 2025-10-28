@@ -94,7 +94,18 @@
       </div>
     </div>
     <div class="tela-comparar" id="tela_comparar" style="display: none;">
-      <div class="div_comparar" id="div_comparar" ></div>
+      <div class="caixa">
+        <img src="../Sites/src/botao-fechar.png" onclick="fechar()" alt="X">
+        <div class="div_comparar" id="div_comparar">
+          <div class="comparacao">
+            <div class="comparar sem-sensor" id="div_semSensor"></div>
+            <div class="comparar com-sensor" id="div_comSensor"></div>
+          </div>
+          <div class="div-final" id="div_final">
+            <div class="div_sensor" id="div_sensor"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
@@ -124,7 +135,8 @@
       custoRacao == 0
     ) {
       alert(`Preencha todos os campos para validação`);
-    } else if (
+    } else 
+    if (
       totalAlevino < 0 ||
       custoAlevino < 0 ||
       vendaTrutaKG < 0 ||
@@ -249,12 +261,15 @@
     var mortalidadeCom = 5;
     var racaoCom = custoRacaoCom;
     var tempoCom = MesesCom;
-    tela_comparar.style.display = 'flex'
+    tela_comparar.style.display = 'flex';
 
-    div_comparar.innerHTML = `Sem o sensor o seu lucro é de ${(custoOpTotalSem / 100).toFixed(2)}% em comparação com o total!<br>
-                    e seu lucro com o sensor é de ${(custoOpTotalCom / 100).toFixed(2)}% em comparação com o seu total!<br><br>
-                    tendo uma taxa de mortalidade de 15% sem o sensor<br>
-                    e uma taxa de mortalidade de 5% com o sensor diminuindo significativamente seus gastos`
+    div_semSensor.innerHTML = `Sem o sensor o seu lucro é de: <span style="color: red;">${(custoOpTotalSem / 100).toFixed(2)}%</span> em comparação com o total!<br><br><br>Tendo uma taxa de mortalidade de <span style="color: red;">15%</span>`
+    div_comSensor.innerHTML = `Com o sensor o seu lucro é de: <span style="color: green;">${(custoOpTotalCom / 100).toFixed(2)}%</span> em comparação com o seu total!<br><br><br>Tendo uma taxa de mortalidade de <span style="color: green;">5%</span>`
+    div_sensor.innerHTML = `Com o sensor seus gastos são diminuidos significativamente!`
+  }
+
+  function fechar() {
+    tela_comparar.style.display = 'none';
   }
 
 </script>

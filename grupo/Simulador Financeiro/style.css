@@ -279,9 +279,48 @@ h3 {
     align-items: center;
     justify-content: center;
 }
+.caixa{
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
 .div_comparar{
     display: flex;
-    background-color: skyblue;
-    width: 400px;
+    background-color: var(--fundo);
+    width: 800px;
     height: 400px;
+    border-radius: 5px;
+    border: 2px solid;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.caixa img{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    margin: 8px 8px;
+    cursor: pointer;
+}
+.comparar{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+}
+.comparacao{
+    display: flex;
+    flex-direction: row;
+}
+.div-final {
+    display: flex;
+    flex-direction: column;
+}
+.div_sensor{
+    font-size: large;
+    color: green;
+    margin: 10px 10px;
 }
