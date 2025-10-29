@@ -56,8 +56,8 @@
         arco-iris)</p>
       <label for="sensor">Simule com ou sem sensor</label>
       <select id="sensor">
-        <option value="1">Com sensor</option>
         <option value="2">Sem sensor</option>
+        <option value="1">Com sensor</option>
       </select><br><br>
       <div class="boxes">
         <div class="box">
@@ -88,6 +88,9 @@
     </div>
     <div class="tela-resultado">
       <h1>Resultado</h1>
+      <div class="imagem" id="div_imagem">
+        <img src="../Sites/src/logo-nome.png" alt="Logo TroustSolutions">
+      </div>
       <div class="resultado" id="resultado" style="display: none;">
         <div id="msg"></div><br><br>
         <button onclick="comparar()">Comparativo</button>
@@ -116,6 +119,7 @@
   var cor = "";
 
   function calcular() {
+    div_imagem.style.display = 'none';
     var mensagem = "";
     var totalAlevino = Number(ipt_alevinos.value);
     var custoAlevino = Number(ipt_CustoAlevinos.value);
@@ -135,8 +139,7 @@
       custoRacao == 0
     ) {
       alert(`Preencha todos os campos para validação`);
-    } else 
-    if (
+    } else if (
       totalAlevino < 0 ||
       custoAlevino < 0 ||
       vendaTrutaKG < 0 ||
@@ -263,9 +266,9 @@
     var tempoCom = MesesCom;
     tela_comparar.style.display = 'flex';
 
-    div_semSensor.innerHTML = `Sem o sensor o seu lucro é de: <span style="color: red;">${(custoOpTotalSem / 100).toFixed(2)}%</span> em comparação com o total!<br><br><br>Tendo uma taxa de mortalidade de <span style="color: red;">15%</span>`
-    div_comSensor.innerHTML = `Com o sensor o seu lucro é de: <span style="color: green;">${(custoOpTotalCom / 100).toFixed(2)}%</span> em comparação com o seu total!<br><br><br>Tendo uma taxa de mortalidade de <span style="color: green;">5%</span>`
-    div_sensor.innerHTML = `Com o sensor seus gastos são diminuidos significativamente!`
+    div_semSensor.innerHTML = `<h1>SEM SENSOR</h1>Sem o sensor o seu lucro é de: <span style="color: red;">${(liquidoSem*100/custoOpTotalSem).toFixed(2)}%</span> em comparação com o total!<br><br>Tendo uma taxa de mortalidade de <span style="color: red;">15%</span>`
+    div_comSensor.innerHTML = `<h1>COM SENSOR</h1>Com o sensor o seu lucro é de: <span style="color: green;">${(liquidoCom*100/custoOpTotalCom).toFixed(2)}%</span> em comparação com o seu total!<br><br>Tendo uma taxa de mortalidade de <span style="color: green;">5%</span>`
+    div_sensor.innerHTML = `A diferença do custo operacional é de: <span style="color: green;">R$${(custoOpTotalSem-custoOpTotalCom).toFixed(2)}</span> <br>Representando uma diferença de: <span style="color: green;">${((custoOpTotalSem-custoOpTotalCom)/custoOpTotalSem*100).toFixed(2)}%</span> na redução de custo <br>Demonstrando que com o sensor os gastos são <span style="color: green;">diminuídos</span> significativamente!`
   }
 
   function fechar() {
