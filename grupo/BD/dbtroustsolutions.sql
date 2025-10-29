@@ -1,6 +1,5 @@
 CREATE DATABASE troustsolutions;
 USE troustsolutions;
-drop database troustsolutions;
 
 /* ORDEM CRIAÇÃO 
 Empresa
@@ -69,13 +68,14 @@ CREATE TABLE plano(
 );
 
 CREATE TABLE pagamento(
-	idPagamento INT PRIMARY KEY AUTO_INCREMENT,
+	idPagamento INT AUTO_INCREMENT,
     dtPag DATE,
     dtVenci DATE,
     statusPag VARCHAR(45),
     CONSTRAINT chk_statusPag CHECK (statusPag in('Pendente','Efetuado','Atrasado')),
     parcela INT,
     fkPlano INT,
+    CONSTRAINT pk_plano_pag PRIMARY KEY (idPagamento, fkPlano),
 	CONSTRAINT fkPlanoPagamento
 		FOREIGN KEY (fkPLano)
         REFERENCES plano(idPlano)
@@ -96,9 +96,9 @@ CREATE TABLE tanque(
         REFERENCES empresa(idEmpresa)
 );
 
-CREATE TABLE Sensor(
+CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT,
-    sSerie VARCHAR(45),
+    nSerie VARCHAR(45),
     status_sen VARCHAR(45),
     CONSTRAINT chk_statusSensor CHECK (status_sen IN( 'Ativo','Inativo','Manutenção')),
     nome VARCHAR(45),
@@ -108,11 +108,12 @@ CREATE TABLE Sensor(
         REFERENCES tanque(idTanque)
 );
 
-CREATE TABLE ColetaTemp(
-	idColeta INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE coletaTemp(
+	idColeta INT AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
     dtHora DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkSensor INT,
+    CONSTRAINT pk_sensor_coleta PRIMARY KEY (idColeta, fkSensor),
     CONSTRAINT fkSensorColetaTemp
 		FOREIGN KEY (fkSensor)
         REFERENCES sensor(idSensor)
@@ -153,12 +154,6 @@ INSERT INTO logradouro (cep, numero, complemento, rua, bairro, estado, fkEmpresa
 ('13920000', '145', 'Galpão 2', 'Rua Dr. Alfredo de Carvalho Pinto', 'Centro', 'São Paulo', 1),
 ('13925000', '320', NULL, 'Rua José Garcia da Silva', 'Jardim São Bento', 'São Paulo', 2),
 ('13927000', '57', 'Próx. ao Rio Claro', 'Rua Primo Frazatto', 'Cidade Nova', 'São Paulo', 3);
-
-INSERT INTO plano (metodo, moeda, qtdParcela, preco, qtdSensor, dtContratacao, fkEmpresa) VALUES
-('', '', 0, 0.0, 0,DEFAULT, 1);
-
-INSERT INTO pagamento (dtPag, dtVenci, statusPag, qtdParce, fkPlano) VALUES
-('', '', '', 0, 1);
         
 INSERT INTO tanque (TempMax, TempMin, qtdTruta, tamanho_m²,litragem, nome, setor, fkEmpresa) VALUES
 -- Empresa 1
@@ -171,7 +166,7 @@ INSERT INTO tanque (TempMax, TempMin, qtdTruta, tamanho_m²,litragem, nome, seto
 (18.8, 10.0, 270, 140,5000, 'Tanque Rio Claro', 'Setor 1', 3),
 (17.5, 9.5, 120, 90,2000, 'Tanque Reserva', 'Setor 2', 3);
 
-INSERT INTO sensor (sSerie, status_sen, nome, fkTanque) VALUES
+INSERT INTO sensor (nSerie, status_sen, nome, fkTanque) VALUES
 -- Tanques da Empresa 1
 ('LM35-A001', 'Ativo', 'LM35', 1), -- tanque 1
 ('DS18B20-A002', 'Ativo', 'DS18B20', 1), 
@@ -188,7 +183,7 @@ INSERT INTO sensor (sSerie, status_sen, nome, fkTanque) VALUES
 ('LM35-C003', 'Ativo', 'LM35', 6), -- Tanque 2
 ('DS18B20-C004', 'Ativo', 'DS18B20', 6);
 
-INSERT INTO coletaTemp (temperatura, dtHora, fkSensor) VALUES
+/* INSERT INTO coletaTemp (temperatura, dtHora, fkSensor) VALUES
 -- Tanque 1 : EMpresa 1
 (15.2, '2025-10-25 08:00:00', 1),
 (15.5, '2025-10-25 12:30:00', 2),
@@ -208,7 +203,7 @@ INSERT INTO coletaTemp (temperatura, dtHora, fkSensor) VALUES
 -- Tanque 6 : Empresa 3
 (16.1, '2025-10-27 11:30:00', 11),
 (16.3, DEFAULT, 12);
-        
+*/        
 -- SELECT
 SELECT * FROM empresa;
 SELECT * FROM usuario;
@@ -232,5 +227,15 @@ SELECT nomeFantasia,
 	JOIN usuario AS supv -- Verse se é o Left ou Right para aparecer o supervisor
 		ON func.Supervisor = supv.idUsuario;
         
+SELECT nomeFantasia as Empresa, setor as Setor, nSerie as 'Número do sensor',
+ temperatura as Temperatura, CASE 
+ WHEN temperatura >= 20 THEN 'Crítico'
+ WHEN temperatura >= 16 AND temperatura < 20 THEN 'Alerta'
+ WHEN temperatura >= 10 AND temperatura < 16 THEN 'Estável'
+ END 'Status do tanque' 
+ FROM empresa JOIN tanque ON tanque.fkEmpresa = empresa.idEmpresa 
+ JOIN sensor ON sensor.fkTanque = tanque.idTanque
+ JOIN coletaTemp ON coletaTemp.fkSensor = sensor.idSensor;
         
-
+        
+-- ifnull(supervisor, 'Líder')
