@@ -355,12 +355,12 @@ body {
     font-weight: 500;
     margin: none;
     font-size: 18px;
-    animation: tremer 0.5s;
+    /* animation: tremer 0.5s; */
     text-align: center;
     display: none;
 }
 
-@keyframes tremer {
+/* @keyframes tremer {
     0% { margin-left: 0px;}
     15% { margin-left: -5px;}
     30% { margin-left: 0px;}
@@ -369,7 +369,7 @@ body {
     75% { margin-left: -5px;}
     90% { margin-left: 0px;}
     95% { margin-left: 5px;}
-}
+} */
 
 /*Display*/
 #login {
