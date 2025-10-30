@@ -36,8 +36,13 @@
                     <div class="links links-ativo">
                         <a href="./dash-tanque.html">Tanque</a>
                     </div>
-                    <div class="links">
+                    <!-- <div class="links">
                         <a href="./dashborad.html">Funcionario</a>
+                    </div> -->
+                    <div class="alerta">
+                        <h3>Alerta</h3>
+                        <p>Tanque 2 - Setor X</p>
+                        <p>Temperatura: 18.2°c</p>
                     </div>
                 </div>
                 <div class="sair links">
@@ -90,7 +95,7 @@
                         <p>Quantidade de Alertas: 0</p>
                     </div>
                 </div>
-                <div class="card" onclick="abrirModal()">
+                <div class="card card-alerta" onclick="abrirModal2()">
                     <div class="titulos">
                         <div class="infos">
                             <p class="nome">Nome: Tanque 2</p>
@@ -103,11 +108,11 @@
                     <div class="configs">
                         <p class="tempMax">Temperatura Máxima: 17</p>
                         <p class="tempMin">Temperatura Minima: 10</p>
-                        <p class="tempMed">Temperatura Média: 14</p>
+                        <p class="tempMed status-alerta">Temperatura Média: 18.2</p>
                     </div>
                     <div class="alertas">
-                        <p>Status: <span class="roxo">Normal</span></p>
-                        <p>Quantidade de Alertas: 0</p>
+                        <p>Status: <span class="status-alerta">Alerta</span></p>
+                        <p>Quantidade de Alertas: <span class="status-alerta">1</span></p>
                     </div>
                 </div>
                 <div class="card" onclick="abrirModal()">
@@ -151,9 +156,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     <div class="modal-container" id="modal">
@@ -163,7 +165,7 @@
                     <img src="../src/botao-fechar.png" alt="X">
                 </div>
                 <div>
-                    <h1>Tanque 1 - <span>Normal</span></h1>
+                    <h1><span id="nome_tanque_modal"> </span> - <span id="status_tanque_modal"></span></h1>
                 </div>
                 <div class="logo">
                     <img src="../src/Logo-icon.png" alt="TroustSolutions">
@@ -202,6 +204,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
@@ -211,6 +214,15 @@
 <script>
     function abrirModal() {
         modal.style.display = 'flex'
+        nome_tanque_modal.innerHTML = 'Tanque 1'
+        status_tanque_modal.innerHTML = 'Normal'
+        status_tanque_modal.style.color = '#000000'
+    }
+    function abrirModal2() {
+        modal.style.display = 'flex'
+        nome_tanque_modal.innerHTML = 'Tanque 2'
+        status_tanque_modal.innerHTML = 'Alerta'
+        status_tanque_modal.style.color = '#e42323'
     }
     function fecharModal() {
         modal.style.display = 'none'
@@ -226,18 +238,18 @@
         data: {
             labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
             datasets: [{
-                label: 'Maxima',
-                data: [80, 82, 80, 85, 80, 83],
-                borderWidth: 3
-            },
-            {
                 label: 'Minima',
-                data: [30, 29, 28, 25, 22, 23],
+                data: [10, 10, 10, 10, 10, 10],
                 borderWidth: 3
             },
             {
-                label: 'Ideal',
-                data: [10, 10, 10, 10, 10, 10],
+                label: 'Máxima',
+                data: [20, 20, 20, 20, 20, 20],
+                borderWidth: 3
+            },
+            {
+                label: 'Sensor',
+                data: [14, 12, 13, 15, 18, 15],
                 borderWidth: 3
             }]
         },

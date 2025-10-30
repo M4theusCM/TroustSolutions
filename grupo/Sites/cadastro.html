@@ -376,7 +376,7 @@
         cad_3.style.display = 'none';
     }
     function cadastrar() {
-        window.location.href = './index.html'
+        window.location.href = './login.html'
     }
 
     function Validar_forca_senha() {
@@ -413,7 +413,7 @@
             if (senhaProvisoriaFunc.length >= 6) {
                 criterios++
             }
-            if (senhaProvisoriaFunc.toLocaleLowerCase() != senhaProvisoriaFunc) {
+            if (senhaProvisoriaFunc.toLowerCase() != senhaProvisoriaFunc) {
                 criterios++
             }
             if (senhaProvisoriaFunc.toUpperCase() != senhaProvisoriaFunc) {

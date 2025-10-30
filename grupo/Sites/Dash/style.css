@@ -102,6 +102,20 @@ body {
     color: #FFF;
 }
 
+.menu-lateral .alerta{
+    margin-top: 20%;
+    background-color: red;
+    width: 90%;
+    height: 150px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+}
+.menu-lateral .alerta p{
+    font-size: 18px;
+    margin: 10px;
+}
+
 .menu-lateral .sair {
     width: 83%;
     height: 40px;
@@ -126,6 +140,8 @@ body {
     width: 80%;
     justify-content: flex-end;
 }
+
+
 
 nav {
     display: flex;
@@ -380,13 +396,26 @@ canvas {
     font-weight: 400;
 }
 
+.card-alerta{
+    background-color: #FF5E5E;
+}
+.status-alerta{
+    color: #fff;
+    font-weight: 600;
+}
+.card-alerta:hover {
+    background-color: #e42323;
+}
+
+
+
+/*Modal Alerta*/
 .modal-container {
     display: none;
     position: absolute;
     width: 100vw;
     height: 100vh;
     background-color: rgba(6, 6, 6, 0.76);
-    z-index: 999;
     align-items: center;
     justify-content: center;
 }
