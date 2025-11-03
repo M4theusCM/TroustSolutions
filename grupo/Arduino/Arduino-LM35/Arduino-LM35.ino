@@ -1,7 +1,8 @@
 const int PINO_SENSOR_TEMPERATURA = A0;
 float temperaturaCelsius;
-int temperatura_max = 30;
-int temperatura_min = 20;
+int temperatura_max = 25;
+int temperatura_min = 10;
+// int tempo = (1000 * 60) * 7
 
 void setup() {
   Serial.begin(9600);
@@ -17,6 +18,7 @@ void loop() {
 
 
   delay(1000);
+  // delay(tempo);
   //  delay(500);
   
 }

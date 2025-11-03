@@ -156,8 +156,8 @@
       var colheitaSem = totalAlevino * (1 - 0.15);
       var colheitaCom = totalAlevino * (1 - 0.05);
 
-      var pesoColheitaComKG = (colheitaCom * 300) / 1000;
-      var pesoColheitaSemKG = (colheitaCom * 300) / 1000;
+      var pesoColheitaComKG = (colheitaCom * 300) / 1000; // 300 quilogramas de 1KG 
+      var pesoColheitaSemKG = (colheitaCom * 300) / 1000; // 300 quilogramas de 1KG 
 
       /*Custos*/
 
@@ -206,10 +206,8 @@
       Tempo de Cultivo: ${tempoSem}
       `
         resultado.style.display = 'flex';
-
       }
       if (simule == '1') {
-
         mensagem = `<h3>Resultado simulação:<br><br>
       <p>Total de Alevinos colhido: ${Math.floor(colheitaCom)}</p>
       <p>Peso total de Trutas: ${pesoColheitaComKG.toFixed(2)}Kg</p>

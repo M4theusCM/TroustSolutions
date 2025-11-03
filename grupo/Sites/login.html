@@ -30,11 +30,11 @@
                 <div class="msg-erros" id="div_msg_erros"> <!--erros aqui--> </div>
                 <label>
                    <span>Email:</span>
-                    <input type="text" placeholder="seuemail@gmail.com" id="ipt_email">
+                    <input type="text" value="truta@empresa.com" placeholder="seuemail@gmail.com" id="ipt_email">
                 </label>
                 <label>
                     <span>Senha:</span>
-                    <input type="password" placeholder="SenhaForte" id="ipt_senha">
+                    <input type="password" value="1234Aa" placeholder="SenhaForte" id="ipt_senha">
                 </label>
                 <button onclick="validar()" class="btn-login">Login</button>
                 <button onclick="entarGmail()" class="btn-google">
@@ -54,8 +54,8 @@
         var email = ipt_email.value
         var senha = ipt_senha.value
         var msg = ''
-        var emailFixo = 'troustsolution@empresa.com'
-        var senhaFixo = '#Sprint2'
+        var emailFixo = 'truta@empresa.com'
+        var senhaFixo = '1234Aa'
         if(email == '' || senha == ''){
             msg = 'Preencha todos os campos'
         }else if(email != emailFixo || senha != senhaFixo){
