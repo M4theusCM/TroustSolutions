@@ -137,18 +137,8 @@ INSERT INTO empresa (nomeFantasia, razaoSocial, cnpj, cell, tellFixo) VALUES
 ('Rio Claro Aquicultura', 'Rio Claro Produção e Distribuição de Peixes LTDA', '30786421000145', '11987456321', '1141279854');
 
 INSERT INTO usuario (nome, email, senha, fkEmpresa, supervisor) VALUES
--- Empresa 1
 ('Vinicius Almada', 'vinicius.almada@trutaviva.com', 'Truta2025va', 1, NULL), -- Supervisor
-('Nathan Rezende', 'nathan.rezende@trutaviva.com', 'PeixeNath89', 1, 1),
-('Emilly Neves', 'emilly.neves@trutaviva.com', '#senhasP3ixes', 1, 1),
--- Empresa 2
-('Hugo Araujo', 'hugo.araujo@aguasfrias.com', 'AguasHugo48', 2, NULL), -- Supervisor
-('Luana Aragao', 'luana.aragao@aguasfrias.com', 'FriaLu59', 2, 4),
-('Josefa Aparicio', 'josefa.aparicio@aguasfrias.com', 'TrutaJose71', 2, 4),
--- Empresa 3
-('Carolina Vieira', 'carolina.vieira@rioclaro.com', 'RioCaro47', 3, NULL),-- SUpervisor
-('Heloisa Ramos', 'heloisa.ramos@rioclaro.com', 'ClaroHe81', 3, 7),
-('Hadassa Barbosa', 'hadassa.barbosa@rioclaro.com', 'AquaHa75', 3, 7);
+('Nathan Rezende', 'nathan.rezende@trutaviva.com', 'PeixeNath89', 1, 1);
         
 INSERT INTO logradouro (cep, numero, complemento, rua, bairro, estado, fkEmpresa) VALUES
 ('13920000', '145', 'Galpão 2', 'Rua Dr. Alfredo de Carvalho Pinto', 'Centro', 'São Paulo', 1),

@@ -29,14 +29,14 @@
             <div class="div-forms-login">
                 <div class="msg-erros" id="div_msg_erros"> <!--erros aqui--> </div>
                 <label>
-                   <span>Email:</span>
-                    <input type="text" value="truta@empresa.com" placeholder="seuemail@gmail.com" id="ipt_email">
+                    <span>Email:</span>
+                    <input type="text" placeholder="seuemail@gmail.com" id="ipt_email">
                 </label>
                 <label>
                     <span>Senha:</span>
-                    <input type="password" value="1234Aa" placeholder="SenhaForte" id="ipt_senha">
+                    <input type="password" placeholder="SenhaForte" id="ipt_senha">
                 </label>
-                <button onclick="validar()" class="btn-login">Login</button>
+                <button onclick="entrar()" class="btn-login">Login</button>
                 <button onclick="entarGmail()" class="btn-google">
                     <img src="./src/logo_google.png" alt="G">
                     continuar com o Google
@@ -50,27 +50,66 @@
     </div>
 </body>
 <script>
-    function validar() {
+    function entrar() {
         var email = ipt_email.value
         var senha = ipt_senha.value
         var msg = ''
-        var emailFixo = 'truta@empresa.com'
-        var senhaFixo = '1234Aa'
-        if(email == '' || senha == ''){
+        if (email == '' || senha == '') {
             msg = 'Preencha todos os campos'
-        }else if(email != emailFixo || senha != senhaFixo){
-            msg = 'Email ou senha errados'
-        }else{
-            msg = 'Passou'
-            login();
         }
+
         div_msg_erros.style.display = 'block'
         div_msg_erros.innerHTML = msg
-    }
 
-    function login() {
-        window.location.href = './Dash/dashborad.html'
-    }
+            console.log("FORM LOGIN: ", email);
+            console.log("FORM SENHA: ", senha);
 
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: email,
+                    senhaServer: senha
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.idUsuario;
+
+                        alert('Logando')
+
+                        setTimeout(function () {
+                            window.location = "./Dash/dashborad.html";
+                        }, 1000); // apenas para exibir o loading
+
+                    });
+
+                } else {
+                    div_msg_erros.innerHTML = 'Email ou senha errados'
+
+                    alert("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
+    }
 </script>
+
 </html>

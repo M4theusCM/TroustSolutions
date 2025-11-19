@@ -43,7 +43,7 @@
                 <div class="linha-input">
                     <label class="w-60">
                         <span>Nome Fantasia:</span>
-                        <input type="text" id="ipt_nome_fantasia" value="Truta Feliz" placeholder="Ex: TroustSolutions">
+                        <input type="text" id="ipt_nome_fantasia" placeholder="Ex: TroustSolutions">
                     </label>
                     <label class="w-40">
                         <span>CNPJ:</span>
@@ -54,18 +54,20 @@
                 <div class="linha-input">
                     <label class="w-100">
                         <span>Razão Social:</span>
-                        <input type="text" value="Trutas Feliz Ltda" id="ipt_razao_social"
+                        <input type="text" id="ipt_razao_social"
                             placeholder="Troust Solutions Desenvolvimento e Inovação Ltda">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-50">
                         <span>Telefone Fixo:</span>
-                        <input id="ipt_telefone" placeholder="(11) 8255-1524" maxlength="14" onkeyup="formatarTellFixo()">
+                        <input id="ipt_telefone" placeholder="(11) 8255-1524" maxlength="14"
+                            onkeyup="formatarTellFixo()">
                     </label>
                     <label class="w-50">
                         <span>Telefone Celular:</span>
-                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524" value="(11) 98255-1524" maxlength="15" onkeyup="formatarTellCell()">
+                        <input id="ipt_telefone_2" placeholder="(11) 98255-1524" maxlength="15"
+                            onkeyup="formatarTellCell()">
                     </label>
                 </div>
                 <div class="linha-input">
@@ -75,21 +77,21 @@
                     </label>
                     <label class="w-33">
                         <span>Número:</span>
-                        <input type="text" id="ipt_numero_ende" value="2" placeholder="598A">
+                        <input type="text" id="ipt_numero_ende" placeholder="598A">
                     </label>
                     <label class="w-33">
                         <span>Complemento:</span>
-                        <input type="text" id="ipt_complemento" value="Galpão 2" placeholder="Apto. 1">
+                        <input type="text" id="ipt_complemento" placeholder="Apto. 1">
                     </label>
                 </div>
                 <div class="linha-input">
                     <label class="w-50">
                         <span>Rua:</span>
-                        <input type="text" id="ipt_rua" value="Rua Joaquim Alves Torres" placeholder="Rua Joaquim Alves Torres">
+                        <input type="text" id="ipt_rua" placeholder="Rua Joaquim Alves Torres">
                     </label>
                     <label class="w-50">
                         <span>Bairro:</span>
-                        <input type="text" id="ipt_bairro" value="Vila Nova Cachoeirinha"  placeholder="Vila Nova Cachoeirinha">
+                        <input type="text" id="ipt_bairro" placeholder="Vila Nova Cachoeirinha">
                     </label>
                 </div>
             </div>
@@ -356,11 +358,11 @@
             msg = 'Senha e confirmação de senha devem ser iguais'
         } else {
             nomeFunc = nomeFunc.replace(' ', '')
-            nomeCompletoFunc = nomeFunc + ' ' + 'sobrenome'
+            nomeCompletoFunc = nomeFunc + ' ' + sobrenomeFunc;
             senhaFunc = senhaProvisoriaFunc
             // cad_2.style.display = 'none';
             // cad_3.style.display = 'flex';
-            cadastrar()
+            buscarPorCnpj()
         }
         div_msg_erros_2.style.display = 'block'
         div_msg_erros_2.innerHTML = msg
@@ -374,9 +376,6 @@
     function voltar_p2() {
         cad_2.style.display = 'flex';
         cad_3.style.display = 'none';
-    }
-    function cadastrar() {
-        window.location.href = './login.html'
     }
 
     function Validar_forca_senha() {
@@ -453,8 +452,6 @@
             span_forca_senha.innerHTML = fraseVetor[i - 1]
             forcaSenha = fraseVetor[i]
         }
-
-
     }
 
 
@@ -530,6 +527,140 @@
     }
 
 
+    function cadastrar() {
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeCompletoFunc,
+                emailServer: emailFunc,
+                senhaServer: senhaFunc,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert(
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...")
+
+                    setTimeout(() => {
+                        window.location = './login.html'
+                    }, "2000");
+
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+    // function cadastrarLogradouro() {
+    //     // Enviando o valor da nova input
+    //     fetch("/usuarios/cadastrar", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             // crie um atributo que recebe o valor recuperado aqui
+    //             // Agora vá para o arquivo routes/usuario.js
+    //             cepEmpresaServer: cepEmpresa,
+    //             numEndeEmpresaServer: numEndeEmpresa,
+    //             compEndeEmpresaServer: compEndeEmpresa,
+    //             ruaEndeEmpresaServer: ruaEndeEmpresa,
+    //             bairoEndeEmpresaServer: bairoEndeEmpresa
+    //         }),
+    //     })
+    //         .then(function (resposta) {
+    //             console.log("resposta: ", resposta);
+
+    //             if (resposta.ok) {
+    //                 cadastrar();
+
+    //             } else {
+    //                 throw "Houve um erro ao tentar realizar o cadastro!";
+    //             }
+    //         })
+    //         .catch(function (resposta) {
+    //             console.log(`#ERRO: ${resposta}`);
+    //         });
+
+    //     return false;
+    // }
+
+    function cadastrarEmpresa() {
+        // Enviando o valor da nova input
+        fetch("/empresas/cadastrarEmpresa", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeFantasiaEmpresaServer: nomeFantasiaEmpresa,
+                cnpjEmpresaServer: cnpjEmpresa,
+                razaoSocialEmpresaServer: razaoSocialEmpresa,
+                tellFixoEmpresaServer: tellFixoEmpresa,
+                tellCellEmpresaServer: tellCellEmpresa,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cadastrar()
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                alert(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+    function buscarPorCnpj() {
+        fetch("/empresas/buscarPorCnpj", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                cnpjEmpresaServer: cnpjEmpresa,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cadastrarEmpresa()
+
+                } else {
+                    throw "Está empresa já esta cadastrada";
+                }
+            })
+            .catch(function (resposta) {
+                alert(`#ERRO: Está empresa já esta cadastrada!`);
+            });
+
+        return false;
+    }
 </script>
 
 </html>
