@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte</title>
+    <link rel="icon" type="image/x-icon" href="../src/Logo-icon.png">
+    <link rel="stylesheet" href="../css/admin.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-area">
+        <div class="menu-lateral">a</div>
+        <div class="container">
+            <div class="titulo">
+                <div>
+                    <h1>Suporte</h1>
+                </div>
+            </div>
+            <div class="area-nome">
+                <p>Bom dia João Pedro</p>
+            </div>
+            <div class="area-cards">
+                <div class="card ">
+                    <a href="#" class="jira">
+                        <div class="infos">
+                            <h2>Jira</h2>
+                            <h3>Help Dask</h3>
+                        </div>
+                        <div class="icons">
+                            <img src="../src/Simplification.png" alt="Help desh">
+                        </div>
+                    </a>
+                </div>
+                <div class="card">
+                    <a href="">
+                        a
+                    </a>
+                </div>
+                <div class="card">
+                    <a href="">
+                        a
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="bob">
+            <img class="bob-ia" id="bob_ia_icon" onclick="openChat()" src="../src/bob_logo.png" alt="">
+            <div class="chat" id="chat_bob_user">
+                <div class="topo">
+                    <div>
+                        <img class="bob-ia-chat" src="../src/bob_logo.png" alt="bob">
+                        <p>Bob-IA</p>
+                    </div>
+                    <img onclick="fecharChat()" class="fechar-chat" src="../src/botao-fechar.png" alt="">
+                </div>
+                <div class="area-msgs">
+                    <div class="msg-bob">
+                        <div class="msg">
+                            Olá JP, como posso ajudar?
+                        </div>
+                    </div>
+                    <div class="msg-user">
+                        <div class="msg">Sua duvida aq</div>
+                    </div>
+                </div>
+                <div class="area-ipt">
+                    <div class="ipt">
+                        <input type="text" id="ipt_msg">
+                        <img onclick="enviarPergunta()" src="../src/mandar.png" alt="Enviar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function openChat() {
+        bob_ia_icon.style.display = 'none'
+        chat_bob_user.style.display = 'block'
+    }
+    function fecharChat(){
+         bob_ia_icon.style.display = 'block'
+        chat_bob_user.style.display = 'none '
+    }
+</script>
+
+</html>

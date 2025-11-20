@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+:root {
+    /*variaves de cores*/
+    --bg-branco: #F4F5FF;
+    /*Branco meio roxo*/
+    --color-branco: #FFFFFF;
+    /*Branco para fonte*/
+    --bg-roxo: #A70FFF;
+    /*Roxo mais usado*/
+    --bg-roxo-escuro: #420E65;
+    /*Roxo escuro*/
+    --bg-roxo-nav: #420e65aa;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #fcf9f4;
+}
+
+.container-area {
+    width: 100vw;
+    min-height: 10 0vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.container-area .menu-lateral {
+    width: 20%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: #6400a6;
+}
+
+.container-area .container {
+    width: 80%;
+    min-height: 100vh;
+}
+
+.container .titulo {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: end;
+    padding: 0% 8%;
+}
+
+.container .titulo div {
+    padding: 0% 2%;
+    border-bottom: solid 5px var(--bg-roxo);
+    font-size: 18px;
+}
+
+
+.container .area-nome {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    padding: 5% 8%;
+    font-size: 20px;
+}
+
+.container .area-cards {
+    width: 100%;
+    height: 60%;
+    padding: 1% 5%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container .area-cards .card {
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .area-cards .card a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.jira {
+    display: flex;
+    flex-direction: row;
+    color: rgb(34, 34, 255);
+}
+
+.jira .icons,
+.jira .infos {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.jira .infos {
+    background-color: rgba(213, 213, 213, 0.99);
+}
+
+.jira .icons {
+    /* background-image: url(../src/jira.png); */
+    background-size: 200px;
+    background-position-y: center;
+    background-color: rgba(33, 33, 255, 0.841);
+}
+
+
+.jira .icons img {
+    width: 50%;
+
+}
+
+.bob {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+    width: 300px;
+    height: 400px;
+    margin-left: 78vw;
+    margin-top: 40vh;
+    /* background-color: red; */
+}
+
+.bob .bob-ia {
+    height: 60px;
+    width: 60px;
+    transition: .5s;
+    display: block;
+}
+
+.bob .bob-ia:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+
+.bob .chat {
+    width: 100%;
+    height: 100%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+}
+
+.bob .chat .topo {
+    width: 100%;
+    height: 15%;
+    background-color: var(--bg-roxo);
+    display: flex;
+    align-items: center;
+    padding: 0% 5%;
+}
+
+.bob .chat .topo div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.bob .chat .topo .bob-ia-chat {
+    width: 18%;
+    margin-right: 10px;
+}
+
+.bob .chat .topo {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.bob .chat .topo .fechar-chat {
+    width: 20px;
+    margin-right: 10px;
+    align-items: end;
+    cursor: pointer;
+    /* border-radius: 50% */
+    /* background-color: white; */
+}
+
+.bob .chat .area-msgs {
+    width: 100%;
+    height: 72%;
+    overflow-y: auto;
+}
+
+.bob .chat .area-msgs .msg-bob {
+    width: 100%;
+    min-height: 15px;
+    display: flex;
+    justify-content: end;
+    padding: 0% 2%;
+}
+
+.bob .chat .area-msgs .msg-bob .msg {
+    width: 85%;
+    margin-top: 5px;
+    padding: 1% 2%;
+    border-radius: 5px 5px 0px 5px;
+    background-color: #b6b6b6;
+}
+
+.bob .chat .area-msgs .msg-user {
+    width: 100%;
+    min-height: 15px;
+    display: flex;
+    justify-content: start;
+    padding: 0% 2%;
+}
+
+.bob .chat .area-msgs .msg-user .msg {
+    width: 85%;
+    margin-top: 5px;
+    padding: 1% 2%;
+    border-radius: 5px 5px 5px 0px;
+    background-color: #c35afb;
+}
+
+
+
+.bob .chat .area-ipt {
+    width: 100%;
+    height: 13%;
+    background-color: #e2e2e2;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+    align-items: center;
+}
+
+.bob .chat .area-ipt .ipt {
+    width: 100%;
+    height: 80%;
+    border-radius: 5px;
+    border: solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.bob .chat .area-ipt .ipt input {
+    width: 85%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.bob .chat .area-ipt .ipt img {
+    width: 20px;
+    cursor: pointer;
+}
