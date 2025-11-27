@@ -85,21 +85,25 @@
                     </label>
                 </div>
                 <div class="linha-input">
-                    <label class="w-50">
+                    <label class="w-33">
                         <span>Rua:</span>
                         <input type="text" id="ipt_rua" placeholder="Rua Joaquim Alves Torres">
                     </label>
-                    <label class="w-50">
+                    <label class="w-33">
                         <span>Bairro:</span>
                         <input type="text" id="ipt_bairro" placeholder="Vila Nova Cachoeirinha">
+                    </label>
+                    <label class="w-33">
+                        <span>Estado:</span>
+                        <input type="text" id="ipt_estado" placeholder="São Paulo">
                     </label>
                 </div>
             </div>
             <div class="outros-links">
                 <div class="container-btn">
-                    <button onclick="avancar_p1()" class="btn-etapa">Próximo</button>
+                    <button onclick="avancar_p1()" class="btn-etapa">Cadastrar</button>
                 </div>
-                <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
+                <p><a>A empresa ja tem cadastro? <span onclick="avancar()">Cadastrar usuario</span></a></p>
             </div>
         </div>
     </div>
@@ -131,9 +135,13 @@
                         <span>Nome:</span>
                         <input type="text" id="ipt_nome_supervisor" placeholder="Ex: Matheus">
                     </label>
-                    <label class="w-60">
+                    <label class="w-40">
                         <span>Sobrenome:</span>
                         <input type="text" id="ipt_sobrenome" placeholder="Ex: Silva">
+                    </label>
+                    <label class="w-20">
+                        <span>Código da empresa:</span>
+                        <input type="text" id="ipt_codigo" placeholder="Digite o código:">
                     </label>
                 </div>
                 <div class="linha-input">
@@ -274,13 +282,20 @@
     var compEndeEmpresa = ''
     var ruaEndeEmpresa = ''
     var bairoEndeEmpresa = ''
+    var estadoEndeEmpresa = ''
 
     /* Parte 2*/
     var nomeCompletoFunc = ''
     var emailFunc = ''
     var senhaFunc = ''
+    var codigoEmpresa = ''
 
     var forcaSenha = ''
+
+    function avancar(){
+        cad_1.style.display = 'none';
+        cad_2.style.display = 'flex';
+    }
 
     function avancar_p1() {
         nomeFantasiaEmpresa = ipt_nome_fantasia.value
@@ -293,6 +308,7 @@
         compEndeEmpresa = ipt_complemento.value
         ruaEndeEmpresa = ipt_rua.value
         bairoEndeEmpresa = ipt_bairro.value
+        estadoEndeEmpresa = ipt_estado.value
 
         // tirando formatação
         cnpjEmpresa = cnpjEmpresa.replaceAll('.', '').replaceAll('/', '').replace('-', '')
@@ -324,8 +340,7 @@
         } else if (cepEmpresa.length != 8) {
             msg = 'CEP inválido'
         } else {
-            cad_1.style.display = 'none';
-            cad_2.style.display = 'flex';
+            buscarPorCnpj()
         }
         div_msg_erros.style.display = 'block'
         div_msg_erros.innerHTML = msg
@@ -338,6 +353,7 @@
         var senhaProvisoriaFunc = ipt_senha.value
         var confirmarSenhaFunc = ipt_confirme_senha.value
         var msg = ''
+        codigoEmpresa = ipt_codigo.value
 
         if (
             nomeFunc == '' ||
@@ -362,7 +378,7 @@
             senhaFunc = senhaProvisoriaFunc
             // cad_2.style.display = 'none';
             // cad_3.style.display = 'flex';
-            buscarPorCnpj()
+            cadastrar()
         }
         div_msg_erros_2.style.display = 'block'
         div_msg_erros_2.innerHTML = msg
@@ -565,39 +581,42 @@
         return false;
     }
 
-    // function cadastrarLogradouro() {
-    //     // Enviando o valor da nova input
-    //     fetch("/usuarios/cadastrar", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //             // crie um atributo que recebe o valor recuperado aqui
-    //             // Agora vá para o arquivo routes/usuario.js
-    //             cepEmpresaServer: cepEmpresa,
-    //             numEndeEmpresaServer: numEndeEmpresa,
-    //             compEndeEmpresaServer: compEndeEmpresa,
-    //             ruaEndeEmpresaServer: ruaEndeEmpresa,
-    //             bairoEndeEmpresaServer: bairoEndeEmpresa
-    //         }),
-    //     })
-    //         .then(function (resposta) {
-    //             console.log("resposta: ", resposta);
+    function cadastrarLogradouro() {
+        // Enviando o valor da nova input
+        fetch("/empresas/cadastrarLogradouro", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                cepEmpresaServer: cepEmpresa,
+                numEndeEmpresaServer: numEndeEmpresa,
+                compEndeEmpresaServer: compEndeEmpresa,
+                ruaEndeEmpresaServer: ruaEndeEmpresa,
+                bairoEndeEmpresaServer: bairoEndeEmpresa,
+                estadoEndeEmpresaServer: estadoEndeEmpresa,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-    //             if (resposta.ok) {
-    //                 cadastrar();
+                if (resposta.ok) {
+                    alert('Empresa cadastrada, cadastre o usuario')
+                    cad_1.style.display = 'none';
+                    cad_2.style.display = 'flex';
 
-    //             } else {
-    //                 throw "Houve um erro ao tentar realizar o cadastro!";
-    //             }
-    //         })
-    //         .catch(function (resposta) {
-    //             console.log(`#ERRO: ${resposta}`);
-    //         });
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
 
-    //     return false;
-    // }
+        return false;
+    }
 
     function cadastrarEmpresa() {
         // Enviando o valor da nova input
@@ -620,7 +639,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    cadastrar()
+                    cadastrarLogradouro()
 
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
@@ -634,7 +653,7 @@
     }
 
     function buscarPorCnpj() {
-        fetch("/empresas/buscarPorCnpj", {
+        fetch("/empresas/buscarPorCnpj/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -650,9 +669,8 @@
 
                 if (resposta.ok) {
                     cadastrarEmpresa()
-
                 } else {
-                    throw "Está empresa já esta cadastrada";
+                    throw "Empresa já cadastrada";
                 }
             })
             .catch(function (resposta) {

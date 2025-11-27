@@ -18,17 +18,32 @@ function cadastrarEmpresa(req, res) {
 
   empresaModel.buscarPorCnpj(cnpjEmpresa).then((resultado) => {
     if (resultado.length > 0) {
-      res.status(401).json({mensagem: `a empresa com o cnpj ${cnpjEmpresa} já existe`});
+      res.status(401).json({ mensagem: `a empresa com o cnpj ${cnpjEmpresa} já existe` });
     } else {
       empresaModel.cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, tellFixoEmpresa, tellCellEmpresa)
-      .then((resultado) => {
-        res.status(201).json(resultado);
-      });
+        .then((resultado) => {
+          res.status(201).json(resultado);
+        });
     }
   });
 }
 
+function cadastrarLogradouro(req, res) {
+  var cepEmpresa = req.body.cepEmpresaServer;
+  var numEndeEmpresa = req.body.numEndeEmpresaServer;
+  var compEndeEmpresa = req.body.compEndeEmpresaServer;
+  var ruaEndeEmpresa = req.body.ruaEndeEmpresaServer;
+  var bairoEndeEmpresa = req.body.bairoEndeEmpresaServer;
+  var estadoEndeEmpresa = req.body.estadoEndeEmpresaServer;
+
+      empresaModel.cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa)
+        .then((resultado) => {
+          res.status(201).json(resultado);
+        });
+}
+
 module.exports = {
   buscarPorCnpj,
-  cadastrarEmpresa
+  cadastrarEmpresa,
+  cadastrarLogradouro
 };

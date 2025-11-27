@@ -18,7 +18,8 @@ CREATE TABLE empresa(
     razaoSocial VARCHAR(100),
     cnpj CHAR(14) UNIQUE,
     cell CHAR(11),
-    tellFixo CHAR(10)
+    tellFixo CHAR(10),
+    codigo varchar(45)
 );
 
 CREATE TABLE usuario(
@@ -30,11 +31,7 @@ CREATE TABLE usuario(
     fkEmpresa INT,
 	CONSTRAINT fkEmpresaUsuario
 		FOREIGN KEY (fkEmpresa)
-        REFERENCES empresa(idEmpresa),
-	supervisor INT,
-    CONSTRAINT fkSupervisorUsuario
-		FOREIGN KEY (supervisor)
-		REFERENCES usuario(idUsuario)
+        REFERENCES empresa(idEmpresa)
 );
 
 CREATE TABLE logradouro(
@@ -49,36 +46,6 @@ CREATE TABLE logradouro(
     CONSTRAINT fkEmpresaLogradouro
 		FOREIGN KEY (fkEmpresa)
         REFERENCES empresa(idEmpresa)
-);
-
-CREATE TABLE plano(
-	idPlano INT PRIMARY KEY AUTO_INCREMENT,
-    metodo VARCHAR(45),
-    CONSTRAINT chk_metodo CHECK(metodo in('Pix','Debito','Credito','Boleto')),
-    moeda VARCHAR(45) DEFAULT 'BRL',
-    qtdParcelas INT DEFAULT 1,
-    preco DECIMAL(6,2),
-    qtdSensor INT,
-    CONSTRAINT chk_qtdSensor CHECK(qtdSensor > 1),
-    dtContratacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fkEmpresa INT,
-	CONSTRAINT fkEmpresaPlano
-		FOREIGN KEY (fkEmpresa)
-        REFERENCES empresa(idEmpresa)
-);
-
-CREATE TABLE pagamento(
-	idPagamento INT AUTO_INCREMENT,
-    dtPag DATE,
-    dtVenci DATE,
-    statusPag VARCHAR(45),
-    CONSTRAINT chk_statusPag CHECK (statusPag in('Pendente','Efetuado','Atrasado')),
-    parcela INT,
-    fkPlano INT,
-    CONSTRAINT pk_plano_pag PRIMARY KEY (idPagamento, fkPlano),
-	CONSTRAINT fkPlanoPagamento
-		FOREIGN KEY (fkPLano)
-        REFERENCES plano(idPlano)
 );
 
 CREATE TABLE tanque(
@@ -130,21 +97,6 @@ CREATE TABLE coletaTemp(
 				DESC coletaTemp;    
 
 -- INSERSÃO DE DADOS
-    -- INSERSÃO DE DADOS
-INSERT INTO empresa (nomeFantasia, razaoSocial, cnpj, cell, tellFixo) VALUES
-('Truta Viva Aquicultura', 'Truta Viva Criação e Comércio de Pescados LTDA', '27894536000192', '11987654321', '1132659874'),
-('Águas Frias Truticultura', 'Águas Frias Criação de Trutas e Produtos Naturais LTDA', '16843275000157', '11996541238', '1145789632'),
-('Rio Claro Aquicultura', 'Rio Claro Produção e Distribuição de Peixes LTDA', '30786421000145', '11987456321', '1141279854');
-
-INSERT INTO usuario (nome, email, senha, fkEmpresa, supervisor) VALUES
-('Vinicius Almada', 'vinicius.almada@trutaviva.com', 'Truta2025va', 1, NULL), -- Supervisor
-('Nathan Rezende', 'nathan.rezende@trutaviva.com', 'PeixeNath89', 1, 1);
-        
-INSERT INTO logradouro (cep, numero, complemento, rua, bairro, estado, fkEmpresa) VALUES
-('13920000', '145', 'Galpão 2', 'Rua Dr. Alfredo de Carvalho Pinto', 'Centro', 'São Paulo', 1),
-('13925000', '320', NULL, 'Rua José Garcia da Silva', 'Jardim São Bento', 'São Paulo', 2),
-('13927000', '57', 'Próx. ao Rio Claro', 'Rua Primo Frazatto', 'Cidade Nova', 'São Paulo', 3);
-        
 INSERT INTO tanque (TempMax, TempMin, qtdTruta, tamanho_m²,litragem, nome, setor, fkEmpresa) VALUES
 -- Empresa 1
 (18.5, 10.5, 250, 135.50,5000, 'Tanque Principal', 'Setor A', 1),
@@ -198,8 +150,6 @@ INSERT INTO sensor (nSerie, status_sen, nome, fkTanque) VALUES
 SELECT * FROM empresa;
 SELECT * FROM usuario;
 SELECT * FROM logradouro;
-SELECT * FROM plano;
-SELECT * FROM pagamento;
 SELECT * FROM tanque;
 SELECT * FROM sensor;
 SELECT * FROM coletaTemp;
@@ -226,7 +176,3 @@ SELECT nomeFantasia as Empresa, setor as Setor, nSerie as 'Número do sensor',
  FROM empresa JOIN tanque ON tanque.fkEmpresa = empresa.idEmpresa 
  JOIN sensor ON sensor.fkTanque = tanque.idTanque
  JOIN coletaTemp ON coletaTemp.fkSensor = sensor.idSensor;
-
-
-        
--- ifnull(supervisor, 'Líder')

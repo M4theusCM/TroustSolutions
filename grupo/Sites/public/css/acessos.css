@@ -95,6 +95,7 @@ body {
 .outros-links a>span {
     color: var(--roxo-2);
     font-weight: 500;
+    cursor: pointer;
 }
 
 .outros-links .senha-link {

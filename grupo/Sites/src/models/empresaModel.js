@@ -12,4 +12,14 @@ function cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, 
   return database.executar(instrucaoSql);
 }
 
-module.exports = {buscarPorCnpj, cadastrarEmpresa};
+function cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa) {
+  var instrucaoSql = `INSERT INTO logradouro (cep, numero, complemento, rua, bairro, estado) VALUES ('${cepEmpresa}', '${numEndeEmpresa}', '${compEndeEmpresa}', '${ruaEndeEmpresa}', '${bairoEndeEmpresa}', '${estadoEndeEmpresa}')`;
+
+  return database.executar(instrucaoSql);
+}
+
+module.exports = {
+  buscarPorCnpj,
+  cadastrarEmpresa, 
+  cadastrarLogradouro
+};

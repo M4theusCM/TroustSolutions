@@ -10,6 +10,10 @@ router.post("/cadastrarEmpresa", function (req, res) {
 
 router.post("/buscarPorCnpj", function (req, res) {
     empresaController.buscarPorCnpj(req, res);
+})
+
+router.post("/cadastrarLogradouro", function (req, res) {
+    empresaController.cadastrarLogradouro(req, res);
 });
 
 module.exports = router;
