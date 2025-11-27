@@ -191,92 +191,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div id="cad_3" class="container">
-        <div class="container-img">
-            <img src="./src/mulher-aquario.svg" alt="img bonitinha">
-        </div>
-        <div class="container-forms">
-            <div class="topo-cad">
-                <div class="topo">
-                    <h1>Cadastre-se</h1>
-                    <img class="logo" src="./src/Logo-icon.png" alt="TroustSolutions">
-                </div>
-                <div class="sub-topo">
-                    <h2>Tanque</h2>
-                    <div class="progresso">
-                        <div class="bolinha ativo"></div>
-                        <div class="linha ativo"></div>
-                        <div class="bolinha ativo"></div>
-                        <div class="linha ativo"></div>
-                        <div class="bolinha ativo"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="div-forms-cad">
-                <div class="linha-input">
-                    <label class="w-60">
-                        <span>Nome:</span>
-                        <input type="text" id="ipt_nome_tanque" placeholder="Ex: Tanque 1A">
-                    </label>
-                    <label class="w-40">
-                        <span>Quantidade de sensores:</span>
-                        <input type="text" id="ipt_qtd_sensore" placeholder="Ex: 5">
-                    </label>
-                </div>
-                <div class="linha-input">
-                    <label class="w-33">
-                        <span>Temperatura Máxima:</span>
-                        <input type="text" id="inp_temp_max" placeholder="25°C">
-                    </label>
-                    <label class="w-33">
-                        <span>Temperatura Minima:</span>
-                        <input type="text" id="inp_temp_min" placeholder="08°C">
-                    </label>
-                    <label class="w-33">
-                        <span>Sensor:</span>
-                        <select id="slc_sensor">
-                            <option value="lm35" selected>LM35</option>
-                            <option value="dht11">DHT11</option>
-                            <option value="ds18b20">DS18B20</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="linha-input">
-                    <label class="w-40">
-                        <span>CEP:</span>
-                        <input type="text" id="ipt_cep_tanque" placeholder="">
-                    </label>
-                    <label class="w-25">
-                        <span>Número:</span>
-                        <input type="text" id="ipt_num_tanque" placeholder="">
-                    </label>
-                    <label class="w-40">
-                        <span>Complemento:</span>
-                        <input type="text" id="ipt_complemento_tanque" placeholder="">
-                    </label>
-                </div>
-                <div class="linha-input">
-                    <label class="w-50">
-                        <span>Rua:</span>
-                        <input type="password" id="inp_rua_tanque" placeholder="">
-                    </label>
-                    <label class="w-50">
-                        <span>Bairro:</span>
-                        <input type="password" id="inp_bairro_tanque" placeholder="">
-                    </label>
-                </div>
-            </div>
-            <div class="outros-links">
-                <div class="container-btn">
-                    <button onclick="voltar_p2()" class="btn-etapa">Voltar</button>
-                    <button onclick="cadastrar()" class="btn-cadastrar">cadastrar</button>
-                </div>
-                <p><a href="./login.html">Já possui uma conta? <span>Faça Login</span></a></p>
-            </div>
-        </div>
-    </div> -->
-
 </body>
 <script>
     /* Parte 1*/
@@ -383,9 +297,7 @@
             nomeFunc = nomeFunc.replace(' ', '')
             nomeCompletoFunc = nomeFunc + ' ' + sobrenomeFunc;
             senhaFunc = senhaProvisoriaFunc
-            // cad_2.style.display = 'none';
-            // cad_3.style.display = 'flex';
-            cadastrar()
+            validarCodigo()
         }
         div_msg_erros_2.style.display = 'block'
         div_msg_erros_2.innerHTML = msg
@@ -550,7 +462,7 @@
     }
 
 
-    function cadastrar() {
+    function cadastrar(fkEmpresa) {
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -563,6 +475,7 @@
                 nomeServer: nomeCompletoFunc,
                 emailServer: emailFunc,
                 senhaServer: senhaFunc,
+                fkEmpresaServer: fkEmpresa,
             }),
         })
             .then(function (resposta) {
@@ -571,7 +484,7 @@
                 if (resposta.ok) {
                     alert(
                         "Cadastro realizado com sucesso! Redirecionando para tela de Login...")
-
+                        
                     setTimeout(() => {
                         window.location = './login.html'
                     }, "2000");
@@ -583,6 +496,31 @@
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+    function validarCodigo(){
+        var codigoEmpresaDigitado = ipt_codigo.value;
+
+        fetch(`/usuarios/validarCodigo/${codigoEmpresaDigitado}`)
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        var fkEmpresa = json.idEmpresa;
+                        cadastrar(fkEmpresa)
+                    });
+                } else {
+                    throw "Código da empresa inválido";
+                }
+            })
+            .catch(function (resposta) {
+                alert("#ERRO: Código da empresa inválido");
             });
 
         return false;
@@ -610,6 +548,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
+                    console.log(resposta);
                     exibirCodigo()
 
                 } else {
@@ -654,7 +593,6 @@
         })
             .then(function (resposta) {
                 console.log("resposta: ", resposta);
-
                 if (resposta.ok) {
                     cadastrarLogradouro()
 

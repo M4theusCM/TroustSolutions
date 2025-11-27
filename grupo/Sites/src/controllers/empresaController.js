@@ -4,8 +4,7 @@ function buscarPorCnpj(req, res) {
   var cnpjEmpresa = req.body.cnpjEmpresaServer;
 
   empresaModel.buscarPorCnpj(cnpjEmpresa).then((resultado) => {
-    res.status(200).json(resultado);
-  });
+    res.status(200).json(resultado)});
 }
 
 function cadastrarEmpresa(req, res) {
@@ -14,12 +13,12 @@ function cadastrarEmpresa(req, res) {
   var razaoSocialEmpresa = req.body.razaoSocialEmpresaServer;
   var tellFixoEmpresa = req.body.tellFixoEmpresaServer;
   var tellCellEmpresa = req.body.tellCellEmpresaServer;
-  var codigoEmpresa =  req.body.codigoEmpresaServer;
+  var codigoEmpresa = req.body.codigoEmpresaServer;
 
-      empresaModel.cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, tellFixoEmpresa, tellCellEmpresa, codigoEmpresa)
-        .then((resultado) => {
-          res.status(201).json(resultado);
-  });
+  empresaModel.cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, tellFixoEmpresa, tellCellEmpresa, codigoEmpresa)
+    .then((resultado) => {
+      res.status(201).json(resultado);
+    });
 }
 
 function cadastrarLogradouro(req, res) {
@@ -30,10 +29,10 @@ function cadastrarLogradouro(req, res) {
   var bairoEndeEmpresa = req.body.bairoEndeEmpresaServer;
   var estadoEndeEmpresa = req.body.estadoEndeEmpresaServer;
 
-      empresaModel.cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa)
-        .then((resultado) => {
-          res.status(201).json(resultado);
-        });
+  empresaModel.cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa)
+    .then((resultado) => {
+      res.status(201).json(resultado);
+    });
 }
 
 module.exports = {

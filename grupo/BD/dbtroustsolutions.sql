@@ -148,8 +148,8 @@ INSERT INTO sensor (nSerie, status_sen, nome, fkTanque) VALUES
 */        
 -- SELECT
 SELECT * FROM empresa;
-SELECT * FROM usuario;
 SELECT * FROM logradouro;
+SELECT * FROM usuario;
 SELECT * FROM tanque;
 SELECT * FROM sensor;
 SELECT * FROM coletaTemp;
@@ -176,3 +176,5 @@ SELECT nomeFantasia as Empresa, setor as Setor, nSerie as 'Número do sensor',
  FROM empresa JOIN tanque ON tanque.fkEmpresa = empresa.idEmpresa 
  JOIN sensor ON sensor.fkTanque = tanque.idTanque
  JOIN coletaTemp ON coletaTemp.fkSensor = sensor.idSensor;
+ 
+ SELECT idEmpresa FROM empresa WHERE codigo = 007172;

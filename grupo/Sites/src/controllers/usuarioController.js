@@ -1,5 +1,33 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+
+function validarCodigo(req, res) {
+    var codigoEmpresaDigitado = req.params.codigoEmpresaDigitado;
+
+    usuarioModel.validarCodigo(codigoEmpresaDigitado)
+        .then(
+            function (resultadoValidar) {
+                console.log(`\nResultados encontrados: ${resultadoValidar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoValidar)}`); // transforma JSON em String
+
+                if (resultadoValidar.length == 1) {
+                    console.log(resultadoValidar)
+                    res.json({
+                            idEmpresa: resultadoValidar[0].idEmpresa
+                        });
+                } else if (resultadoValidar.length == 0) {
+                    res.status(403).send("O código digitado não existe");
+                } else {
+                    res.status(403).send("Código inválido");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o cadastro! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -47,7 +75,8 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    
+    var fkEmpresa = req.body.fkEmpresaServer;
+
 
     // Faça as validações dos valores
     if (nome == undefined) {
@@ -59,7 +88,7 @@ function cadastrar(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha)
+        usuarioModel.cadastrar(nome, email, senha, fkEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -79,5 +108,6 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    validarCodigo
 }

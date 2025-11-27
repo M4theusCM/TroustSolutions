@@ -10,6 +10,10 @@ router.post("/cadastrar", function (req, res) {
 
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
+})
+
+router.get("/validarCodigo/:codigoEmpresaDigitado", function (req, res) {
+    usuarioController.validarCodigo(req, res);
 });
 
 module.exports = router;
