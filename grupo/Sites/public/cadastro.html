@@ -22,6 +22,14 @@
             <img src="./src/homem-tabelas.svg" alt="img bonitinha">
         </div>
         <div class="container-forms">
+            <div id="cad_1_pt2" style="display: none;">
+                <div class="modal_cad_1">
+                    <span>O código da sua empresa é:</span><br>
+                    <div id="div_codigoEmpresa"></div><br>
+                    <span>Anote o código da empresa!</span><br><br>
+                    <button onclick="fecharCodigo()" class="btn-etapa">Salvar</button>
+                </div>
+            </div>
             <div class="topo-cad">
                 <div class="topo">
                     <h1>Cadastre-se</h1>
@@ -292,7 +300,7 @@
 
     var forcaSenha = ''
 
-    function avancar(){
+    function avancar() {
         cad_1.style.display = 'none';
         cad_2.style.display = 'flex';
     }
@@ -353,7 +361,6 @@
         var senhaProvisoriaFunc = ipt_senha.value
         var confirmarSenhaFunc = ipt_confirme_senha.value
         var msg = ''
-        codigoEmpresa = ipt_codigo.value
 
         if (
             nomeFunc == '' ||
@@ -603,9 +610,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    alert('Empresa cadastrada, cadastre o usuario')
-                    cad_1.style.display = 'none';
-                    cad_2.style.display = 'flex';
+                    exibirCodigo()
 
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
@@ -618,7 +623,18 @@
         return false;
     }
 
+    function exibirCodigo() {
+        cad_1_pt2.style.display = 'flex'
+        div_codigoEmpresa.innerHTML = codigoEmpresa;
+    }
+
+    function fecharCodigo() {
+        cad_1.style.display = 'none';
+        cad_2.style.display = 'flex';
+    }
+
     function cadastrarEmpresa() {
+        codigoEmpresa = Math.random().toString(16).substring(2, 8).toUpperCase();
         // Enviando o valor da nova input
         fetch("/empresas/cadastrarEmpresa", {
             method: "POST",
@@ -633,6 +649,7 @@
                 razaoSocialEmpresaServer: razaoSocialEmpresa,
                 tellFixoEmpresaServer: tellFixoEmpresa,
                 tellCellEmpresaServer: tellCellEmpresa,
+                codigoEmpresaServer: codigoEmpresa
             }),
         })
             .then(function (resposta) {
@@ -653,7 +670,7 @@
     }
 
     function buscarPorCnpj() {
-        fetch("/empresas/buscarPorCnpj/", {
+        fetch("/empresas/buscarPorCnpj", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

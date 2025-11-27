@@ -14,17 +14,11 @@ function cadastrarEmpresa(req, res) {
   var razaoSocialEmpresa = req.body.razaoSocialEmpresaServer;
   var tellFixoEmpresa = req.body.tellFixoEmpresaServer;
   var tellCellEmpresa = req.body.tellCellEmpresaServer;
+  var codigoEmpresa =  req.body.codigoEmpresaServer;
 
-
-  empresaModel.buscarPorCnpj(cnpjEmpresa).then((resultado) => {
-    if (resultado.length > 0) {
-      res.status(401).json({ mensagem: `a empresa com o cnpj ${cnpjEmpresa} já existe` });
-    } else {
-      empresaModel.cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, tellFixoEmpresa, tellCellEmpresa)
+      empresaModel.cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, tellFixoEmpresa, tellCellEmpresa, codigoEmpresa)
         .then((resultado) => {
           res.status(201).json(resultado);
-        });
-    }
   });
 }
 
