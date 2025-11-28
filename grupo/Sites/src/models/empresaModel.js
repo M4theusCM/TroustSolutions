@@ -12,8 +12,8 @@ function cadastrarEmpresa(nomeFantasiaEmpresa, razaoSocialEmpresa, cnpjEmpresa, 
   return database.executar(instrucaoSql);
 }
 
-function cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa) {
-  var instrucaoSql = `INSERT INTO logradouro (cep, numero, complemento, rua, bairro, estado) VALUES ('${cepEmpresa}', '${numEndeEmpresa}', '${compEndeEmpresa}', '${ruaEndeEmpresa}', '${bairoEndeEmpresa}', '${estadoEndeEmpresa}')`;
+function cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa, cnpjEmpresa) {
+  var instrucaoSql = `INSERT INTO logradouro (cep, numero, complemento, rua, bairro, estado, fkEmpresa) VALUES ('${cepEmpresa}', '${numEndeEmpresa}', '${compEndeEmpresa}', '${ruaEndeEmpresa}', '${bairoEndeEmpresa}', '${estadoEndeEmpresa}', (SELECT idEmpresa FROM empresa WHERE cnpj = '${cnpjEmpresa}'))`;
 
   return database.executar(instrucaoSql);
 }

@@ -28,8 +28,9 @@ function cadastrarLogradouro(req, res) {
   var ruaEndeEmpresa = req.body.ruaEndeEmpresaServer;
   var bairoEndeEmpresa = req.body.bairoEndeEmpresaServer;
   var estadoEndeEmpresa = req.body.estadoEndeEmpresaServer;
+  var cnpjEmpresa = req.body.cnpjEmpresaServer;
 
-  empresaModel.cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa)
+  empresaModel.cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEndeEmpresa, bairoEndeEmpresa, estadoEndeEmpresa, cnpjEmpresa)
     .then((resultado) => {
       res.status(201).json(resultado);
     });
