@@ -77,10 +77,11 @@
             <div class="container-cards-tanque" id="areas_cards">
 
             </div>
+        
         </div>
     </div>
     <div class="modal-container" id="modal">
-
+        
     </div>
 </body>
 
@@ -89,6 +90,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+    // carregar tanques
     function carregarTanques() {
         var fkEmpresa = sessionStorage.FK_EMPRESA
         fetch(`/tanques/tanquesEmpresa/${fkEmpresa}`, { cache: "no-store" })
@@ -162,6 +165,7 @@
 
 
 <script>
+    // modais
     function abrirModal(fkTanque) {
         var idTanque = fkTanque
         var fkEmpresa = sessionStorage.FK_EMPRESA
@@ -245,6 +249,11 @@
         `
         modal.style.display = 'flex'
         modal.innerHTML = cardEstatistica
+
+    }
+
+
+    function alterarTanque(idTanque){
 
     }
 </script>
