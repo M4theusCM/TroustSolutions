@@ -148,11 +148,50 @@ INSERT INTO sensor (nSerie, status_sen, nome, fkTanque) VALUES
 */        
 -- SELECT
 SELECT * FROM empresa;
-SELECT * FROM logradouro;
 SELECT * FROM usuario;
+SELECT * FROM logradouro;
 SELECT * FROM tanque;
 SELECT * FROM sensor;
 SELECT * FROM coletaTemp;
+
+SELECT t.idTanque,
+	t.nome AS nometanque,
+    t.setor AS setortanque,
+    t.TempMax AS configMaxTemp,
+    t.TempMin AS configMinTemp,
+    ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+    MAX(ct.dtHora) AS ultimaCOleta
+    FROM tanque t
+		JOIN sensor s ON t.idTanque = s.fkTanque
+        JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+	WHERE fkEmpresa = 1
+    GROUP BY idTanque;
+	
+SELECT t.idTanque,
+	t.nome AS nometanque,
+    t.setor AS setortanque,
+    t.TempMax AS configMaxTemp,
+    t.TempMin AS configMinTemp,
+    ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+    MAX(ct.dtHora) AS ultimaCOleta
+    FROM tanque t
+		JOIN sensor s ON t.idTanque = s.fkTanque
+        JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+	WHERE fkEmpresa = 1
+    GROUP BY idTanque;
+
+SELECT t.idTanque,
+	t.nome AS nometanque,
+    t.setor AS setortanque,
+    t.TempMax AS configMaxTemp,
+    t.TempMin AS configMinTemp,
+    ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+    ct.dtHora AS ultimaCOleta
+    FROM tanque t
+		JOIN sensor s ON t.idTanque = s.fkTanque
+        JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+	WHERE fkEmpresa = 1 AND idTanque = 1
+    GROUP BY idTanque, dtHora;
 
 SELECT nomeFantasia,
 	razaoSocial,
