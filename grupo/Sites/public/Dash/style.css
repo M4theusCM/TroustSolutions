@@ -6,6 +6,7 @@
     --azul: #7CF8E5;
     --modal: #ebebeb;
     --modal-kpi: #3a3a3a;
+    --card-selecionado: #a98cca;
 }
 
 body {
@@ -324,8 +325,8 @@ canvas {
 }
 
 .card {
-    width: 400px;
-    height: 225px;
+    width: 475px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     padding: 1%;
@@ -335,60 +336,60 @@ canvas {
 }
 .card:hover {
     cursor: pointer;
-    background-color: var(--roxo-claro);
+    background-color: var(--card-selecionado);
 }
-
-.card .titulos {
+.card .titulo{
     display: flex;
+    padding: 0px 10px;
+    height: 20%;
+    font-size: 20px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: solid 2px black;
 }
-
-.card .infos {
-    width: 70%;
-}
-
-.card .infos p {
+.card .titulo p{
     margin: 0;
 }
-
-.card .nome {
-    font-size: 24px;
-    font-weight: 500px;
-}
-
-.card .setor {
-    font-size: 20px;
-    font-weight: 300px;
-}
-
-.card .logo {
-    display: flex;
-    width: 30%;
-    align-items: center;
-    justify-content: end;
-}
-
-.card .logo img {
-    width: 50px;
-    height: 50px;
-}
-
-.card .configs {
-    margin: 0;
-}
-
-.card .configs p {
-    font-size: 16px;
+.card .titulo img{
+    width: 25px;
     padding: 5px;
-    margin: 0;
 }
+.card .infos{
+    width: 100%;
+    height: 80%;
+    display: flex;
+}
+.card .infos .infosTanque{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card .infos .txt-infos{
+    margin: 5px;
+}
+.card .infos h2{
+    font-size: 20px;
+}
+.card .infos .ilustracao{
+    display: flex;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+}
+.card .infos  img{
+    width: 125px;
+}
+
+
 
 .card .alertas {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-
 }
 
 .roxo {

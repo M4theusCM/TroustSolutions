@@ -20,7 +20,7 @@
     </style>
 </head>
 
-<body>
+<body onload="carregarTanques()">
     <div class="div-pai">
         <!-- Menu Lateral -->
         <div class="container-lateral">
@@ -74,98 +74,136 @@
 
             <!-- Cards -->
 
-            <div class="container-cards-tanque">
-                <div class="card" onclick="abrirModal()">
-                    <div class="titulos">
-                        <div class="infos">
-                            <p class="nome">Nome: Tanque 1</p>
-                            <p class="setor">Setor X</p>
-                        </div>
-                        <div class="logo">
-                            <img src="../src/Logo-icon.png" alt="TroustSolutions">
-                        </div>
-                    </div>
-                    <div class="configs">
-                        <p class="tempMax">Temperatura Máxima: 17</p>
-                        <p class="tempMin">Temperatura Minima: 10</p>
-                        <p class="tempMed">Temperatura Média: 14</p>
-                    </div>
-                    <div class="alertas">
-                        <p>Status: <span class="roxo">Normal</span></p>
-                        <p>Quantidade de Alertas: 0</p>
-                    </div>
-                </div>
-                <div class="card card-alerta" onclick="abrirModal2()">
-                    <div class="titulos">
-                        <div class="infos">
-                            <p class="nome">Nome: Tanque 2</p>
-                            <p class="setor">Setor X</p>
-                        </div>
-                        <div class="logo">
-                            <img src="../src/Logo-icon.png" alt="TroustSolutions">
-                        </div>
-                    </div>
-                    <div class="configs">
-                        <p class="tempMax">Temperatura Máxima: 17</p>
-                        <p class="tempMin">Temperatura Minima: 10</p>
-                        <p class="tempMed status-alerta">Temperatura Média: 18.2</p>
-                    </div>
-                    <div class="alertas">
-                        <p>Status: <span class="status-alerta">Alerta</span></p>
-                        <p>Quantidade de Alertas: <span class="status-alerta">1</span></p>
-                    </div>
-                </div>
-                <div class="card" onclick="abrirModal()">
-                    <div class="titulos">
-                        <div class="infos">
-                            <p class="nome">Nome: Tanque 3</p>
-                            <p class="setor">Setor X</p>
-                        </div>
-                        <div class="logo">
-                            <img src="../src/Logo-icon.png" alt="TroustSolutions">
-                        </div>
-                    </div>
-                    <div class="configs">
-                        <p class="tempMax">Temperatura Máxima: 17</p>
-                        <p class="tempMin">Temperatura Minima: 10</p>
-                        <p class="tempMed">Temperatura Média: 14</p>
-                    </div>
-                    <div class="alertas">
-                        <p>Status: <span class="roxo">Normal</span></p>
-                        <p>Quantidade de Alertas: 0</p>
-                    </div>
-                </div>
-                <div class="card" onclick="abrirModal()">
-                    <div class="titulos">
-                        <div class="infos">
-                            <p class="nome">Nome: Tanque 4</p>
-                            <p class="setor">Setor X</p>
-                        </div>
-                        <div class="logo">
-                            <img src="../src/Logo-icon.png" alt="TroustSolutions">
-                        </div>
-                    </div>
-                    <div class="configs">
-                        <p class="tempMax">Temperatura Máxima: 17</p>
-                        <p class="tempMin">Temperatura Minima: 10</p>
-                        <p class="tempMed">Temperatura Média: 14</p>
-                    </div>
-                    <div class="alertas">
-                        <p>Status: <span class="roxo">Normal</span></p>
-                        <p>Quantidade de Alertas: 0</p>
-                    </div>
-                </div>
+            <div class="container-cards-tanque" id="areas_cards">
+
             </div>
         </div>
     </div>
     <div class="modal-container" id="modal">
+
+    </div>
+</body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    function carregarTanques() {
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+        fetch(`/tanques/tanquesEmpresa/${fkEmpresa}`, { cache: "no-store" })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (tanques) {
+                        console.log('Quantidade de respostas do banco: ' + tanques.length)
+                        exibirTanques(tanques)
+                    })
+                }
+            }
+            )
+
+    }
+
+    function exibirTanques(tanques) {
+        var qtdtanques = tanques.length
+        var cards = ''
+        var alerta = ''
+        for (var i = 0; i < qtdtanques; i++) {
+            var tanqueAtual = tanques[i]
+            var temp = tanqueAtual.mediaTanque
+            var max = tanqueAtual.configMaxTemp
+            var min = tanqueAtual.configMinTemp
+            var idTanque = tanqueAtual.idTanque
+            if (max < temp || min > temp) {
+                alerta += `
+                    <div class="card alerta" id="card_tanque_id_${idTanque}">
+                        <div class="titulo">
+                            <p>Nome: ${tanqueAtual.nometanque}</p>
+                            <img src="../src/icons/editar.png" alt="editar">
+                        </div>
+                        <div class="infos" onclick="abrirModal(${idTanque})">
+                            <div class="infosTanque">
+                                <h2 class="txt-infos">Temp. Media: ${temp}°C</h2>
+                                <h3 class="txt-infos">Setor: ${tanqueAtual.setortanque}</h3>
+                                <h4 class="txt-infos">Limite Máximo: ${max}</h4>
+                                <h4 class="txt-infos">Limite Minimo: ${min}°c</h4>
+                            </div>
+                            <div class="ilustracao">
+                                <img src="../src/icons/alerta.png" alt="Tanque Ok">
+                            </div>
+                        </div>
+                    </div>
+                 `
+            } else {
+                cards += `
+                    <div class="card" id="card_tanque_id_${idTanque}">
+                        <div class="titulo">
+                            <p>Nome: ${tanqueAtual.nometanque}</p>
+                            <img src="../src/icons/editar.png" alt="editar" onclick="alterarTanque(${idTanque})">
+                        </div>
+                        <div class="infos" onclick="abrirModal(${idTanque})">
+                            <div class="infosTanque">
+                                <h2 class="txt-infos">Temp. Media: ${temp}°C</h2>
+                                <h3 class="txt-infos">Setor: ${tanqueAtual.setortanque}</h3>
+                                <h4 class="txt-infos">Limite Máximo: ${max}</h4>
+                                <h4 class="txt-infos">Limite Minimo: ${min}°c</h4>
+                            </div>
+                            <div class="ilustracao">
+                                <img src="../src/icons/tanque.png" alt="Tanque Ok">
+                            </div>
+                        </div>
+                    </div>
+                 `
+            }
+        }
+        areas_cards.innerHTML = alerta + cards
+    }
+</script>
+
+
+<script>
+    function abrirModal(fkTanque) {
+        var idTanque = fkTanque
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+        fetch("/tanques/estatisticasTanques", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: fkEmpresa,
+                idTanqueServer: idTanque 
+            })
+        })
+        .then(function(response){
+            if(response.ok){
+                response.json().then(
+                    function (estatisticas){
+                        console.log("Resposta")
+                        console.log(JSON.stringify(estatisticas))
+                        exibirStatisticas(estatisticas)
+                    }
+                )
+            }
+        }
+
+        )
+    }
+    function fecharModal() {
+        modal.style.display = 'none'
+    }
+
+    function exibirStatisticas(estatisticas) {
+        var qtdEstatisticas = estatisticas.length
+        var t = estatisticas[qtdEstatisticas - 1] // t de tanque q nem no bd
+        var cardEstatistica = `
         <div class="modal-tanque">
             <div class="topo-modal">
                 <div class="sair" onclick="fecharModal()">
                     <img src="../src/botao-fechar.png" alt="X">
                 </div>
                 <div>
-                    <h1><span id="nome_tanque_modal"> </span> - <span id="status_tanque_modal"></span></h1>
+                    <h1><span id="nome_tanque_modal">Nome</span> - ${t.nometanque}<span id="status_tanque_modal"></span></h1>
                 </div>
                 <div class="logo">
                     <img src="../src/Logo-icon.png" alt="TroustSolutions">
@@ -176,17 +214,17 @@
                     <div class="box">
                         <span>Temperatura Mínima</span><br>
                         <hr>
-                        <b>10ºC</b><br>
+                        <b>${t.configMinTemp}ºC</b><br>
                     </div>
                     <div class="box">
                         <span>Temperatura Máxima</span><br>
                         <hr>
-                        <b>17ºC</b><br>
+                        <b>${t.configMaxTemp}ºC</b><br>
                     </div>
                     <div class="box">
                         <span>Temperatura Média</span><br>
                         <hr>
-                        <b>14ºC</b><br>
+                        <b>${t.mediaTanque}ºC</b><br>
                     </div>
                     <div class="box">
                         <span>Quantidade de Alertas</span><br>
@@ -204,28 +242,10 @@
                 </div>
             </div>
         </div>
-    </div>
-</body>
-
-</html>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-    function abrirModal() {
+        `
         modal.style.display = 'flex'
-        nome_tanque_modal.innerHTML = 'Tanque 1'
-        status_tanque_modal.innerHTML = 'Normal'
-        status_tanque_modal.style.color = '#000000'
-    }
-    function abrirModal2() {
-        modal.style.display = 'flex'
-        nome_tanque_modal.innerHTML = 'Tanque 2'
-        status_tanque_modal.innerHTML = 'Alerta'
-        status_tanque_modal.style.color = '#e42323'
-    }
-    function fecharModal() {
-        modal.style.display = 'none'
+        modal.innerHTML = cardEstatistica
+
     }
 </script>
 
