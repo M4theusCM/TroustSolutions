@@ -77,10 +77,11 @@
             <div class="container-cards-tanque" id="areas_cards">
 
             </div>
+
         </div>
     </div>
     <div class="modal-container" id="modal">
-
+        <img src="" alt="">
     </div>
 </body>
 
@@ -89,6 +90,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+    // carregar tanques
     function carregarTanques() {
         var fkEmpresa = sessionStorage.FK_EMPRESA
         fetch(`/tanques/tanquesEmpresa/${fkEmpresa}`, { cache: "no-store" })
@@ -114,6 +117,9 @@
             var max = tanqueAtual.configMaxTemp
             var min = tanqueAtual.configMinTemp
             var idTanque = tanqueAtual.idTanque
+            var setortanque = tanqueAtual.setortanque
+            var nomeTanque = tanqueAtual.nometanque
+
             if (max < temp || min > temp) {
                 alerta += `
                     <div class="card alerta" id="card_tanque_id_${idTanque}">
@@ -138,13 +144,13 @@
                 cards += `
                     <div class="card" id="card_tanque_id_${idTanque}">
                         <div class="titulo">
-                            <p>Nome: ${tanqueAtual.nometanque}</p>
-                            <img src="../src/icons/editar.png" alt="editar" onclick="alterarTanque(${idTanque})">
+                            <p>Nome: ${nomeTanque}</p>
+                            <img src="../src/icons/editar.png" alt="editar" onclick="alterarTanque(${idTanque}, '${nomeTanque}', ${max}, ${min}, '${setortanque}')">
                         </div>
                         <div class="infos" onclick="abrirModal(${idTanque})">
                             <div class="infosTanque">
                                 <h2 class="txt-infos">Temp. Media: ${temp}°C</h2>
-                                <h3 class="txt-infos">Setor: ${tanqueAtual.setortanque}</h3>
+                                <h3 class="txt-infos">Setor: ${setortanque}</h3>
                                 <h4 class="txt-infos">Limite Máximo: ${max}</h4>
                                 <h4 class="txt-infos">Limite Minimo: ${min}°c</h4>
                             </div>
@@ -158,10 +164,8 @@
         }
         areas_cards.innerHTML = alerta + cards
     }
-</script>
 
-
-<script>
+    // modais
     function abrirModal(fkTanque) {
         var idTanque = fkTanque
         var fkEmpresa = sessionStorage.FK_EMPRESA
@@ -172,22 +176,22 @@
             },
             body: JSON.stringify({
                 fkEmpresaServer: fkEmpresa,
-                idTanqueServer: idTanque 
+                idTanqueServer: idTanque
             })
         })
-        .then(function(response){
-            if(response.ok){
-                response.json().then(
-                    function (estatisticas){
-                        console.log("Resposta")
-                        console.log(JSON.stringify(estatisticas))
-                        exibirStatisticas(estatisticas)
-                    }
-                )
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(
+                        function (estatisticas) {
+                            console.log("Resposta")
+                            console.log(JSON.stringify(estatisticas))
+                            exibirStatisticas(estatisticas)
+                        }
+                    )
+                }
             }
-        }
 
-        )
+            )
     }
     function fecharModal() {
         modal.style.display = 'none'
@@ -245,6 +249,90 @@
         `
         modal.style.display = 'flex'
         modal.innerHTML = cardEstatistica
+
+    }
+
+    // alteração
+    function alterarTanque(idTanque, nomeTanque, max, min, setortanque) {
+        var configs = `
+        <div class="card-config">
+            <div class="topo-modal">
+                <div class="sair" onclick="fecharModal()">
+                    <img src="../src/botao-fechar.png" alt="X">
+                </div>
+                <div>
+                    <h1><span id="nome_tanque_modal">Nome</span> - ${nomeTanque}<span id="status_tanque_modal"></span></h1>
+                </div>
+                <div class="logo">
+                    <img src="../src/Logo-icon.png" alt="TroustSolutions">
+                </div>
+            </div>
+            <div class="infos-config-modal">
+                <label>
+                    Nome do tanque:
+                    <input type="text" value="${nomeTanque}" id="config_nome_tanque">
+                </label>
+                <label>
+                    Setor do tanque:
+                    <input type="text" value="${setortanque}" id="config_setor_tanque">
+                </label>
+                <label>
+                    Limite Minimo de temperatura
+                    <input type="text" value="${min}" id="config_temp_min_tanque">
+                </label>
+                <label>
+                    Limite Máximo de temperatura
+                    <input type="text" value="${max}" id="config_temp_max_tanque">
+                </label>
+                <button onclick="salvarAlteracao(${idTanque})" class="btn-salvar">Salvar alteração</button>
+            </div>
+        </div>
+        `
+        modal.style.display = 'flex'
+        modal.innerHTML = configs
+    }
+
+    function salvarAlteracao(idTanque) {
+        var nomeTanque = config_nome_tanque.value
+        var setortanque = config_setor_tanque.value
+        var min = Number(config_temp_min_tanque.value)
+        var max = Number(config_temp_max_tanque.value)
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+
+        if (min > max) {
+            alert('A temperatura Minima não pode ser maior que a temperatura Maxima')
+        } else if (min < 8) {
+            alert('Recomendamos minima seja superior a 8°C para melhor funcionamento')
+        } else if (max > 20) {
+            alert('Recomendamos maxima seja inferior a 20°C para melhor funcionamento')
+        } else {
+            fetch("/tanques/alterarConfigsTanque", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idTanqueServer: idTanque,
+                    nomeTanqueServer: nomeTanque,
+                    tempMaxServer: max,
+                    tempMinServer: min,
+                    setorTanqueServer: setortanque,
+                    fkEmpresaServer: fkEmpresa
+                })
+            })
+                .then(function (resposta) {
+                    if (resposta.ok) {
+                        alert('tanque alterado com sucesso')                        
+                        fecharModal()
+                        carregarTanques()
+                    } else {
+                        console.log('Erro ao alterar: \n\n\t\t', resposta)
+                    }
+                })
+                .catch(function (erro) {
+                    console.error('Erro encontrado: ' + erro)
+                })
+        }
 
     }
 </script>

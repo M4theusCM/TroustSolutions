@@ -8,9 +8,6 @@ function tanqueEmpresa(req, res) {
         tanqueModel.tanquesEmpresa(fkEmpresa)
             .then(
                 function (resultadotanque) {
-                    console.log(`\nResultados encontrados: ${resultadotanque.length}`)
-                    console.log(`Resultados: ${JSON.stringify(resultadotanque)}`)
-
                     res.status(200).json(resultadotanque)
                 }
             )
@@ -30,7 +27,7 @@ function tanqueEmpresa(req, res) {
 function estatisticasTanque(req, res) {
     var fkEmpresa = req.body.fkEmpresaServer
     var idTanque = req.body.idTanqueServer
-    console.log('A: '+fkEmpresa, idTanque)
+    console.log('A: ' + fkEmpresa, idTanque)
     if (fkEmpresa == undefined) {
         res.status(400).send('Empresa não encontrada')
     } else if (idTanque == undefined) {
@@ -58,8 +55,35 @@ function estatisticasTanque(req, res) {
 
 }
 
+function alterarConfigsTanque(req, res) {
+    var idTanque = req.body.idTanqueServer
+    var nomeTanque = req.body.nomeTanqueServer
+    var max = req.body.tempMaxServer
+    var min = req.body.tempMinServer
+    var setortanque = req.body.setorTanqueServer
+    var fkEmpresa = req.body.fkEmpresaServer
+    console.log('Funcioton controller: \n\n\t\t', idTanque, nomeTanque, max, min, setortanque, fkEmpresa)
+    if (idTanque == undefined) {
+        res.status(401).send('Tanque não indentificado')
+    } else if (nomeTanque == undefined) {
+        res.status(400).send('Nome do tanque deve ser preenchido')
+    } else if (max == undefined || min == undefined) {
+        res.status(400).send('Temperaturas invalidas')
+    } else if (setortanque == undefined) {
+        res.status(400).send('Setor do tanque deve ser preenchido')
+    } else if (fkEmpresa == undefined) {
+        res.status(400).send('Empresa não identificada')
+    } else {
+        tanqueModel.alterarConfigsTanque(idTanque, nomeTanque, max, min, setortanque, fkEmpresa)
+        .then((resultado) => {
+            res.status(200).json(resultado)
+        })
+    }
+}
+
 
 module.exports = {
     tanqueEmpresa,
     estatisticasTanque,
+    alterarConfigsTanque,
 }
