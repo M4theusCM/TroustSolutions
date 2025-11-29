@@ -42,8 +42,18 @@ function estatisticasTanque(fkEmpresa, fkTanque) {
     return database.executar(instrucaoSql)
 }
 
+function alterarConfigsTanque(idTanque, nomeTanque, max, min, setortanque, fkEmpresa) {
+    console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function alterarConfigsTanque(): ", idTanque, nomeTanque, max, min, setortanque, fkEmpresa)
+    var instrucaoSql = `
+    UPDATE tanque SET TempMax = ${max}, TempMin = ${min}, nome = '${nomeTanque}', setor = '${setortanque}'
+	    WHERE idTanque = ${idTanque} AND fkEmpresa = ${fkEmpresa}
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
 
 module.exports = {
     tanquesEmpresa,
     estatisticasTanque,
+    alterarConfigsTanque
 }

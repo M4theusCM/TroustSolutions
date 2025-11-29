@@ -103,7 +103,7 @@ body {
     color: #FFF;
 }
 
-.menu-lateral .alerta{
+.menu-lateral .alerta {
     margin-top: 20%;
     background-color: red;
     width: 90%;
@@ -112,7 +112,8 @@ body {
     color: #fff;
     text-align: center;
 }
-.menu-lateral .alerta p{
+
+.menu-lateral .alerta p {
     font-size: 18px;
     margin: 10px;
 }
@@ -334,11 +335,13 @@ canvas {
     background-color: #ffffff;
     transition: 0.4s;
 }
+
 .card:hover {
     cursor: pointer;
     background-color: var(--card-selecionado);
 }
-.card .titulo{
+
+.card .titulo {
     display: flex;
     padding: 0px 10px;
     height: 20%;
@@ -348,38 +351,45 @@ canvas {
     justify-content: space-between;
     border-bottom: solid 2px black;
 }
-.card .titulo p{
+
+.card .titulo p {
     margin: 0;
 }
-.card .titulo img{
+
+.card .titulo img {
     width: 25px;
     padding: 5px;
 }
-.card .infos{
+
+.card .infos {
     width: 100%;
     height: 80%;
     display: flex;
 }
-.card .infos .infosTanque{
+
+.card .infos .infosTanque {
     width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.card .infos .txt-infos{
+.card .infos .txt-infos {
     margin: 5px;
 }
-.card .infos h2{
+
+.card .infos h2 {
     font-size: 20px;
 }
-.card .infos .ilustracao{
+
+.card .infos .ilustracao {
     display: flex;
     width: 40%;
     align-items: center;
     justify-content: center;
 }
-.card .infos  img{
+
+.card .infos img {
     width: 125px;
 }
 
@@ -397,13 +407,15 @@ canvas {
     font-weight: 400;
 }
 
-.card-alerta{
+.card-alerta {
     background-color: #FF5E5E;
 }
-.status-alerta{
+
+.status-alerta {
     color: #fff;
     font-weight: 600;
 }
+
 .card-alerta:hover {
     background-color: #e42323;
 }
@@ -413,18 +425,20 @@ canvas {
 /*Modal Alerta*/
 .modal-container {
     display: none;
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgba(6, 6, 6, 0.76);
     align-items: center;
     justify-content: center;
 }
 
 .modal-tanque {
-    width: 65%;
-    height: 75%;
-    background-color: #fff;
+    top: 50px;
+    width: 65vw;
+    height: 75vh;
+    background-color: #ffffff;
     border-radius: 10px;
     padding: 1% 2%;
 }
@@ -434,7 +448,8 @@ canvas {
     justify-content: space-between;
     align-items: center;
 }
-.topo-modal .sair:hover{
+
+.topo-modal .sair:hover {
     cursor: pointer;
 }
 
@@ -452,7 +467,8 @@ canvas {
     width: 60px;
     height: 60px;
 }
-.meio-modal{
+
+.meio-modal {
     width: 100%;
     height: 75%;
     display: flex;
@@ -460,20 +476,60 @@ canvas {
     justify-content: space-between;
 }
 
-.graficos-modal{
+.graficos-modal {
     display: flex;
     justify-content: space-evenly;
 }
 
-.grafico-modal{
+.grafico-modal {
     background-color: var(--modal);
 }
 
-.kpis-modal{
+.kpis-modal {
     display: flex;
 }
-.kpis-modal .box{
+
+.kpis-modal .box {
     height: 80px;
     background-color: var(--modal-kpi);
     border-radius: 10px;
+}
+
+.card-config {
+    width: 50vw;
+    height: 60vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 1% 2%;
+}
+.infos-config-modal{
+    width: 100%;
+    height: 75%;
+    border-top: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-evenly   ;
+}
+.infos-config-modal label{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.infos-config-modal label input{
+    height: 10px;
+    padding: 1% 3%;
+}
+
+.btn-salvar{
+    background-color: var(--roxo-claro);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: .6s;
+}
+.btn-salvar:hover{
+    background-color: var(--roxo);
+    cursor: pointer;
 }
