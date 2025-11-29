@@ -15,4 +15,8 @@ router.post("/alterarConfigsTanque", function (req, res) {
     tanqueController.alterarConfigsTanque(req, res)
 })
 
+router.get("/alertaTanque/:fkEmpresa", function(req, res){
+    tanqueController.alertaTemp(req, res)
+})
+
 module.exports = router

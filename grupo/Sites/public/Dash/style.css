@@ -323,6 +323,7 @@ canvas {
     padding: 1%;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
 }
 
 .card {
@@ -334,11 +335,21 @@ canvas {
     border-radius: 10px;
     background-color: #ffffff;
     transition: 0.4s;
+    text-decoration: none;
+    color: black
 }
 
 .card:hover {
     cursor: pointer;
     background-color: var(--card-selecionado);
+}
+
+.alerta {
+    background-color: #ff9393;
+}
+
+.alerta:hover {
+    background-color: #ff5e5e;
 }
 
 .card .titulo {
@@ -502,26 +513,29 @@ canvas {
     border-radius: 10px;
     padding: 1% 2%;
 }
-.infos-config-modal{
+
+.infos-config-modal {
     width: 100%;
     height: 75%;
     border-top: 2px solid black;
     display: flex;
     flex-direction: column;
     align-items: end;
-    justify-content: space-evenly   ;
+    justify-content: space-evenly;
 }
-.infos-config-modal label{
+
+.infos-config-modal label {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-.infos-config-modal label input{
+
+.infos-config-modal label input {
     height: 10px;
     padding: 1% 3%;
 }
 
-.btn-salvar{
+.btn-salvar {
     background-color: var(--roxo-claro);
     color: white;
     border: none;
@@ -529,7 +543,65 @@ canvas {
     font-size: 20px;
     transition: .6s;
 }
-.btn-salvar:hover{
+
+.btn-salvar:hover {
     background-color: var(--roxo);
     cursor: pointer;
+}
+
+.modal-alerta {
+    display: none;
+    width: 20vw;
+    height: 15vh;
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    top: 80vh;
+    left: 75vw;
+    flex-direction: column;
+    padding: 5px 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.modal-alerta .infos-alerta {
+    border-bottom: solid 2px red;
+    font-size: 18px;
+    font-weight: 600;
+    color: red;
+}
+
+.modal-alerta .dados {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.modal-alerta .estatisticas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+}
+
+.modal-alerta .estatisticas h1 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.modal-alerta .estatisticas h2 {
+    font-size: 17px;
+    margin: 0;
+}
+.modal-alerta .img{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+.modal-alerta img{
+     width: 75px;
+     height: 75px;
+
 }

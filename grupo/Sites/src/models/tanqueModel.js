@@ -1,5 +1,6 @@
 var database = require("../database/config")
 
+// tanques gerais da empresa
 function tanquesEmpresa(fkEmpresa) {
     console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function tanquesEmpresa(): ", fkEmpresa)
 
@@ -21,6 +22,7 @@ function tanquesEmpresa(fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+// estatisticas de um tanque em especifico
 function estatisticasTanque(fkEmpresa, fkTanque) {
     console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function statisticasTanque(): ", fkEmpresa)
 
@@ -42,6 +44,7 @@ function estatisticasTanque(fkEmpresa, fkTanque) {
     return database.executar(instrucaoSql)
 }
 
+//  alteração das infos do tanque
 function alterarConfigsTanque(idTanque, nomeTanque, max, min, setortanque, fkEmpresa) {
     console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function alterarConfigsTanque(): ", idTanque, nomeTanque, max, min, setortanque, fkEmpresa)
     var instrucaoSql = `
@@ -52,8 +55,20 @@ function alterarConfigsTanque(idTanque, nomeTanque, max, min, setortanque, fkEmp
     return database.executar(instrucaoSql)
 }
 
+
+// alerta de temperatura
+function alertaTemp(fkEmpresa) {
+    console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function alertaTanque(): ", fkEmpresa)
+    instrucaoSql = `
+        SELECT idTanque, nomeTanque, setorTanque, mediaTanque FROM vw_alerta_tanque WHERE fkEmpresa = ${fkEmpresa};
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     tanquesEmpresa,
     estatisticasTanque,
-    alterarConfigsTanque
+    alterarConfigsTanque,
+    alertaTemp
 }

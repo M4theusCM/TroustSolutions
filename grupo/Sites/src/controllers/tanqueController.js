@@ -81,9 +81,26 @@ function alterarConfigsTanque(req, res) {
     }
 }
 
+function alertaTemp(req, res){
+    var fkEmpresa = req.params.fkEmpresa
+
+    if(fkEmpresa == undefined){
+        res.status(400).send('Empresa não encontrada')
+    }else{
+        tanqueModel.alertaTemp(fkEmpresa)
+        .then(function (resultado) {
+            res.status(200).json(resultado)
+        }).catch(function(erro){
+            console.error(erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+    }
+}
+
 
 module.exports = {
     tanqueEmpresa,
     estatisticasTanque,
     alterarConfigsTanque,
+    alertaTemp
 }

@@ -75,14 +75,40 @@
             <!-- Cards -->
 
             <div class="container-cards-tanque" id="areas_cards">
-
+                <a class="card" href="https://troustsolutions.atlassian.net/servicedesk/customer/portal/1"
+                    target="_blank">
+                    <div class="titulo">
+                        <p>Nenhum Tanque encontrado</p>
+                    </div>
+                    <div class="infos">
+                        <div class="infosTanque">
+                            <h3>Solicitar a instalação dos sensores</h3>
+                        </div>
+                        <div class="ilustracao">
+                            <img src="../src/icons/naoEncontrado.png" alt="Não encontrado">
+                        </div>
+                    </div>
+                </a>
             </div>
 
         </div>
     </div>
     <div class="modal-container" id="modal">
-        <img src="" alt="">
     </div>
+    <a class="modal-alerta" id="Modal_alerta_tanque" href="./dash-tanque.html">
+        <div class="infos-alerta ">
+            Alerta: <span id="span_nome_tanque">Tanque Principal</span>
+        </div>
+        <div class="dados">
+            <div class="estatisticas">
+                <h1>Temperatura: <span id="span_temp_tanque"></span>°c</h1>
+                <h2>Setor: <span id="span_setor_tanque"></span></h2>
+            </div>
+            <div class="img">
+                <img src="../src/icons/alerta.gif">
+            </div>
+        </div>
+    </a>
 </body>
 
 </html>
@@ -91,9 +117,10 @@
 
 <script>
 
-    // carregar tanques
+    // carregar tanques e exibição
     function carregarTanques() {
         var fkEmpresa = sessionStorage.FK_EMPRESA
+
         fetch(`/tanques/tanquesEmpresa/${fkEmpresa}`, { cache: "no-store" })
             .then(function (response) {
                 if (response.ok) {
@@ -104,28 +131,32 @@
                 }
             }
             )
-
+        alertaTanque()
+        setInterval(() => {
+            alertaTanque()
+        }, 30000)
     }
 
     function exibirTanques(tanques) {
         var qtdtanques = tanques.length
         var cards = ''
         var alerta = ''
-        for (var i = 0; i < qtdtanques; i++) {
-            var tanqueAtual = tanques[i]
-            var temp = tanqueAtual.mediaTanque
-            var max = tanqueAtual.configMaxTemp
-            var min = tanqueAtual.configMinTemp
-            var idTanque = tanqueAtual.idTanque
-            var setortanque = tanqueAtual.setortanque
-            var nomeTanque = tanqueAtual.nometanque
+        if (qtdtanques > 0) {
+            for (var i = 0; i < qtdtanques; i++) {
+                var tanqueAtual = tanques[i]
+                var temp = tanqueAtual.mediaTanque
+                var max = tanqueAtual.configMaxTemp
+                var min = tanqueAtual.configMinTemp
+                var idTanque = tanqueAtual.idTanque
+                var setortanque = tanqueAtual.setortanque
+                var nomeTanque = tanqueAtual.nometanque
 
-            if (max < temp || min > temp) {
-                alerta += `
+                if (max < temp || min > temp) {
+                    alerta += `
                     <div class="card alerta" id="card_tanque_id_${idTanque}">
                         <div class="titulo">
                             <p>Nome: ${tanqueAtual.nometanque}</p>
-                            <img src="../src/icons/editar.png" alt="editar">
+                            <img src="../src/icons/editar.png" alt="editar" onclick="alterarTanque(${idTanque}, '${nomeTanque}', ${max}, ${min}, '${setortanque}')">
                         </div>
                         <div class="infos" onclick="abrirModal(${idTanque})">
                             <div class="infosTanque">
@@ -135,13 +166,13 @@
                                 <h4 class="txt-infos">Limite Minimo: ${min}°c</h4>
                             </div>
                             <div class="ilustracao">
-                                <img src="../src/icons/alerta.png" alt="Tanque Ok">
+                                <img src="../src/icons/alerta.png" alt="Tanque Alerta">
                             </div>
                         </div>
                     </div>
                  `
-            } else {
-                cards += `
+                } else {
+                    cards += `
                     <div class="card" id="card_tanque_id_${idTanque}">
                         <div class="titulo">
                             <p>Nome: ${nomeTanque}</p>
@@ -160,10 +191,39 @@
                         </div>
                     </div>
                  `
+                }
             }
+            areas_cards.innerHTML = alerta + cards
         }
-        areas_cards.innerHTML = alerta + cards
     }
+
+    // alerta tanque
+    function alertaTanque() {
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+        fetch(`/tanques/alertaTanque/${fkEmpresa}`, { cache: "no-store" })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json()
+                        .then(function (alerta) {
+                            console.log(alerta)
+                            if (alerta.length > 0) {
+                                Modal_alerta_tanque.style.display = 'flex'
+                                span_nome_tanque.innerHTML = alerta[0].nomeTanque
+                                span_temp_tanque.innerHTML = alerta[0].mediaTanque
+                                span_setor_tanque.innerHTML = alerta[0].setorTanque
+                            } else {
+                                Modal_alerta_tanque.style.display = 'none'
+                                span_nome_tanque.innerHTML = ''
+                                span_temp_tanque.innerHTML = ''
+                                span_setor_tanque.innerHTML = ''
+                            }
+                        })
+                } else {
+                    console.log('erro: ', resposta)
+                }
+            })
+    }
+
 
     // modais
     function abrirModal(fkTanque) {
@@ -322,7 +382,7 @@
             })
                 .then(function (resposta) {
                     if (resposta.ok) {
-                        alert('tanque alterado com sucesso')                        
+                        alert('tanque alterado com sucesso')
                         fecharModal()
                         carregarTanques()
                     } else {
