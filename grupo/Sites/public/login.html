@@ -36,11 +36,13 @@
                     <span>Senha:</span>
                     <input type="password" placeholder="SenhaForte" id="ipt_senha">
                 </label>
-                <button onclick="entrar()" class="btn-login">Login</button>
-                <button onclick="entarGmail()" class="btn-google">
-                    <img src="./src/logo_google.png" alt="G">
-                    continuar com o Google
-                </button>
+                <div id="div_carregamento" style="padding-top: 50px; margin-bottom: -80px;">
+                    <button onclick="entarGmail()" class="btn-google">
+                        <img src="./src/logo_google.png" alt="G">
+                        Continuar com o Google
+                    </button>
+                    <button onclick="entrar()" class="btn-login">Login</button>
+                </div>
             </div>
             <div class="outros-links">
                 <p><a href="./cadastro.html">Não possui uma conta? <span>Cadastre-se</span></a></p>
@@ -56,11 +58,9 @@
         var msg = ''
         if (email == '' || senha == '') {
             msg = 'Preencha todos os campos'
-        }
-
-        div_msg_erros.style.display = 'block'
-        div_msg_erros.innerHTML = msg
-
+            div_msg_erros.style.display = 'block'
+            div_msg_erros.innerHTML = msg;
+        } else {
             console.log("FORM LOGIN: ", email);
             console.log("FORM SENHA: ", senha);
 
@@ -87,7 +87,8 @@
                         sessionStorage.ID_USUARIO = json.idUsuario;
                         sessionStorage.FK_EMPRESA = json.fkEmpresa
 
-                        alert('Logando')
+                        div_carregamento.innerHTML = `Logando...<br>
+                    <img src="./src/imagens/loading.gif" alt="" width = '100px'>`;
 
                         setTimeout(function () {
                             window.location = "./Dash/dashborad.html";
@@ -96,9 +97,8 @@
                     });
 
                 } else {
+                    div_msg_erros.style.display = 'block'
                     div_msg_erros.innerHTML = 'Email ou senha errados'
-
-                    alert("Houve um erro ao tentar realizar o login!");
 
                     resposta.text().then(texto => {
                         console.error(texto);
@@ -110,6 +110,7 @@
             })
 
             return false;
+        }
     }
 </script>
 

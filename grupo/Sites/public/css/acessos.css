@@ -105,6 +105,7 @@ body {
 .outros-links {
     text-align: center;
     padding-bottom: 2vh;
+    margin-top: -10px;
 }
 
 .outros-links a {
@@ -127,6 +128,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .div-forms-login label {
@@ -151,6 +153,19 @@ body {
     font-weight: 400;
 }
 
+#div_carregamento{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.div-forms-login #div_carregamento button{
+    text-align: center;
+    width: 28%;
+    height: 45px;
+}
 
 /* Cadastro*/
 .sub-topo {
@@ -201,6 +216,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
 }
 
 .linha-input {
@@ -374,7 +390,7 @@ body {
 .msg-erros {
     color: red;
     font-weight: 500;
-    margin: none;
+    margin-bottom: 15px;
     font-size: 18px;
     /* animation: tremer 0.5s; */
     text-align: center;
