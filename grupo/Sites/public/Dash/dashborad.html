@@ -240,7 +240,7 @@ function mudarTanque() {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
 
-          plotarGrafico(resposta, idAquario);
+          plotarGrafico(resposta, idTanque);
 
         });
       } else {
@@ -255,7 +255,7 @@ function mudarTanque() {
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, idAquario) {
+  function plotarGrafico(resposta, idTanque) {
 
     console.log('iniciando plotagem do gráfico...');
 

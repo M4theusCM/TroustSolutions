@@ -2,14 +2,11 @@ var database = require("../database/config");
 
 function buscarUltimasMedidas(idTanque, limite_linhas) {
 
-    var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    FROM medida
-                    WHERE fk_aquario = ${idAquario}
-                    ORDER BY id DESC LIMIT ${limite_linhas}`;
+    var instrucaoSql = `SELECT fkSensor, temperatura, DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico
+                    FROM coletaTemp join sensor 
+                    ON fkSensor = idSensor
+                    WHERE fkTanque = ${idTanque}
+                    ORDER BY idColeta DESC LIMIT ${limite_linhas};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
