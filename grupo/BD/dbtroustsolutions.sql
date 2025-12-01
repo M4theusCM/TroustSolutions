@@ -232,6 +232,20 @@ SELECT nomeFantasia as Empresa, setor as Setor, nSerie as 'Número do sensor',
 	WHERE fkEmpresa = 1
     GROUP BY idTanque
     HAVING ROUND(AVG(ct.temperatura), 2) > t.tempMax OR ROUND(AVG(ct.temperatura), 2) < t.tempMin;
+
+SELECT t.idTanque,
+	t.nome AS nometanque,
+    t.setor AS setortanque,
+    t.TempMax AS configMaxTemp,
+    t.TempMin AS configMinTemp,
+    ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+    MAX(ct.dtHora) AS ultimaCOleta
+    FROM tanque t
+		JOIN sensor s ON t.idTanque = s.fkTanque
+        JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+	WHERE fkEmpresa = 1
+    GROUP BY idTanque
+    HAVING ROUND(AVG(ct.temperatura), 2) > t.tempMax OR ROUND(AVG(ct.temperatura), 2) < t.tempMin;
     
 CREATE VIEW vw_alerta_tanque AS SELECT t.idTanque,
 	t.nome AS nometanque,
@@ -249,3 +263,6 @@ CREATE VIEW vw_alerta_tanque AS SELECT t.idTanque,
 
 SELECT idTanque, nomeTanque, setorTanque, mediaTanque FROM vw_alerta_tanque WHERE fkEmpresa = 2;	
 select * from empresa;
+select * from usuario;
+select * from coletaTemp ORDER BY idColeta DESC;
+desc coletaTemp;

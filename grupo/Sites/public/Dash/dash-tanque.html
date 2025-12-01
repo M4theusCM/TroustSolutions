@@ -20,7 +20,7 @@
     </style>
 </head>
 
-<body onload="carregarTanques()">
+<body onload="iniciar()">
     <div class="div-pai">
         <!-- Menu Lateral -->
         <div class="container-lateral">
@@ -116,11 +116,19 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+    function iniciar(){
+        alertaTanque()
+        carregarTanques()
+        setInterval(() => {
+            carregarTanques()
+            alertaTanque()
+        }, 5000)
+    }
 
     // carregar tanques e exibição
     function carregarTanques() {
+        console.log('buscar tanques')
         var fkEmpresa = sessionStorage.FK_EMPRESA
-
         fetch(`/tanques/tanquesEmpresa/${fkEmpresa}`, { cache: "no-store" })
             .then(function (response) {
                 if (response.ok) {
@@ -131,10 +139,7 @@
                 }
             }
             )
-        alertaTanque()
-        setInterval(() => {
-            alertaTanque()
-        }, 30000)
+       
     }
 
     function exibirTanques(tanques) {
@@ -199,6 +204,7 @@
 
     // alerta tanque
     function alertaTanque() {
+        console.log('buscar alertas')
         var fkEmpresa = sessionStorage.FK_EMPRESA
         fetch(`/tanques/alertaTanque/${fkEmpresa}`, { cache: "no-store" })
             .then(function (resposta) {
