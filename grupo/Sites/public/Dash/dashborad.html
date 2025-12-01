@@ -24,36 +24,31 @@
   <div class="div-pai">
     <!-- Menu Lateral -->
     <div class="container-lateral">
-      <div class="menu-lateral">
-        <div class="topo">
-          <div class="logo">
-            <img src="../src/Logo-icon.png" alt="TroustSolutions">
-            <h2><span>Troust</span>Solutions</h2>
-          </div>
-          <div class="links links-ativo">
-            <a href="./dashborad.html">Home</a>
-          </div>
-          <div class="links">
-            <a href="./dash-tanque.html">Tanque</a>
-            <!-- <div class="links">
-          </div>
-            <a href="./dashborad.html">Funcionario</a>
-          </div> -->
-            <div class="alerta">
-              <h3>Alerta</h3>
-              <p>Tanque 2 - Setor X</p>
-              <p>Temperatura: 18.2°c</p>
+            <div class="menu-lateral" id="menu_lateral">
+                <div class="topo">
+                    <div class="logo">
+                        <img src="../src/Logo-icon.png" alt="TroustSolutions">
+                        <h2><span>Troust</span>Solutions</h2>
+                    </div>
+                    <div class="links links-ativo">
+                        <a href="./dashborad.html">Home</a>
+                    </div>
+                    <div class="links ">
+                        <a href="./dash-tanque.html">Tanque</a>
+                    </div>
+                    <!-- <div class="links">
+                        <a href="./dashborad.html">Funcionario</a>
+                    </div> -->
+                    
+                </div>
+                <div class="sair links">
+                    <a href="../index.html">
+                        <img src="../src/icon-desconectar.png" alt="Icon">
+                        Desconectar
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="sair links">
-            <a href="../index.html">
-              <img src="../src/icon-desconectar.png" alt="Icon">
-              Desconectar
-            </a>
-          </div>
         </div>
-      </div>
-    </div>
 
     <!-- Infos Nav -->
     <div class="container-principal">
@@ -73,52 +68,54 @@
         </div>
       </nav>
 
-
-      <div class="container container1">
-        <div class="kpis-container">
-          <div class="select">
-            <select id="select_tanque" onclick="mudarTanque()">
-              <option value="1">TANQUE 1</option>
-              <option value="2">TANQUE 2</option>
-            </select>
+      <div class="container-kpi">
+        <div class="kpis">
+          <div class="titulo">
+            <h3>Qtd. tanques</h3>
           </div>
-          <div class="box">
-            <span>Temperatura Mínima</span><br>
-            <hr><br>
-            <b>10ºC</b><br>
-          </div>
-          <div class="box">
-            <span>Temperatura Máxima</span><br>
-            <hr><br>
-            <b>10ºC</b><br>
-          </div>
-          <div class="box">
-            <span>Temperatura Média</span><br>
-            <hr><br>
-            <b>10ºC</b><br>
-          </div>
-          <div class="box">
-            <span>Temperatura Ideal</span><br>
-            <hr><br>
-            <b>10ºC</b><br>
+          <div class="dados">
+            <h1>2</h1>
           </div>
         </div>
-
-        <div class="grafico-secundario">
-          <canvas id="grafico2"></canvas>
+        <div class="kpis">
+          <div class="titulo">
+            <h3>Qtd. Sensores</h3>
+          </div>
+          <div class="dados">
+            <h1>3</h1>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="titulo">
+            <h3>Alertas</h3>
+          </div>
+          <div class="dados">
+            <h1>0</h1>
+          </div>
         </div>
       </div>
-
-      <div class="container container2">
-        <div class="grafico-principal">
-          <canvas id="grafico1"></canvas>
-        </div>
-        <div class="grafico-terciario">
-          <canvas id="grafico3"></canvas>
-        </div>
+      <div class="container-grafico">
+          <div class="graf">
+              grafico aq
+          </div>
       </div>
+     
     </div>
   </div>
+  <a class="modal-alerta" id="Modal_alerta_tanque" href="./dash-tanque.html">
+        <div class="infos-alerta ">
+            Alerta: <span id="span_nome_tanque">Tanque Principal</span>
+        </div>
+        <div class="dados">
+            <div class="estatisticas">
+                <h1>Temperatura: <span id="span_temp_tanque"></span>°c</h1>
+                <h2>Setor: <span id="span_setor_tanque"></span></h2>
+            </div>
+            <div class="img">
+                <img src="../src/icons/alerta.gif">
+            </div>
+        </div>
+    </a>
 </body>
 
 </html>
@@ -127,11 +124,11 @@
 
 
 <script>
-  function mudarTanque() {
-    var tanqueSelecionado = select_tanque.value
-
-    obterDadosGrafico(tanqueSelecionado)
-  }
+function mudarTanque() {
+  var tanqueSelecionado = select_tanque.value
+   
+  obterDadosGrafico(tanqueSelecionado)
+}
 
 
   const grafico2 = document.getElementById('grafico2');
@@ -216,20 +213,20 @@
     }
   });
 
+  
 
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-  // O gráfico é construído com três funções:
-  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-  //     Para ajustar o "select", ajuste o comando sql em src/models
-  function obterDadosGrafico(idTanque) {
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+  function obterDadosGrafico(idTanque) {  
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
     }
@@ -377,4 +374,44 @@
       });
 
   }
+
+
+
+
+
+
+
+
+  // alerta tanque - NÂO MEXER
+    function alertaTanque() {
+        console.log('buscar alertas')
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+        fetch(`/tanques/alertaTanque/${fkEmpresa}`, { cache: "no-store" })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json()
+                        .then(function (alerta) {
+                            console.log(alerta)
+                            if (alerta.length > 0) {
+                                Modal_alerta_tanque.style.display = 'flex'
+                                span_nome_tanque.innerHTML = alerta[0].nomeTanque
+                                span_temp_tanque.innerHTML = alerta[0].mediaTanque
+                                span_setor_tanque.innerHTML = alerta[0].setorTanque
+                            } else {
+                                Modal_alerta_tanque.style.display = 'none'
+                                span_nome_tanque.innerHTML = ''
+                                span_temp_tanque.innerHTML = ''
+                                span_setor_tanque.innerHTML = ''
+                            }
+                        })
+                } else {
+                    console.log('erro: ', resposta)
+                }
+            })
+    }
+
+
+
+
+
 </script>

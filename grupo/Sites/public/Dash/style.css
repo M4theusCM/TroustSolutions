@@ -308,6 +308,61 @@ canvas {
 
 }
 
+/*Dash v2*/
+.container-kpi{
+    width: 100%;
+    height: 150px;
+    margin-top: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.container-kpi .kpis{
+    width: 250px;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0% 2%;
+    background-color: var(--modal-kpi);
+    color: white;
+}
+.container-kpi .kpis .titulo{
+    margin: 0;
+    border-bottom: solid 1px;
+    width: 100%;
+}
+.container-kpi .kpis .dados{
+    margin: 0;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-kpi h3{
+    margin: 10px;
+}
+
+.container-kpi h1{
+    margin: 0;
+    font-size: 50px;
+}
+
+.container-grafico{
+    width: 100%;
+    height: 400px;
+    padding: 10px 20px;
+    margin-bottom: 3vh;
+}
+.container-grafico .graf{
+    width: 95%;
+    height: 100%;
+    background-color: #797979;
+    padding: 10px;
+    border-radius: 10px;
+}
 
 /* dashboard -Tanque */
 .container-tanque {
@@ -603,5 +658,4 @@ canvas {
 .modal-alerta img{
      width: 75px;
      height: 75px;
-
 }
