@@ -35,8 +35,8 @@
           </div>
           <div class="links">
             <a href="./dash-tanque.html">Tanque</a>
+            <!-- <div class="links">
           </div>
-          <!-- <div class="links">
             <a href="./dashborad.html">Funcionario</a>
           </div> -->
           <div class="alerta">
@@ -78,11 +78,8 @@
         <div class="kpis-container">
           <div class="select">
             <select id="select_tanque" onclick="mudarTanque()">
-              <option>TANQUE 1</option>
-              <option>TANQUE 2</option>
-              <option>TANQUE 3</option>
-              <option>TANQUE 4</option>
-              <option>TANQUE 5</option>
+              <option value="1">TANQUE 1</option>
+              <option value="2">TANQUE 2</option>
             </select>
           </div>
           <div class="box">
@@ -130,7 +127,13 @@
 
 
 <script>
-  const grafico1 = document.getElementById('grafico1');
+function mudarTanque() {
+  var tanqueSelecionado = select_tanque.value
+   
+  obterDadosGrafico(tanqueSelecionado)
+}
+
+
   const grafico2 = document.getElementById('grafico2');
   const grafico3 = document.getElementById('grafico3');
 
@@ -226,15 +229,12 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-  function obterDadosGrafico(idAquario) {
-
-    alterarTitulo(idAquario)
-
+  function obterDadosGrafico(idTanque) {  
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
     }
 
-    fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/ultimas/${idTanque}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
