@@ -39,20 +39,20 @@
           </div>
             <a href="./dashborad.html">Funcionario</a>
           </div> -->
-          <div class="alerta">
-            <h3>Alerta</h3>
-            <p>Tanque 2 - Setor X</p>
-            <p>Temperatura: 18.2°c</p>
+            <div class="alerta">
+              <h3>Alerta</h3>
+              <p>Tanque 2 - Setor X</p>
+              <p>Temperatura: 18.2°c</p>
+            </div>
+          </div>
+          <div class="sair links">
+            <a href="../index.html">
+              <img src="../src/icon-desconectar.png" alt="Icon">
+              Desconectar
+            </a>
           </div>
         </div>
-        <div class="sair links">
-          <a href="../index.html">
-            <img src="../src/icon-desconectar.png" alt="Icon">
-            Desconectar
-          </a>
-        </div>
       </div>
-
     </div>
 
     <!-- Infos Nav -->
@@ -127,11 +127,11 @@
 
 
 <script>
-function mudarTanque() {
-  var tanqueSelecionado = select_tanque.value
-   
-  obterDadosGrafico(tanqueSelecionado)
-}
+  function mudarTanque() {
+    var tanqueSelecionado = select_tanque.value
+
+    obterDadosGrafico(tanqueSelecionado)
+  }
 
 
   const grafico2 = document.getElementById('grafico2');
@@ -216,20 +216,20 @@ function mudarTanque() {
     }
   });
 
-  
 
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+  // O gráfico é construído com três funções:
+  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-  function obterDadosGrafico(idTanque) {  
+  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+  function obterDadosGrafico(idTanque) {
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
     }

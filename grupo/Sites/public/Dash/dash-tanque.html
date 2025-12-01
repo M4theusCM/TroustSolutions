@@ -152,7 +152,7 @@
                 var temp = tanqueAtual.mediaTanque
                 var max = tanqueAtual.configMaxTemp
                 var min = tanqueAtual.configMinTemp
-                var idTanque = tanqueAtual.idTAlertaanque
+                var idTanque = tanqueAtual.idTanque
                 var setortanque = tanqueAtual.setortanque
                 var nomeTanque = tanqueAtual.nometanque
 
@@ -235,6 +235,7 @@
     function abrirModal(fkTanque) {
         var idTanque = fkTanque
         var fkEmpresa = sessionStorage.FK_EMPRESA
+        console.log(idTanque, fkEmpresa)
         fetch("/tanques/estatisticasTanques", {
             method: "POST",
             headers: {
