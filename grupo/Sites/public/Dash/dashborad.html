@@ -213,90 +213,19 @@
     }
   });
 
-  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  
 
-  let proximaAtualizacao;
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-  window.onload = exibirAquariosDoUsuario();
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-  function exibirAquariosDoUsuario() {
-    var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-    aquarios.forEach(item => {
-      document.getElementById("btnAquario").innerHTML += `
-                <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-                `
-
-      document.getElementById("graficos").innerHTML += `
-                    <div id="grafico${item.id}" class="display-none">
-                        <h3 class="tituloGraficos">
-                            <span id="tituloAquario${item.id}">${item.descricao}</span>
-                        </h3>
-                        <div class="graph">
-                            <canvas id="myChartCanvas${item.id}"></canvas>
-                        </div>
-                        <div class="label-captura">
-                            <p id="avisoCaptura${item.id}" style="color: white"></p>
-                        </div>
-                    </div>
-                `
-
-      obterDadosGrafico(item.id)
-    });
-
-    if (aquarios.length > 0) {
-      exibirAquario(aquarios[0].id)
-    }
-  }
-
-  function alterarTitulo(idAquario) {
-    var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-    var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-    tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-  }
-
-  function exibirAquario(idAquario) {
-    let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
-
-    for (i = 0; i < todosOsGraficos.length; i++) {
-      // exibindo - ou não - o gráfico
-      if (todosOsGraficos[i].id != idAquario) {
-        let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-        if (elementoAtual.classList.contains("display-block")) {
-          elementoAtual.classList.remove("display-block")
-        }
-        elementoAtual.classList.add("display-none")
-
-        // alterando estilo do botão
-        let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-        if (btnAtual.classList.contains("btn-pink")) {
-          btnAtual.classList.remove("btn-pink")
-        }
-        btnAtual.classList.add("btn-white")
-      }
-    }
-
-    // exibindo - ou não - o gráfico
-    let graficoExibir = document.getElementById(`grafico${idAquario}`)
-    graficoExibir.classList.remove("display-none")
-    graficoExibir.classList.add("display-block")
-
-    // alterando estilo do botão
-    let btnExibir = document.getElementById(`btnAquario${idAquario}`)
-    btnExibir.classList.remove("btn-white")
-    btnExibir.classList.add("btn-pink")
-  }
-
-  // O gráfico é construído com três funções:
-  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-  //     Para ajustar o "select", ajuste o comando sql em src/models
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
   function obterDadosGrafico(idAquario) {
 
     alterarTitulo(idAquario)
