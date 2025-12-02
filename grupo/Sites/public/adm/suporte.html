@@ -19,7 +19,28 @@
 
 <body>
     <div class="container-area">
-        <div class="menu-lateral">a</div>
+
+        <div class="menu-lateral" id="menu_lateral">
+            <div class="topo">
+                <div class="logo">
+                    <img src="../src/Logo-icon.png" alt="TroustSolutions">
+                    <h2><span>Troust</span>Solutions</h2>
+                </div>
+                <div class="links">
+                    <a href="./dashborad.html">Home</a>
+                </div>
+                <div class="links links-ativo">
+                    <a href="./dash-tanque.html">Tanque</a>
+                </div>
+            </div>
+            <div class="sair links">
+                <a href="../index.html">
+                    <img src="../src/icon-desconectar.png" alt="Icon">
+                    Desconectar
+                </a>
+            </div>
+
+        </div>
         <div class="container">
             <div class="titulo">
                 <div>
@@ -191,7 +212,7 @@
         var tempMinTanque = Number(ipt_temp_min_tanque.value)
         var codEmpresa = ipt_cod_empresa.value
 
-        fetch("/empresas/cadastrarTanqueEmpresa", {
+        fetch("/empresas/cadastrarTanqueEmpresas", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
