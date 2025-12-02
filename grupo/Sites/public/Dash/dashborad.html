@@ -24,31 +24,31 @@
   <div class="div-pai">
     <!-- Menu Lateral -->
     <div class="container-lateral">
-            <div class="menu-lateral" id="menu_lateral">
-                <div class="topo">
-                    <div class="logo">
-                        <img src="../src/Logo-icon.png" alt="TroustSolutions">
-                        <h2><span>Troust</span>Solutions</h2>
-                    </div>
-                    <div class="links links-ativo">
-                        <a href="./dashborad.html">Home</a>
-                    </div>
-                    <div class="links ">
-                        <a href="./dash-tanque.html">Tanque</a>
-                    </div>
-                    <!-- <div class="links">
+      <div class="menu-lateral" id="menu_lateral">
+        <div class="topo">
+          <div class="logo">
+            <img src="../src/Logo-icon.png" alt="TroustSolutions">
+            <h2><span>Troust</span>Solutions</h2>
+          </div>
+          <div class="links links-ativo">
+            <a href="./dashborad.html">Home</a>
+          </div>
+          <div class="links ">
+            <a href="./dash-tanque.html">Tanque</a>
+          </div>
+          <!-- <div class="links">
                         <a href="./dashborad.html">Funcionario</a>
                     </div> -->
-                    
-                </div>
-                <div class="sair links">
-                    <a href="../index.html">
-                        <img src="../src/icon-desconectar.png" alt="Icon">
-                        Desconectar
-                    </a>
-                </div>
-            </div>
+
         </div>
+        <div class="sair links">
+          <a href="../index.html">
+            <img src="../src/icon-desconectar.png" alt="Icon">
+            Desconectar
+          </a>
+        </div>
+      </div>
+    </div>
 
     <!-- Infos Nav -->
     <div class="container-principal">
@@ -95,27 +95,27 @@
         </div>
       </div>
       <div class="container-grafico">
-          <div class="graf">
-              grafico aq
-          </div>
+        <div class="grafico">
+          <canvas id="grafico"></canvas>
+        </div>
       </div>
-     
+
     </div>
   </div>
   <a class="modal-alerta" id="Modal_alerta_tanque" href="./dash-tanque.html">
-        <div class="infos-alerta ">
-            Alerta: <span id="span_nome_tanque">Tanque Principal</span>
-        </div>
-        <div class="dados">
-            <div class="estatisticas">
-                <h1>Temperatura: <span id="span_temp_tanque"></span>°c</h1>
-                <h2>Setor: <span id="span_setor_tanque"></span></h2>
-            </div>
-            <div class="img">
-                <img src="../src/icons/alerta.gif">
-            </div>
-        </div>
-    </a>
+    <div class="infos-alerta ">
+      Alerta: <span id="span_nome_tanque">Tanque Principal</span>
+    </div>
+    <div class="dados">
+      <div class="estatisticas">
+        <h1>Temperatura: <span id="span_temp_tanque"></span>°c</h1>
+        <h2>Setor: <span id="span_setor_tanque"></span></h2>
+      </div>
+      <div class="img">
+        <img src="../src/icons/alerta.gif">
+      </div>
+    </div>
+  </a>
 </body>
 
 </html>
@@ -124,120 +124,32 @@
 
 
 <script>
-function mudarTanque() {
-  var tanqueSelecionado = select_tanque.value
-   
-  obterDadosGrafico(tanqueSelecionado)
-}
+  var fkEmpresa = sessionStorage.FK_EMPRESA;
+  window.onload = obterDadosGrafico(fkEmpresa);
 
+  // O gráfico é construído com três funções:
+  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-  const grafico2 = document.getElementById('grafico2');
-  const grafico3 = document.getElementById('grafico3');
+  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-  new Chart(grafico1, {
-    type: 'line',
-    data: {
-      labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
-      datasets: [{
-        label: 'Minima',
-        data: [10, 10, 10, 10, 10, 10],
-        borderWidth: 3
-      },
-      {
-        label: 'Máxima',
-        data: [20, 20, 20, 20, 20, 20],
-        borderWidth: 3
-      },
-      {
-        label: 'Sensor',
-        data: [14, 12, 13, 15, 18, 15],
-        borderWidth: 3
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: 'TANQUE 1'
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+  function obterDadosGrafico(fkEmpresa) {
+    // if (proximaAtualizacao != undefined) {
+    //   clearTimeout(proximaAtualizacao);
+    // }
 
-  new Chart(grafico2, {
-    type: 'line',
-    data: {
-      labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4', 'Sensor 5'],
-      datasets: [{
-        label: 'Temperatura',
-        data: [22, 24, 27, 23, 20],
-        borderWidth: 2
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: 'Temperatura Tanque 1'
-        },
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    }
-  });
-
-  new Chart(grafico3, {
-    type: 'pie',
-    data: {
-      labels: ['Ideal', 'Máxima', 'Minima'],
-      datasets: [{
-        label: 'Temperatura',
-        data: [7, 7, 10],
-        borderWidth: 2
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
-  
-
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-  function obterDadosGrafico(idTanque) {  
-    if (proximaAtualizacao != undefined) {
-      clearTimeout(proximaAtualizacao);
-    }
-
-    fetch(`/medidas/ultimas/${idTanque}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/ultimas/${fkEmpresa}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
 
-          plotarGrafico(resposta, idTanque);
+          plotarGrafico(resposta);
 
         });
       } else {
@@ -252,7 +164,7 @@ function mudarTanque() {
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, idTanque) {
+  function plotarGrafico(resposta) {
 
     console.log('iniciando plotagem do gráfico...');
 
@@ -261,21 +173,66 @@ function mudarTanque() {
 
     // Criando estrutura para plotar gráfico - dados
     let dados = {
-      labels: labels,
+      labels: labels, // nomes dos tanques
       datasets: [{
-        label: 'Umidade',
-        data: [],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      },
-      {
-        label: 'Temperatura',
-        data: [],
-        fill: false,
-        borderColor: 'rgb(199, 52, 52)',
-        tension: 0.1
-      }]
+        label: 'Temperatura dos Tanques',
+        data: [], // médias
+        borderWidth: 2,
+        borderColor: '#c400ff',
+        backgroundColor: 'rgba(196, 0, 255, 0.25)',
+        hoverBackgroundColor: 'rgba(196, 0, 255, 0.45)',
+        hoverBorderColor: '#c400ff',
+        borderRadius: 12,    // deixa as barras arredondadas
+        barThickness: 80   // deixa as barras mais grossas
+      }],
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#ffffff',
+              font: {
+                size: 14,
+                weight: 'bold'
+              }
+            }
+          },
+          title: {
+            display: true,
+            text: 'Temperatura Média dos Tanques',
+            color: '#ffffff',
+            font: {
+              size: 20,
+              weight: 'bold'
+            },
+            padding: {
+              top: 10,
+              bottom: 20
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#ffffff',
+              font: { size: 13 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            ticks: {
+              color: '#ffffff',
+              font: { size: 13 }
+            },
+            grid: {
+              color: 'rgba(255,255,255,0.2)' // grade bem suave
+            }
+          }
+        }
+      }
     };
 
     console.log('----------------------------------------------')
@@ -284,10 +241,8 @@ function mudarTanque() {
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
     for (i = 0; i < resposta.length; i++) {
-      var registro = resposta[i];
-      labels.push(registro.momento_grafico);
-      dados.datasets[0].data.push(registro.umidade);
-      dados.datasets[1].data.push(registro.temperatura);
+      labels.push(resposta[i].nomeTanque);
+      dados.datasets[0].data.push(resposta[i].mediaTanque);
     }
 
     console.log('----------------------------------------------')
@@ -300,17 +255,16 @@ function mudarTanque() {
 
     // Criando estrutura para plotar gráfico - config
     const config = {
-      type: 'line',
+      type: 'bar',
       data: dados,
     };
 
     // Adicionando gráfico criado em div na tela
     let myChart = new Chart(
-      document.getElementById(`myChartCanvas${idAquario}`),
+      document.getElementById(`grafico`),
       config
     );
-
-    setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+    // setTimeout(() => atualizarGrafico(dados, myChart), 2000);
   }
 
 
@@ -319,11 +273,11 @@ function mudarTanque() {
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
-  function atualizarGrafico(idAquario, dados, myChart) {
+  function atualizarGrafico(dados, myChart) {
 
 
 
-    fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/tempo-real/`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (novoRegistro) {
 
@@ -383,32 +337,32 @@ function mudarTanque() {
 
 
   // alerta tanque - NÂO MEXER
-    function alertaTanque() {
-        console.log('buscar alertas')
-        var fkEmpresa = sessionStorage.FK_EMPRESA
-        fetch(`/tanques/alertaTanque/${fkEmpresa}`, { cache: "no-store" })
-            .then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json()
-                        .then(function (alerta) {
-                            console.log(alerta)
-                            if (alerta.length > 0) {
-                                Modal_alerta_tanque.style.display = 'flex'
-                                span_nome_tanque.innerHTML = alerta[0].nomeTanque
-                                span_temp_tanque.innerHTML = alerta[0].mediaTanque
-                                span_setor_tanque.innerHTML = alerta[0].setorTanque
-                            } else {
-                                Modal_alerta_tanque.style.display = 'none'
-                                span_nome_tanque.innerHTML = ''
-                                span_temp_tanque.innerHTML = ''
-                                span_setor_tanque.innerHTML = ''
-                            }
-                        })
-                } else {
-                    console.log('erro: ', resposta)
-                }
+  function alertaTanque() {
+    console.log('buscar alertas')
+    var fkEmpresa = sessionStorage.FK_EMPRESA
+    fetch(`/tanques/alertaTanque/${fkEmpresa}`, { cache: "no-store" })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json()
+            .then(function (alerta) {
+              console.log(alerta)
+              if (alerta.length > 0) {
+                Modal_alerta_tanque.style.display = 'flex'
+                span_nome_tanque.innerHTML = alerta[0].nomeTanque
+                span_temp_tanque.innerHTML = alerta[0].mediaTanque
+                span_setor_tanque.innerHTML = alerta[0].setorTanque
+              } else {
+                Modal_alerta_tanque.style.display = 'none'
+                span_nome_tanque.innerHTML = ''
+                span_temp_tanque.innerHTML = ''
+                span_setor_tanque.innerHTML = ''
+              }
             })
-    }
+        } else {
+          console.log('erro: ', resposta)
+        }
+      })
+  }
 
 
 

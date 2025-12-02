@@ -1,14 +1,9 @@
 var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidas(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
 
-    const limite_linhas = 7;
-
-    var idTanque = req.params.idTanque;
-
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
-
-    medidaModel.buscarUltimasMedidas(idTanque, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas(fkEmpresa).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
