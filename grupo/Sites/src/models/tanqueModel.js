@@ -11,7 +11,7 @@ function tanquesEmpresa(fkEmpresa) {
             t.TempMax AS configMaxTemp,
             t.TempMin AS configMinTemp,
             ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
-            MAX(ct.dtHora) AS ultimaCOleta
+            MAX(ct.dtHora) AS ultimaColeta
             FROM tanque t
                 JOIN sensor s ON t.idTanque = s.fkTanque
                 JOIN coletaTemp ct on s.idSensor = ct.fkSensor
@@ -65,10 +65,29 @@ function alertaTemp(fkEmpresa) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
 }
+function gerarGrafico(fkEmpresa, fkTanque) {
+    console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function statisticasTanque(): ", fkEmpresa)
 
+    var instrucaoSql = `
+        SELECT t.idTanque,
+            t.nome AS nometanque,
+            t.setor AS setortanque,
+            ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+            MAX(ct.dtHora) AS ultimaColeta
+            FROM tanque t
+                JOIN sensor s ON t.idTanque = s.fkTanque
+                JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+                where fkEmpresa = ${fkEmpresa} and idTanque = ${fkTanque}
+            GROUP BY idTanque, dtHora 
+            order by dtHora limit 7;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
 module.exports = {
     tanquesEmpresa,
     estatisticasTanque,
     alterarConfigsTanque,
-    alertaTemp
+    alertaTemp,
+    gerarGrafico
 }

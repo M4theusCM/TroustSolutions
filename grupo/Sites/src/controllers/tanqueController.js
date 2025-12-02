@@ -96,11 +96,43 @@ function alertaTemp(req, res){
         })
     }
 }
+function gerarGrafico(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer
+    var idTanque = req.body.idTanqueServer
+    console.log('A: ' + fkEmpresa, idTanque)
+    if (fkEmpresa == undefined) {
+        res.status(400).send('Empresa não encontrada')
+    } else if (idTanque == undefined) {
+        res.status(400).send('Tanque não encontrado')
+    } else {
+        console.log('Entrei no controller')
+        tanqueModel.gerarGrafico(fkEmpresa, idTanque)
+            .then(
+                function (resposta) {
+                    console.log(`\nRespostas encontrada: ${resposta.length}`)
+                    console.log(JSON.stringify(resposta))
+                    res.status(200).json(resposta)
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro)
+                    console.log(
+                        "\nHouve um erro ao buscar os dados! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
 
 
 module.exports = {
     tanqueEmpresa,
     estatisticasTanque,
     alterarConfigsTanque,
-    alertaTemp
+    alertaTemp,
+    gerarGrafico
 }

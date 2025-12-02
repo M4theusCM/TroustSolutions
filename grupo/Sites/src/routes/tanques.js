@@ -19,4 +19,8 @@ router.get("/alertaTanque/:fkEmpresa", function(req, res){
     tanqueController.alertaTemp(req, res)
 })
 
+router.post("/gerarGrafico", function (req, res) {
+    tanqueController.gerarGrafico(req, res)
+})
+
 module.exports = router

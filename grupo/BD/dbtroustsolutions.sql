@@ -91,6 +91,10 @@ CREATE TABLE coletaTemp(
 				DESC coletaTemp;    
 
 -- INSERSÃO DE DADOS
+insert into empresa (nomeFantasia,razaoSocial ,cnpj ,cell,tellFixo, codigo) values
+	(1, 1, 11111111111111, 11111111111, 1111111111, 123456),
+	(2, 2, 22222222222222, 22222222222, 2222222222, 654321);
+    
 INSERT INTO tanque (TempMax, TempMin, mts_quadrados, litragem, nome, setor, fkEmpresa) VALUES
 -- Empresa 1
 (18.5, 10.5, 135.50,5000, 'Tanque Principal', 'Setor A', 1),
@@ -106,24 +110,24 @@ INSERT INTO sensor (status_sen, fkTanque) VALUES
 ('Ativo', 2), -- Tanque 2
 ('Inativo', 2),
 -- Tanques da Empresa 2
-('Ativo', 11), -- Tanque 1 
-('Ativo', 11),
-('Ativo', 12), -- Tanque 2
-('Inativo', 12);
+('Ativo', 3), -- Tanque 1 
+('Ativo', 3),
+('Ativo', 4), -- Tanque 2
+('Inativo', 4);
 
 INSERT INTO coletaTemp (temperatura, dtHora, fkSensor) VALUES
 -- Tanque 1 : EMpresa 1
-(15.2, '2025-10-25 08:00:00', 11),
-(15.5, '2025-10-25 12:30:00', 12),
+(15.2, '2025-10-25 08:00:00', 1),
+(15.5, '2025-10-25 12:30:00', 2),
 -- Tanque 2: Empresa 1
-(16.1, '2025-10-24 09:15:00', 11),
-(16.4, '2025-10-24 14:45:00', 12),
+(16.1, '2025-10-24 09:15:00', 3),
+(16.4, '2025-10-24 14:45:00', 4),
 -- Tanque 3 : Empresa 2
-(14.9, '2025-10-25 07:50:00', 13),
-(15.3, '2025-10-25 07:50:00', 14),
+(14.9, '2025-10-25 07:50:00', 1),
+(15.3, '2025-10-25 07:50:00', 2),
 -- Tanque 4 : Empresa 2
-(16.0, '2025-10-24 10:10:00', 15),
-(16.2, '2025-10-24 13:20:00', 16);
+(16.0, '2025-10-24 10:10:00', 3),
+(16.2, '2025-10-24 13:20:00', 4);
 
        
 -- SELECT
@@ -190,7 +194,7 @@ WHERE fkTanque = 9 ORDER BY idColeta DESC;
             t.TempMax AS configMaxTemp,
             t.TempMin AS configMinTemp,
             ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
-            MAX(ct.dtHora) AS ultimaCOleta
+            MAX(ct.dtHora) AS ultimaColeta
             FROM tanque t
                 JOIN sensor s ON t.idTanque = s.fkTanque
                 JOIN coletaTemp ct on s.idSensor = ct.fkSensor
@@ -210,17 +214,18 @@ CREATE VIEW vw_alerta_tanque AS SELECT t.idTanque,
         JOIN coletaTemp ct on s.idSensor = ct.fkSensor
     GROUP BY idTanque
     HAVING ROUND(AVG(ct.temperatura), 2) > t.tempMax OR ROUND(AVG(ct.temperatura), 2) < t.tempMin;
-    
+    fkEmpresa
     
  SELECT t.idTanque,
             t.nome AS nometanque,
             t.setor AS setortanque,
             ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
-            MAX(ct.dtHora) AS ultimaCOleta
+            MAX(ct.dtHora) AS ultimaColeta
             FROM tanque t
                 JOIN sensor s ON t.idTanque = s.fkTanque
                 JOIN coletaTemp ct on s.idSensor = ct.fkSensor
-                where idTanque = 9
-            GROUP BY idTanque, dtHora limit 7;
+                where fkEmpresa = 1 and idTanque = 1
+            GROUP BY idTanque, dtHora 
+            order by dtHora limit 7;
             
 	

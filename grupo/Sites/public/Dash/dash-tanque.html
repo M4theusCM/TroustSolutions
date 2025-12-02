@@ -247,7 +247,7 @@
                         function (estatisticas) {
                             console.log("Resposta")
                             console.log(JSON.stringify(estatisticas))
-                            exibirStatisticas(estatisticas)
+                            exibirStatisticas(estatisticas, idTanque)
                         }
                     )
                 }
@@ -259,7 +259,7 @@
         modal.style.display = 'none'
     }
 
-    function exibirStatisticas(estatisticas) {
+    function exibirStatisticas(estatisticas, idTanque) {
         var qtdEstatisticas = estatisticas.length
         var t = estatisticas[qtdEstatisticas - 1] // t de tanque q nem no bd
         var cardEstatistica = `
@@ -312,19 +312,53 @@
         modal.style.display = 'flex'
         modal.innerHTML = cardEstatistica
 
-        gerarGraficoModal(t);
+        gerarGraficoModal(t, idTanque);
 
     }
 
-    function gerarGraficoModal(tanque) {
+    function gerarGraficoModal(tanque, idTanque) {
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+
+        fetch("/tanques/gerarGrafico", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: fkEmpresa,
+                idTanqueServer: idTanque
+            })
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(
+                        function (resposta) {
+                            console.log("resposta")
+                            console.log(JSON.stringify(resposta))
+
+                            tratativaDados(tanque, resposta);
+                        }
+                    )
+                }
+            })
+    }
+
+    function tratativaDados(tanque, resposta) {
+        var dados = []
+        var labels = []
+
+        for (var i = 0; i < resposta.length; i++) {
+            dados.push(resposta[i].mediaTanque)
+            labels.push(resposta[i].ultimaColeta)
+        }
 
         new Chart(document.getElementById("grafico1"), {
             type: 'line',
             data: {
-                labels: ['Min', 'Média', 'Max'],
+                labels: labels,
                 datasets: [{
-                    label: 'Temperaturas',
-                    data: [tanque.configMinTemp, tanque.mediaTanque, tanque.configMaxTemp],
+                    label: 'TEMPERATURA DO TANQUE',
+                    data: dados,
                     borderWidth: 3
                 }]
             },
@@ -386,6 +420,7 @@
         modal.style.display = 'flex'
         modal.innerHTML = configs
     }
+
 
     function salvarAlteracao(idTanque) {
         var nomeTanque = config_nome_tanque.value

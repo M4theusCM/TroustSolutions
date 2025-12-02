@@ -273,6 +273,7 @@ nav .funcionario p {
     display: flex;
     width: auto;
     height: auto;
+    min-height: 80vh;
     padding: 1%;
     flex-wrap: wrap;
     justify-content: space-evenly;
