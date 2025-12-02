@@ -65,6 +65,8 @@ function alertaTemp(fkEmpresa) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
 }
+
+
 function gerarGrafico(fkEmpresa, fkTanque) {
     console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function statisticasTanque(): ", fkEmpresa)
 
@@ -73,7 +75,7 @@ function gerarGrafico(fkEmpresa, fkTanque) {
             t.nome AS nometanque,
             t.setor AS setortanque,
             ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
-            MAX(ct.dtHora) AS ultimaColeta
+            DATE_FORMAT(MAX(ct.dtHora), '%H:%i') AS ultimaColeta
             FROM tanque t
                 JOIN sensor s ON t.idTanque = s.fkTanque
                 JOIN coletaTemp ct on s.idSensor = ct.fkSensor

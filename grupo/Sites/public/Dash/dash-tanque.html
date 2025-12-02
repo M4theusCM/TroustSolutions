@@ -300,10 +300,10 @@
                 </div>
                 <div class="graficos-modal">
                     <div class="grafico-principal grafico-modal">
-                        <canvas id="grafico1"></canvas>
+                        <canvas id="grafico1" width="700px"></canvas>
                     </div>
                     <div class="grafico-terciario grafico-modal">
-                        <canvas id="grafico3"></canvas>
+                        <canvas id="grafico3" width="400px"></canvas>
                     </div>
                 </div>
             </div>
@@ -336,14 +336,14 @@
                             console.log("resposta")
                             console.log(JSON.stringify(resposta))
 
-                            tratativaDados(tanque, resposta);
+                            tratativaDados(tanque, resposta, idTanque);
                         }
                     )
                 }
             })
     }
 
-    function tratativaDados(tanque, resposta) {
+    function tratativaDados(tanque, resposta, idTanque) {
         var dados = []
         var labels = []
 
