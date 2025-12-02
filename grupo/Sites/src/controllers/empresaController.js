@@ -4,7 +4,8 @@ function buscarPorCnpj(req, res) {
   var cnpjEmpresa = req.body.cnpjEmpresaServer;
 
   empresaModel.buscarPorCnpj(cnpjEmpresa).then((resultado) => {
-    res.status(200).json(resultado)});
+    res.status(200).json(resultado)
+  });
 }
 
 function cadastrarEmpresa(req, res) {
@@ -36,8 +37,32 @@ function cadastrarLogradouro(req, res) {
     });
 }
 
+function cadastrarTanqueEmpresa(req, res) {
+  var nomeTanque = req.body.nomeTanqueServer
+  var setorTanque = req.body.setorTanqueServer
+  var metragem = req.body.metragemTanqueServer
+  var litragem = req.body.litragemTanqueServer
+  var tempMax = req.body.tempMaxTanqueServer
+  var tempMin = req.body.tempMinTanqueServer
+  var codEmpresa = req.body.codEmpresaServer
+
+  empresaModel.cadastrarTanqueEmpresa(nomeTanque, setorTanque, metragem, litragem, tempMax, tempMin, codEmpresa)
+    .then((resultado) => {
+      res.status(201).json(resultado);
+    });
+}
+
+function buscarEmpresas(req, res){
+  empresaModel.buscarEmpresas()
+  .then((resultado) => {
+    res.status(201).json(resultado)
+  })
+}
+
 module.exports = {
   buscarPorCnpj,
   cadastrarEmpresa,
-  cadastrarLogradouro
+  cadastrarLogradouro,
+  cadastrarTanqueEmpresa,
+  buscarEmpresas
 };

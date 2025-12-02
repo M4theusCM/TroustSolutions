@@ -18,8 +18,22 @@ function cadastrarLogradouro(cepEmpresa, numEndeEmpresa, compEndeEmpresa, ruaEnd
   return database.executar(instrucaoSql);
 }
 
+function cadastrarTanqueEmpresa(nomeTanque, setorTanque, metragem, litragem, tempMax, tempMin, codEmpresa) {
+  var instrucaoSql = `INSERT INTO tanque (TempMax, TempMin, mts_quadrados, litragem, nome, setor, fkEmpresa) VALUES 
+    (${tempMax}, ${tempMin}, ${metragem}, ${litragem}, '${nomeTanque}', '${setorTanque}', (SELECT idEmpresa FROM empresa WHERE codigo = '${codEmpresa}'))`;
+
+  return database.executar(instrucaoSql);
+}
+
+function buscarEmpresas(){
+  var instrucaoSql = `SELECT nomeFantasia, codigo FROM empresa;`
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarPorCnpj,
-  cadastrarEmpresa, 
-  cadastrarLogradouro
+  cadastrarEmpresa,
+  cadastrarLogradouro,
+  cadastrarTanqueEmpresa,
+  buscarEmpresas
 };

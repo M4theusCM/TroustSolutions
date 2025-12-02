@@ -30,27 +30,48 @@
                 <p>Bom dia João Pedro</p>
             </div>
             <div class="area-cards">
-                <div class="card ">
-                    <a href="#" class="jira">
+                <div class="card jira-card">
+                    <a href="https://troustsolutions.atlassian.net/jira/servicedesk/projects/TS/queues/custom/4?atlOrigin=eyJpIjoiNmJjZWMwZWEwM2U1NDA1MGIyODIwZjAxYTUwZjFiMzgiLCJwIjoiaiJ9"
+                        class="jira tipo-card" target="_blank">
+                        <div class="titulo">
+                            <h2>Jira - Help Desk</h2>
+                        </div>
                         <div class="infos">
-                            <h2>Jira</h2>
-                            <h3>Help Dask</h3>
-                        </div>
-                        <div class="icons">
-                            <img src="../src/Simplification.png" alt="Help desh">
+                            <img src="../src/logos/jira.png" alt="Jira">
                         </div>
                     </a>
                 </div>
-                <div class="card">
-                    <a href="">
-                        a
+                <div class="card trello-card">
+                    <a href="https://trello.com/b/fy7P32D4" class="trello tipo-card" target="_blank">
+                        <div class="titulo">
+                            <h2>Trello</h2>
+                        </div>
+                        <div class="infos">
+                            <img src="../src/logos/trello.png" alt="trello">
+                        </div>
                     </a>
                 </div>
-                <div class="card">
-                    <a href="">
-                        a
-                    </a>
+                <div class="card tanque-card">
+                    <div onclick="addTanque()" class="tanque tipo-card" target="_blank">
+                        <div class="titulo">
+                            <h2>Adicionar Tanque</h2>
+                        </div>
+                        <div class="infos">
+                            <img src="../src/icons/tanque.png" alt="tanque">
+                        </div>
+                    </div>
                 </div>
+                <div class="card tanque-card">
+                    <div onclick="exibirEmpresas()" class="empresas tipo-card" target="_blank">
+                        <div class="titulo">
+                            <h2>Exibir Empresas</h2>
+                        </div>
+                        <div class="infos">
+                            <img src="../src/icons/companhia.png" alt="tanque">
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="bob">
@@ -81,6 +102,11 @@
                 </div>
             </div>
         </div>
+
+
+        <div id="idModal" class="area-modal">
+           
+        </div>
     </div>
 </body>
 <script>
@@ -88,10 +114,160 @@
         bob_ia_icon.style.display = 'none'
         chat_bob_user.style.display = 'block'
     }
-    function fecharChat(){
-         bob_ia_icon.style.display = 'block'
+    function fecharChat() {
+        bob_ia_icon.style.display = 'block'
         chat_bob_user.style.display = 'none '
     }
+    function addTanque() {
+        idModal.style.display = 'flex'
+        idModal.innerHTML = `
+            <div class="modal" id="modal_card">
+                <div class="ipts">
+                    <div class="titulo-modal">
+                        <img src="../src/botao-fechar.png" onclick="fecharModal()" alt="Fechar">
+                        <h1>Adicionar tanque</h1>
+                    </div>
+                    <div class="dados">
+                        <div class="linha">
+                            <label>
+                                <span>Nome Tanque:</span>
+                                <input type="text" id="ipt_nome_tanque">
+                            </label>
+                        </div>
+                        <div class="linha">
+
+                            <label>
+                                <span>Setor Tanque:</span>
+                                <input type="text" id="ipt_setor_tanque">
+                            </label>
+                        </div>
+                        <div class="linha">
+                            <label>
+                                <span>Tamanho do tanque em M²</span>
+                                <input type="number" id="ipt_mts">
+                            </label>
+                            <label>
+                                <span>Litragem do tanque</span>
+                                <input type="number" id="ipt_litragem">
+                            </label>
+                        </div>
+                        <div class="linha">
+                            <label>
+                                <span>Temp. Máxima Tanque:</span>
+                                <input type="number" id="ipt_temp_max_tanque">
+                            </label>
+                            <label>
+                                <span>Temp. Minina Tanque:</span>
+                                <input type="number" id="ipt_temp_min_tanque">
+                            </label>
+                        </div>
+
+                        <div class="linha">
+                            <label>
+                                <span>Código da empresa:</span>
+                                <input type="text" id="ipt_cod_empresa">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="enviar">
+                        <button onclick="salvarTanque()">Salvar</button>
+                    </div>
+                </div>
+                <div class="img">
+                    <img src="../src/icons/tanque.png" alt="Tanque">
+                </div>
+            </div>
+        `
+    }
+    function fecharModal() {
+        idModal.innerHTML = ''
+        idModal.style.display = 'none'
+    }
+
+    function salvarTanque() {
+        var nomeTanque = ipt_nome_tanque.value
+        var setorTanque = ipt_setor_tanque.value
+        var mtsTanque = Number(ipt_mts.value)
+        var litragemTanque = Number(ipt_litragem.value)
+        var tempMaxTanque = Number(ipt_temp_max_tanque.value)
+        var tempMinTanque = Number(ipt_temp_min_tanque.value)
+        var codEmpresa = ipt_cod_empresa.value
+
+        fetch("/empresas/cadastrarTanqueEmpresa", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeTanqueServer: nomeTanque,
+                setorTanqueServer: setorTanque,
+                metragemTanqueServer: mtsTanque,
+                litragemTanqueServer: litragemTanque,
+                tempMaxTanqueServer: tempMaxTanque,
+                tempMinTanqueServer: tempMinTanque,
+                codEmpresaServer: codEmpresa
+            })
+        })
+            .then(function (resposta) {
+                console.log('Cadastrado eu acho: ' + resposta)
+                if (resposta.ok) {
+                    ipt_nome_tanque.value = ''
+                    ipt_setor_tanque.value = ''
+                    ipt_mts.value = ''
+                    ipt_litragem.value = ''
+                    ipt_temp_max_tanque.value = ''
+                    ipt_temp_min_tanque.value = ''
+                    ipt_cod_empresa.value = ''
+                    fecharModal()
+                } else {
+                    console.error("Deu ruim ")
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+    }
+
+    function exibirEmpresas() {
+        idModal.style.display = 'flex'
+        fetch("/empresas/buscarEmpresas", { cache: "no-store" })
+        .then(function (empresas){
+            console.log('Empresas: '+ empresas)
+            console.log(JSON.stringify(empresas))
+            if(empresas.ok){
+            }else{
+                console.log('Erro ao buscar as empresas')
+            }
+        })
+
+
+        msg = ` <div class="modal modal-empresa" id="modal_card">
+                <div class="titulo-modal">
+                    <img src="../src/botao-fechar.png" onclick="fecharModal()" alt="Fechar">
+                    <h1>Empresas Cadastradas</h1>
+                </div>
+                <div class="area-empresas">
+                    <table>
+                        <tr>
+                            <th>Nome Fantasia</th>
+                            <th>Código</th>
+                        </tr>
+                        <tr class="l1">
+                            <td>as</td>
+                            <td>aa</td>
+                        </tr>
+                        <tr class="l2">
+                            <td>as</td>
+                            <td>aa</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>`
+    
+        
+    }
+
 </script>
 
 </html>
