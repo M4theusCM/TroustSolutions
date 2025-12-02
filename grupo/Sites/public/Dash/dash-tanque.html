@@ -111,7 +111,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    function iniciar(){
+    function iniciar() {
         alertaTanque()
         carregarTanques()
         setInterval(() => {
@@ -134,7 +134,7 @@
                 }
             }
             )
-       
+
     }
 
     function exibirTanques(tanques) {
@@ -312,6 +312,39 @@
         modal.style.display = 'flex'
         modal.innerHTML = cardEstatistica
 
+        gerarGraficoModal(t);
+
+    }
+
+    function gerarGraficoModal(tanque) {
+
+        new Chart(document.getElementById("grafico1"), {
+            type: 'line',
+            data: {
+                labels: ['Min', 'Média', 'Max'],
+                datasets: [{
+                    label: 'Temperaturas',
+                    data: [tanque.configMinTemp, tanque.mediaTanque, tanque.configMaxTemp],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                plugins: {
+                    title: { display: true, text: tanque.nometanque }
+                }
+            }
+        });
+
+        new Chart(document.getElementById("grafico3"), {
+            type: 'pie',
+            data: {
+                labels: ['Min', 'Média', 'Max'],
+                datasets: [{
+                    data: [tanque.configMinTemp, tanque.mediaTanque, tanque.configMaxTemp],
+                    borderWidth: 2
+                }]
+            }
+        });
     }
 
     // alteração
@@ -399,7 +432,7 @@
     }
 </script>
 
-<script>
+<!-- <script>
     const graficoLinha = document.getElementById('grafico1');
     const graficoPizza = document.getElementById('grafico3');
 
@@ -456,4 +489,4 @@
             }
         }
     });
-</script>
+</script> -->
