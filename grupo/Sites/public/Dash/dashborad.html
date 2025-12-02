@@ -20,7 +20,7 @@
   </style>
 </head>
 
-<body>
+<body onload="iniciar()">
   <div class="div-pai">
     <!-- Menu Lateral -->
     <div class="container-lateral">
@@ -124,6 +124,12 @@
 
 
 <script>
+  function iniciar() {
+    alertaTanque()
+    setInterval(() => {
+      alertaTanque()
+    }, 5000)
+  }
   var fkEmpresa = sessionStorage.FK_EMPRESA;
   window.onload = obterDadosGrafico(fkEmpresa);
 
@@ -330,13 +336,7 @@
   }
 
 
-
-
-
-
-
-
-  // alerta tanque - NÂO MEXER
+  // alerta tanque
   function alertaTanque() {
     console.log('buscar alertas')
     var fkEmpresa = sessionStorage.FK_EMPRESA
@@ -363,9 +363,5 @@
         }
       })
   }
-
-
-
-
 
 </script>

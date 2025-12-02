@@ -5,17 +5,17 @@ function tanquesEmpresa(fkEmpresa) {
     console.log("ACESSEI O TANQUE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function tanquesEmpresa(): ", fkEmpresa)
 
     var instrucaoSql = `
-        SELECT t.idTanque,
-            t.nome AS nometanque,
+        select t.idTanque,
+		    t.nome AS nometanque,
             t.setor AS setortanque,
             t.TempMax AS configMaxTemp,
             t.TempMin AS configMinTemp,
-            ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
-            MAX(ct.dtHora) AS ultimaColeta
+                ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+                MAX(ct.dtHora) AS ultimaColeta
             FROM tanque t
                 JOIN sensor s ON t.idTanque = s.fkTanque
                 JOIN coletaTemp ct on s.idSensor = ct.fkSensor
-            WHERE fkEmpresa = ${fkEmpresa}
+            WHERE fkEmpresa = 1 AND dtHora = (select dtHora from coletaTemp JOIN sensor on fkSensor = idSensor WHERE fktanque = t.idTanque order by dtHora DESC limit 1)
             GROUP BY idTanque;
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -81,7 +81,7 @@ function gerarGrafico(fkEmpresa, fkTanque) {
                 JOIN coletaTemp ct on s.idSensor = ct.fkSensor
                 where fkEmpresa = ${fkEmpresa} and idTanque = ${fkTanque}
             GROUP BY idTanque, dtHora 
-            order by dtHora limit 7;
+            order by dtHora DESC limit 7;
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql)

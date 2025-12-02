@@ -1,5 +1,6 @@
 CREATE DATABASE troustsolutions;
 USE troustsolutions;
+
 /* ORDEM CRIAÇÃO 
 Empresa
 	Usuario
@@ -74,7 +75,7 @@ CREATE TABLE sensor(
 CREATE TABLE coletaTemp(
 	idColeta INT AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
-    dtHora DATETIME,
+    dtHora DATETIME default current_timestamp,
     fkSensor INT,
     CONSTRAINT pk_sensor_coleta PRIMARY KEY (idColeta, fkSensor),
     CONSTRAINT fkSensorColetaTemp
@@ -92,44 +93,49 @@ CREATE TABLE coletaTemp(
 
 -- INSERSÃO DE DADOS
 insert into empresa (nomeFantasia,razaoSocial ,cnpj ,cell,tellFixo, codigo) values
-	(1, 1, 11111111111111, 11111111111, 1111111111, 123456),
-	(2, 2, 22222222222222, 22222222222, 2222222222, 654321);
+	('troustsolutions', 'Troustsolutions LTDA', 11111111111111, 11111111111, 1111111111, 123456);
     
 INSERT INTO tanque (TempMax, TempMin, mts_quadrados, litragem, nome, setor, fkEmpresa) VALUES
 -- Empresa 1
 (18.5, 10.5, 135.50,5000, 'Tanque Principal', 'Setor A', 1),
-(17.0, 11.0, 128.20,5000, 'Tanque Juvenil', 'Setor B', 1),
+(17.0, 11.0, 128.20,5000, 'Tanque Juvenil', 'Setor B', 1);
+/*
 -- Empresa 2
 (19.0, 9.8, 155.50,5500, 'Tanque da Serra', 'Setor Norte', 2),
 (18.2, 10.2, 105.10,4000, 'Tanque Experimental', 'Setor Leste', 2);
-
+*/
 INSERT INTO sensor (status_sen, fkTanque) VALUES
 -- Tanques da Empresa 1
 ('Ativo', 1), -- tanque 1
 ('Ativo', 1), 
 ('Ativo', 2), -- Tanque 2
-('Inativo', 2),
+('Inativo', 2);
+/*
 -- Tanques da Empresa 2
 ('Ativo', 3), -- Tanque 1 
 ('Ativo', 3),
 ('Ativo', 4), -- Tanque 2
 ('Inativo', 4);
-
+*/
 INSERT INTO coletaTemp (temperatura, dtHora, fkSensor) VALUES
 -- Tanque 1 : EMpresa 1
 (15.2, '2025-10-25 08:00:00', 1),
 (15.5, '2025-10-25 12:30:00', 2),
 -- Tanque 2: Empresa 1
 (16.1, '2025-10-24 09:15:00', 3),
-(16.4, '2025-10-24 14:45:00', 4),
+(16.4, '2025-10-24 14:45:00', 4);
+/*
 -- Tanque 3 : Empresa 2
 (14.9, '2025-10-25 07:50:00', 1),
 (15.3, '2025-10-25 07:50:00', 2),
 -- Tanque 4 : Empresa 2
 (16.0, '2025-10-24 10:10:00', 3),
 (16.2, '2025-10-24 13:20:00', 4);
+*/
+desc usuario;
+insert into usuario (nome, email, senha, fkEmpresa) VALUES
+	('Matheus S. Rodrigues', 'matheus@gmail.com', '123456', 1);
 
-       
 -- SELECT
 SELECT * FROM empresa;
 SELECT * FROM usuario;
@@ -181,7 +187,7 @@ SELECT idTanque, nomeTanque, setorTanque, mediaTanque FROM vw_alerta_tanque WHER
 select * from empresa;
 select * from usuario;
 select * from tanque;
-select * from coletaTemp ORDER BY idColeta DESC;
+
 
 select temperatura from coletaTemp 
 JOIN sensor ON idSensor = fkSensor
@@ -212,10 +218,10 @@ CREATE VIEW vw_alerta_tanque AS SELECT t.idTanque,
     FROM tanque t
 		JOIN sensor s ON t.idTanque = s.fkTanque
         JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+        WHERE fkEmpresa = 1 AND dtHora = (select dtHora from coletaTemp JOIN sensor on fkSensor = idSensor WHERE fktanque = t.idTanque order by dtHora DESC limit 1)
     GROUP BY idTanque
     HAVING ROUND(AVG(ct.temperatura), 2) > t.tempMax OR ROUND(AVG(ct.temperatura), 2) < t.tempMin;
-    fkEmpresa
-    
+        
  SELECT t.idTanque,
             t.nome AS nometanque,
             t.setor AS setortanque,
@@ -228,4 +234,19 @@ CREATE VIEW vw_alerta_tanque AS SELECT t.idTanque,
             GROUP BY idTanque, dtHora 
             order by dtHora limit 7;
             
-	
+select * from coletaTemp ORDER BY idColeta DESC;
+
+select t.idTanque,
+		t.nome AS nometanque,
+        t.setor AS setortanque,
+		t.TempMax AS configMaxTemp,
+		t.TempMin AS configMinTemp,
+        ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+		MAX(ct.dtHora) AS ultimaColeta
+		FROM tanque t
+        JOIN sensor s ON t.idTanque = s.fkTanque
+        JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+        WHERE fkEmpresa = 1 AND dtHora = (select dtHora from coletaTemp JOIN sensor on fkSensor = idSensor WHERE fktanque = t.idTanque order by dtHora DESC limit 1)
+        GROUP BY idTanque;
+
+select * from vw_alerta_tanque;
