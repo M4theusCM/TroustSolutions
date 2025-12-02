@@ -567,6 +567,17 @@
     }
 
     function fecharCodigo() {
+        var CopiaCodigo = codigoEmpresa
+
+        navigator.clipboard.writeText(CopiaCodigo)
+            .then(() => {
+                console.log('copiado')
+                alert('Código da empresa copiado com sucesso')
+            })
+            .catch(() =>{
+                console.log('erro na copia')
+            })
+
         cad_1.style.display = 'none';
         cad_2.style.display = 'flex';
     }
