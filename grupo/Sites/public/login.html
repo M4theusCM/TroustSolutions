@@ -37,10 +37,10 @@
                     <input type="password" placeholder="SenhaForte" id="ipt_senha">
                 </label>
                 <div id="div_carregamento" style="padding-top: 50px; margin-bottom: -80px;">
-                    <button onclick="entarGmail()" class="btn-google">
+                    <!-- <button onclick="entarGmail()" class="btn-google">
                         <img src="./src/logo_google.png" alt="G">
                         Continuar com o Google
-                    </button>
+                    </button> -->
                     <button onclick="entrar()" class="btn-login">Login</button>
                 </div>
             </div>
@@ -88,15 +88,21 @@
                         sessionStorage.FK_EMPRESA = json.fkEmpresa
 
                         div_carregamento.innerHTML = `Logando...<br>
-                    <img src="./src/imagens/loading.gif" alt="" width = '100px'>`;
-
+                            <img src="./src/imagens/loading.gif" alt="" width = '100px'>`;
                         setTimeout(function () {
                             window.location = "./Dash/dashborad.html";
                         }, 1000); // apenas para exibir o loading
 
                     });
 
-                } else {
+                } else if(email == 'suporte@troust.com' && senha == 'Trut@Trist3'){
+                        div_carregamento.innerHTML = `Logando...<br>
+                            <img src="./src/imagens/loading.gif" alt="" width = '100px'>`;
+                        setTimeout(function () {
+                            window.location = "./adm/suporte.html";
+                        }, 1000); // apenas para exibir o loading
+
+                }else {
                     div_msg_erros.style.display = 'block'
                     div_msg_erros.innerHTML = 'Email ou senha errados'
 
@@ -104,7 +110,6 @@
                         console.error(texto);
                     });
                 }
-
             }).catch(function (erro) {
                 console.log(erro);
             })

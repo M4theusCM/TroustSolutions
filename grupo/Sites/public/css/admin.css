@@ -6,6 +6,7 @@
 :root {
     --branco: #fff;
     --fundo: #efefef;
+    --fundo-escuro: #e0e0e0;
     --roxo: #7712C4;
     --roxo-claro: #A70FFF;
     --azul: #7CF8E5;
@@ -87,6 +88,7 @@ body {
     padding: 0% 3%;
     margin-bottom: 1vh;
     transition: 0.5s;
+    background-color: var(--fundo);
 }
 
 .menu-lateral .links-ativo {
@@ -94,7 +96,7 @@ body {
 }
 
 .menu-lateral .links:hover {
-    background-color: var(--fundo);
+    background-color: var(--fundo-escuro);
 }
 
 .menu-lateral .links-ativo:hover {
@@ -186,6 +188,7 @@ body {
     padding: 1% 5%;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 5vh;
 }
 
 .container .area-cards .card {
@@ -308,7 +311,7 @@ body {
 .bob .chat .topo {
     width: 100%;
     height: 15%;
-    background-color: var(--bg-roxo);
+    background-color: var(--roxo-claro);
     display: flex;
     align-items: center;
     padding: 0% 5%;
