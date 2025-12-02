@@ -191,6 +191,9 @@ body {
     border-radius: 10px;
     overflow: hidden;
     display: none;
+    border: solid 2px black;
+    box-shadow: rgba(0, 0, 0, 0.297) 0px 5px 15px;
+
 }
 
 .bob .chat .topo {
@@ -300,6 +303,21 @@ body {
     cursor: pointer;
 }
 
+
+.msg-bob .msg-carregando {
+    width: 30%;
+    margin-top: 5px;
+    border-radius: 5px 5px 0px 5px;
+    background-color: #b6b6b6;
+}
+
+.msg-bob .msg-carregando img {
+    /* background-color: rebeccapurple; */
+    width: 60px;
+    margin: -20px 0px;
+    height: 60px;
+
+}
 
 /*Modal*/
 .area-modal {
@@ -427,7 +445,7 @@ body {
     width: 100%;
 }
 
-.modal .area-empresas{
+.modal .area-empresas {
     margin-top: 5vh;
     display: flex;
     flex-direction: column;
@@ -440,17 +458,19 @@ body {
     border-collapse: collapse;
 }
 
-.modal table th{
+.modal table th {
     margin: 0;
     border: solid 1px black;
     text-align: left;
     padding: 0% 3%;
 }
-.modal table td{
+
+.modal table td {
     margin: 0;
     border: solid 1px black;
     padding: 0% 3%;
 }
-.modal table .l1{
+
+.modal table .l1 {
     background-color: rgb(239, 226, 255);
 }

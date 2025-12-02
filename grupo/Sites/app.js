@@ -20,7 +20,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var empresasRouter = require("./src/routes/empresas");
 var tanquesRouter = require("./src/routes/tanques");
 var medidasRouter = require("./src/routes/medidas");
-
+var bobRouter = require('./src/routes/bob')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +33,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
 app.use("/tanques", tanquesRouter);
 app.use("/medidas", medidasRouter);
+app.use("/bob", bobRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

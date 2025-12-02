@@ -27,7 +27,6 @@
                 </div>
             </div>
             <div class="area-nome">
-                <p>Bom dia João Pedro</p>
             </div>
             <div class="area-cards">
                 <div class="card jira-card">
@@ -84,15 +83,9 @@
                     </div>
                     <img onclick="fecharChat()" class="fechar-chat" src="../src/botao-fechar.png" alt="">
                 </div>
-                <div class="area-msgs">
-                    <div class="msg-bob">
-                        <div class="msg">
-                            Olá JP, como posso ajudar?
-                        </div>
-                    </div>
-                    <div class="msg-user">
-                        <div class="msg">Sua duvida aq</div>
-                    </div>
+                <div class="area-msgs" id="chat_user_bob">
+
+
                 </div>
                 <div class="area-ipt">
                     <div class="ipt">
@@ -113,6 +106,11 @@
     function openChat() {
         bob_ia_icon.style.display = 'none'
         chat_bob_user.style.display = 'block'
+        chat_user_bob.innerHTML = `<div class="msg-bob">
+                                        <div class="msg">
+                                            Olá, como posso ajudar?
+                                        </div>
+                                    </div>`
     }
     function fecharChat() {
         bob_ia_icon.style.display = 'block'
@@ -279,6 +277,35 @@
                     console.log('Erro ao buscar as resposta')
                 }
             })
+    }
+
+    async function enviarPergunta() {
+        var pergunta = ipt_msg.value
+        if (pergunta.trim() != '') {
+
+            chat_user_bob.innerHTML += ` <div class="msg-user">
+                                            <div class="msg">${pergunta}</div>
+                                        </div> `
+            ipt_msg.value = ''
+            const response = await fetch('/bob/perguntar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pergunta })
+            });
+            const data = await response.json();
+            console.log(data)
+            chat_user_bob.innerHTML += `
+                    <div class="msg-bob">
+                        <div class="msg">
+                            ${data.resultado}
+                        </div>
+                    </div>
+            `
+
+            console.log(data)
+        }
     }
 
 </script>
