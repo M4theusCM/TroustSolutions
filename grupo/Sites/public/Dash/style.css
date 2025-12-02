@@ -264,19 +264,18 @@ nav .funcionario p {
 
 /* dashboard -Tanque */
 .container-tanque {
+    height: auto;
     width: 80%;
-    height: 100vh;
     background-color: rgb(220, 220, 220);
 }
 
 .container-cards-tanque {
     display: flex;
-    width: 100%;
-    height: 70%;
+    width: auto;
+    height: auto;
     padding: 1%;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
 }
 
 .card {
@@ -289,7 +288,8 @@ nav .funcionario p {
     background-color: #ffffff;
     transition: 0.4s;
     text-decoration: none;
-    color: black
+    color: black;
+    margin: 5px;
 }
 
 .card:hover {
@@ -323,6 +323,11 @@ nav .funcionario p {
 .card .titulo img {
     width: 25px;
     padding: 5px;
+}
+
+.card .titulo img:hover{
+    transform: scale(1.3);
+    transition: 0.5s;
 }
 
 .card .infos {

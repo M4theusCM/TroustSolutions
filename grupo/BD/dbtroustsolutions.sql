@@ -196,3 +196,16 @@ WHERE fkTanque = 9 ORDER BY idColeta DESC;
             WHERE fkEmpresa = 1 AND dtHora = (select dtHora from coletaTemp JOIN sensor on fkSensor = idSensor WHERE fktanque = t.idTanque order by dtHora DESC limit 1)
             GROUP BY idTanque;
             
+CREATE VIEW vw_alerta_tanque AS SELECT t.idTanque,
+	t.nome AS nometanque,
+    t.setor AS setortanque,
+    t.TempMax AS configMaxTemp,
+    t.TempMin AS configMinTemp,
+    ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+    MAX(ct.dtHora) AS ultimaColeta,
+    t.fkEmpresa AS fkEmpresa
+    FROM tanque t
+		JOIN sensor s ON t.idTanque = s.fkTanque
+        JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+    GROUP BY idTanque
+    HAVING ROUND(AVG(ct.temperatura), 2) > t.tempMax OR ROUND(AVG(ct.temperatura), 2) < t.tempMin;
