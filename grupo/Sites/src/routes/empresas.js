@@ -16,12 +16,13 @@ router.post("/cadastrarLogradouro", function (req, res) {
     empresaController.cadastrarLogradouro(req, res);
 });
 
-router.get('/buscarEmpresas', function(req, res){
-    empresaController.buscarEmpresas(req, res)
-})
 
 router.post("/cadastrarTanqueEmpresas", function(req, res){
     empresaController.cadastrarTanqueEmpresa(req, res)
+})
+
+router.get('/buscarEmpresasCad', function(req, res){
+    empresaController.buscarEmpresas(req, res)
 })
 
 module.exports = router;

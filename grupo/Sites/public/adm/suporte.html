@@ -105,7 +105,7 @@
 
 
         <div id="idModal" class="area-modal">
-           
+
         </div>
     </div>
 </body>
@@ -231,41 +231,54 @@
 
     function exibirEmpresas() {
         idModal.style.display = 'flex'
-        fetch("/empresas/buscarEmpresas", { cache: "no-store" })
-        .then(function (empresas){
-            console.log('Empresas: '+ empresas)
-            console.log(JSON.stringify(empresas))
-            if(empresas.ok){
-            }else{
-                console.log('Erro ao buscar as empresas')
-            }
-        })
-
-
-        msg = ` <div class="modal modal-empresa" id="modal_card">
-                <div class="titulo-modal">
-                    <img src="../src/botao-fechar.png" onclick="fecharModal()" alt="Fechar">
-                    <h1>Empresas Cadastradas</h1>
-                </div>
-                <div class="area-empresas">
-                    <table>
-                        <tr>
-                            <th>Nome Fantasia</th>
-                            <th>Código</th>
-                        </tr>
-                        <tr class="l1">
-                            <td>as</td>
-                            <td>aa</td>
-                        </tr>
-                        <tr class="l2">
-                            <td>as</td>
-                            <td>aa</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>`
-    
-        
+        fetch("/empresas/buscarEmpresasCad")
+            .then(function (resposta) {
+                // console.log('resposta: ' + resposta)
+                if (resposta.ok) {
+                    resposta.json().then(function (empresas) {
+                        var qtdEmpresas = empresas.length
+                        // console.log(JSON.stringify(empresas))
+                        var msgEmpresas = ''
+                        for (var i = 0; i < qtdEmpresas; i++) {
+                            var empresaAtual = empresas[i]
+                            console.log(empresaAtual)
+                            if (i % 2 == 0) {
+                                msgEmpresas += `
+                                <tr class="l1">
+                                    <td>${empresaAtual.nomeFantasia}</td>
+                                    <td>${empresaAtual.codigo}</td>
+                                </tr>
+                             `
+                            } else {
+                                msgEmpresas += `
+                                <tr>
+                                    <td>${empresaAtual.nomeFantasia}</td>
+                                    <td>${empresaAtual.codigo}</td>
+                                </tr>
+                             `
+                            }
+                        }
+                        var msg = ` <div class="modal modal-empresa" id="modal_card">
+                                    <div class="titulo-modal">
+                                        <img src="../src/botao-fechar.png" onclick="fecharModal()" alt="Fechar">
+                                        <h1>Empresas Cadastradas</h1>
+                                    </div>
+                                    <div class="area-empresas">
+                                        <table>
+                                            <tr>
+                                                <th>Nome Fantasia</th>
+                                                <th>Código</th>
+                                            </tr>
+                                        ${msgEmpresas}
+                                        </table>
+                                    </div>
+                                </div>`
+                        idModal.innerHTML = msg
+                    })
+                } else {
+                    console.log('Erro ao buscar as resposta')
+                }
+            })
     }
 
 </script>
