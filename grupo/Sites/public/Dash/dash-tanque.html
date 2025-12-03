@@ -36,6 +36,10 @@
                     <div class="links links-ativo">
                         <a href="./dash-tanque.html">Tanque</a>
                     </div>
+                    <div class="links suporte">
+                        <a href="https://troustsolutions.atlassian.net/servicedesk/customer/portal/2"
+                            target="_blank">Suporte</a>
+                    </div>
                     <!-- <div class="links">
                         <a href="./dashborad.html">Funcionario</a>
                     </div> -->
@@ -292,11 +296,6 @@
                         <hr>
                         <b>${t.mediaTanque}ºC</b><br>
                     </div>
-                    <div class="box">
-                        <span>Quantidade de Alertas</span><br>
-                        <hr>
-                        <b>0</b><br>
-                    </div>
                 </div>
                 <div class="graficos-modal">
                     <div class="grafico-principal grafico-modal">
@@ -430,21 +429,21 @@
                         console.log(dados.labels[dados.labels.length - 1])
                         console.log("---------------------------------------------------------------")
                     } else {
-                        if(dados.length > 7){
+                        if (dados.length > 7) {
 
                             // tirando e colocando valores no gráfico
                             dados.labels.shift(); // apagar o primeiro
                             dados.labels.push(novoRegistro[0].ultimaColeta); // incluir um novo momento
-                            
+
                             dados.datasets[0].data.shift();  // apagar o primeiro de umidade
                             dados.datasets[0].data.push(novoRegistro[0].mediaTanque); // incluir uma nova medida de umidade
-                            
-                        }else{
+
+                        } else {
                             dados.labels.push(novoRegistro[0].ultimaColeta); // incluir um novo momento
                             dados.datasets[0].data.push(novoRegistro[0].mediaTanque); // incluir uma nova medida de umidade
 
                         }
-                            myChart.update();
+                        myChart.update();
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar

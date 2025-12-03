@@ -82,6 +82,11 @@ body {
     margin-bottom: 1vh;
     transition: 0.5s;
 }
+.menu-lateral .suporte{
+    margin-top: auto;
+    margin-bottom: 20%;
+    background-color: rgb(202, 202, 202);
+}
 
 .menu-lateral .links-ativo {
     background-color: var(--roxo-claro);
@@ -449,20 +454,30 @@ nav .funcionario p {
 .graficos-modal {
     display: flex;
     justify-content: space-evenly;
+    padding: 1%;
 }
 
 .grafico-modal {
     background-color: var(--modal);
+    padding: 1%;
+    border-radius: 10px;
 }
 
 .kpis-modal {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .kpis-modal .box {
     height: 80px;
     background-color: var(--modal-kpi);
+    color: white;
+    padding: 1%;
     border-radius: 10px;
+}
+.kpis-modal .box b{
+    text-align: center;
+    font-size: 20px;
 }
 
 .card-config {
