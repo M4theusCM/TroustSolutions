@@ -522,6 +522,7 @@ nav .funcionario p {
     cursor: pointer;
     text-decoration: none;
     color: black;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.275);
 }
 
 .modal-alerta .infos-alerta {

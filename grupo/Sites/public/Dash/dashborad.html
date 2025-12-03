@@ -36,6 +36,9 @@
           <div class="links ">
             <a href="./dash-tanque.html">Tanque</a>
           </div>
+          <div class="links ">
+            <a href="https://troustsolutions.atlassian.net/servicedesk/customer/portal/2" target="_blank">Suporte</a>
+          </div>
           <!-- <div class="links">
                         <a href="./dashborad.html">Funcionario</a>
                     </div> -->
@@ -149,6 +152,8 @@
     //   clearTimeout(proximaAtualizacao);
     // }
 
+
+
     fetch(`/medidas/ultimas/${fkEmpresa}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
@@ -165,6 +170,11 @@
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
+
+    alertaTanque()
+    setInterval(() => {
+      alertaTanque()
+    }, 5000)
   }
 
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
@@ -338,6 +348,7 @@
 
   // alerta tanque
   function alertaTanque() {
+    console.log('Ta chamando aq')
     console.log('buscar alertas')
     var fkEmpresa = sessionStorage.FK_EMPRESA
     fetch(`/tanques/alertaTanque/${fkEmpresa}`, { cache: "no-store" })
