@@ -11,4 +11,8 @@ router.get("/tempo-real/:idTanque/:fkEmpresa", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 });
 
+router.get("/principal/:fkEmpresa", function (req, res) {
+    medidaController.atualizarGraficoPrincipal(req, res);
+});
+
 module.exports = router;

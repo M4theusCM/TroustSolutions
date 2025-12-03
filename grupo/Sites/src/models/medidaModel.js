@@ -27,8 +27,6 @@ GROUP BY t.idTanque;`;
 }
 
 function buscarMedidasEmTempoReal(idTanque, fkEmpresa) {
-    console.log("TESTE MATHEUS É GAY: " + fkEmpresa)
-
     var instrucaoSql = `SELECT t.idTanque,
             t.nome AS nometanque,
             t.setor AS setortanque,
@@ -45,7 +43,15 @@ function buscarMedidasEmTempoReal(idTanque, fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function atualizarGraficoPrincipal(fkEmpresa) {
+    var instrucaoSql = `SELECT * FROM vw_ultimasMediasTanque where fkEmpresa = ${fkEmpresa}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    atualizarGraficoPrincipal
 }
