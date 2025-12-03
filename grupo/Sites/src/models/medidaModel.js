@@ -26,15 +26,20 @@ GROUP BY t.idTanque;`;
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarMedidasEmTempoReal(idTanque, fkEmpresa) {
+    console.log("TESTE MATHEUS É GAY: " + fkEmpresa)
 
-    var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        FROM medida WHERE fk_aquario = ${idAquario} 
-                    ORDER BY id DESC LIMIT 1`;
+    var instrucaoSql = `SELECT t.idTanque,
+            t.nome AS nometanque,
+            t.setor AS setortanque,
+            ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+            DATE_FORMAT(MAX(ct.dtHora), '%H:%i') AS ultimaColeta
+            FROM tanque t
+                JOIN sensor s ON t.idTanque = s.fkTanque
+                JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+                where fkEmpresa = ${fkEmpresa} and idTanque = ${idTanque}
+            GROUP BY idTanque, dtHora 
+            order by ultimaColeta DESC limit 7;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

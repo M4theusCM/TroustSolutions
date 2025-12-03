@@ -108,8 +108,8 @@ INSERT INTO sensor (status_sen, fkTanque) VALUES
 -- Tanques da Empresa 1
 ('Ativo', 1), -- tanque 1
 ('Ativo', 1), 
-('Ativo', 2), -- Tanque 2
-('Inativo', 2);
+('Ativo', 1), -- Tanque 2
+('Inativo', 1);
 /*
 -- Tanques da Empresa 2
 ('Ativo', 3), -- Tanque 1 
@@ -119,11 +119,10 @@ INSERT INTO sensor (status_sen, fkTanque) VALUES
 */
 INSERT INTO coletaTemp (temperatura, dtHora, fkSensor) VALUES
 -- Tanque 1 : EMpresa 1
-(15.2, '2025-10-25 08:00:00', 1),
-(15.5, '2025-10-25 12:30:00', 2),
+(25.2, '2025-10-25 19:54:00', 1);
 -- Tanque 2: Empresa 1
-(16.1, '2025-10-24 09:15:00', 3),
-(16.4, '2025-10-24 14:45:00', 4);
+(16.1, '2025-10-24 03:15:00', 2),
+(16.4, '2025-10-24 04:45:00', 2);
 /*
 -- Tanque 3 : Empresa 2
 (14.9, '2025-10-25 07:50:00', 1),
@@ -192,7 +191,7 @@ select * from tanque;
 select temperatura from coletaTemp 
 JOIN sensor ON idSensor = fkSensor
 JOIN tanque ON idTanque = fkTanque
-WHERE fkTanque = 9 ORDER BY idColeta DESC;
+WHERE fkTanque = 1 ORDER BY idColeta DESC;
 
  SELECT t.idTanque,
             t.nome AS nometanque,
@@ -248,5 +247,14 @@ select t.idTanque,
         JOIN coletaTemp ct on s.idSensor = ct.fkSensor
         WHERE fkEmpresa = 1 AND dtHora = (select dtHora from coletaTemp JOIN sensor on fkSensor = idSensor WHERE fktanque = t.idTanque order by dtHora DESC limit 1)
         GROUP BY idTanque;
+        
+        SELECT ROUND(AVG(ct.temperatura), 2) AS mediaTanque,
+            DATE_FORMAT(MAX(ct.dtHora), '%H:%i') AS ultimaColeta
+            FROM tanque t
+                JOIN sensor s ON t.idTanque = s.fkTanque
+                JOIN coletaTemp ct on s.idSensor = ct.fkSensor
+                where fkEmpresa = 1 and idTanque = 1
+            GROUP BY idTanque, dtHora 
+            order by ultimaColeta DESC limit 7;
 
 select * from vw_alerta_tanque;

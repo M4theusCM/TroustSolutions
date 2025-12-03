@@ -99,13 +99,13 @@ function alertaTemp(req, res){
 function gerarGrafico(req, res) {
     var fkEmpresa = req.body.fkEmpresaServer
     var idTanque = req.body.idTanqueServer
-    console.log('A: ' + fkEmpresa, idTanque)
+
+    console.log('Valores recebidos para o select: ' + fkEmpresa, idTanque)
     if (fkEmpresa == undefined) {
         res.status(400).send('Empresa não encontrada')
     } else if (idTanque == undefined) {
         res.status(400).send('Tanque não encontrado')
     } else {
-        console.log('Entrei no controller')
         tanqueModel.gerarGrafico(fkEmpresa, idTanque)
             .then(
                 function (resposta) {
