@@ -74,6 +74,15 @@ body {
     align-items: center;
 }
 
+.menu-lateral .span-sair {
+    text-decoration: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .menu-lateral .links {
     width: 83%;
     height: 40px;
@@ -135,7 +144,8 @@ body {
     align-items: center;
 }
 
-.menu-lateral .sair a {
+.menu-lateral .sair .span-sair {
+    cursor: pointer;
     color: #FF5E5E;
     justify-content: space-around;
 }
@@ -332,7 +342,7 @@ nav .funcionario p {
 }
 
 .card .titulo img:hover{
-    transform: scale(1.3);
+    transform: scale(1.15);
     transition: 0.5s;
 }
 
@@ -412,7 +422,7 @@ nav .funcionario p {
 .modal-tanque {
     top: 50px;
     width: 65vw;
-    height: 75vh;
+    height: 80vh;
     background-color: #ffffff;
     border-radius: 10px;
     padding: 1% 2%;
@@ -505,8 +515,11 @@ nav .funcionario p {
 }
 
 .infos-config-modal label input {
-    height: 10px;
-    padding: 1% 3%;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 3px;
+    height: 20px;
+    padding: 0% 2%;
 }
 
 .btn-salvar {

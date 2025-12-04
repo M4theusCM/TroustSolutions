@@ -96,8 +96,8 @@
                     });
 
                 } else if(email == 'suporte@troust.com' && senha == 'Trut@Trist3'){
-                        div_carregamento.innerHTML = `Logando...<br>
-                            <img src="./src/imagens/loading.gif" alt="" width = '100px'>`;
+                        sessionStorage.NIVEL_SUPORTE = 'N3'
+                        div_carregamento.innerHTML = `Logando...<br> <img src="./src/imagens/loading.gif" alt="" width = '100px'>`;
                         setTimeout(function () {
                             window.location = "./adm/suporte.html";
                         }, 1000); // apenas para exibir o loading

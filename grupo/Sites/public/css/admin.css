@@ -23,11 +23,12 @@ body {
     margin: 0;
     overflow-x: hidden;
     background-color: #dfdfdf;
+
 }
 
 .container-area {
     width: 100vw;
-    min-height: 10 0vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
 }
@@ -138,7 +139,7 @@ body {
     align-items: center;
 }
 
-.menu-lateral .sair a {
+.menu-lateral .sair .span-sair {
     color: #FF5E5E;
     justify-content: space-around;
 }
@@ -156,6 +157,7 @@ body {
 .container-area .container {
     width: 80%;
     min-height: 100vh;
+    padding-bottom: 5vh;
 }
 
 .container .titulo {
@@ -272,7 +274,7 @@ body {
 
 
 .bob {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -460,7 +462,7 @@ body {
 
 .modal {
     width: 900px;
-    height: 450px;
+    min-height: 400px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     display: flex;
@@ -470,6 +472,14 @@ body {
 
 .modal-empresa {
     flex-direction: column;
+}
+
+.modal .area-fluxograma{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .modal .ipts {
@@ -531,6 +541,19 @@ body {
     border-radius: 3px;
     height: 30px;
     padding: 0% 2%;
+}
+
+.fluxograma{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 2%;
+}
+.fluxograma img{
+    height: 100%;
+    border: solid 1px black;
 }
 
 .modal .enviar {

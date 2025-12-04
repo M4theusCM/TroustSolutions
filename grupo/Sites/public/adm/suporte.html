@@ -7,7 +7,7 @@
     <title>Suporte</title>
     <link rel="icon" type="image/x-icon" href="../src/Logo-icon.png">
     <link rel="stylesheet" href="../css/admin.css">
-
+    <script src="../js/session.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -17,7 +17,7 @@
     </style>
 </head>
 
-<body>
+<body onload="validarSessaoN3()">
     <div class="container-area">
 
         <div class="menu-lateral" id="menu_lateral">
@@ -30,25 +30,25 @@
                     <a href="./suporte.html">Home</a>
                 </div>
                 <div class="links">
-                    <a href="truticultura documentação (1).pdf" download="documentacao">Documentação</a>
+                    <a href="./docs/truticultura documentação (1).pdf" download="documentacao">Documentação</a>
                 </div>
                 <div class="links">
-                    <a href="Design sem nome (1).pdf" download="Manual">Manual de instalação</a>
+                    <a href="./docs/Manual de Software (1).pdf" download="Manual">Manual de instalação</a>
                 </div>
-                
+
             </div>
             <div class="sair links">
-                <a href="../index.html">
+                <span href="../index.html" onclick="limparSessao()">
                     <img src="../src/icon-desconectar.png" alt="Icon">
                     Desconectar
-                </a>
+                </span>
             </div>
 
         </div>
         <div class="container">
             <div class="titulo">
                 <div>
-                    <h1>Suporte</h1>
+                    <h1>Suporte - N3</h1>
                 </div>
             </div>
             <div class="area-cards">
@@ -63,15 +63,15 @@
                         </div>
                     </a>
                 </div>
-                <div class="card trello-card">
-                    <a href="https://trello.com/b/fy7P32D4" class="trello tipo-card" target="_blank">
+                <div class="card tanque-card">
+                    <div onclick="exibirFluxograma()" class="empresas tipo-card" target="_blank">
                         <div class="titulo">
-                            <h2>Trello</h2>
+                            <h2>Fluxograma</h2>
                         </div>
                         <div class="infos">
-                            <img src="../src/logos/trello.png" alt="trello">
+                            <img src="../src/icons/fluxograma.png" alt="tanque">
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="card tanque-card">
                     <div onclick="addTanque()" class="tanque tipo-card" target="_blank">
@@ -92,6 +92,16 @@
                             <img src="../src/icons/companhia.png" alt="tanque">
                         </div>
                     </div>
+                </div>
+                <div class="card trello-card">
+                    <a href="https://trello.com/b/fy7P32D4" class="trello tipo-card" target="_blank">
+                        <div class="titulo">
+                            <h2>Trello</h2>
+                        </div>
+                        <div class="infos">
+                            <img src="../src/logos/trello.png" alt="trello">
+                        </div>
+                    </a>
                 </div>
 
             </div>
@@ -333,6 +343,23 @@
         }
     }
 
+    function exibirFluxograma() {
+        idModal.style.display = 'flex'
+        idModal.innerHTML = `
+            <div class="modal" id="modal_card">
+                 <div class="area-fluxograma">
+                     <div class="titulo-modal">
+                        <img src="../src/botao-fechar.png" onclick="fecharModal()" alt="Fechar">
+                        <h1>Fluxograma de atendimento</h1>
+                    </div>
+                    <div class="fluxograma">
+                        <img src="./docs/fluxograma.png" alt="Fluxograma">
+                    </div>
+                </div>
+                
+            </div>
+        `
+    }
 </script>
 
 </html>
