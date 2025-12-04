@@ -258,3 +258,12 @@ select t.idTanque,
             order by ultimaColeta DESC limit 7;
 
 select * from vw_alerta_tanque;
+
+select count(DISTINCT t.idtanque) AS qtdTanque,
+	count(DISTINCT s.idSensor) AS qtdSensor,
+    (select COUNT(DISTINCT idTanque) from vw_alerta_tanque WHERE t.fkEmpresa = 1) AS qtdAlertas
+    from tanque t 
+    JOIN sensor s ON t.idTanque = s.fktanque  
+    WHERE t.fkEmpresa = 1;
+    
+

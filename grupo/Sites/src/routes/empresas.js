@@ -25,4 +25,8 @@ router.get('/buscarEmpresasCad', function(req, res){
     empresaController.buscarEmpresas(req, res)
 })
 
+router.get(`/kpisEmpresa/:fkEmpresa`, function(req, res){
+    empresaController.kpisEmpresa(req, res)
+})
+
 module.exports = router;

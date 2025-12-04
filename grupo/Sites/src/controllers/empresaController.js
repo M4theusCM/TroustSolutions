@@ -52,11 +52,25 @@ function cadastrarTanqueEmpresa(req, res) {
     });
 }
 
-function buscarEmpresas(req, res){
+function buscarEmpresas(req, res) {
   empresaModel.buscarEmpresas()
-  .then((resultado) => {
-    res.status(201).json(resultado)
-  })
+    .then((resultado) => {
+      res.status(201).json(resultado)
+    })
+}
+
+
+function kpisEmpresa(req, res) {
+  var fkEmpresa = req.params.fkEmpresa
+  if (fkEmpresa == undefined) {
+    res.status(400).send('Empresa não encontrada')
+  } else {
+    empresaModel.kpisEmpresa(fkEmpresa)
+    .then((resultado) => {
+      res.status(201).json(resultado)
+    })
+  }
+
 }
 
 module.exports = {
@@ -64,5 +78,6 @@ module.exports = {
   cadastrarEmpresa,
   cadastrarLogradouro,
   cadastrarTanqueEmpresa,
-  buscarEmpresas
+  buscarEmpresas,
+  kpisEmpresa
 };

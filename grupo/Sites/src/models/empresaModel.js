@@ -30,10 +30,24 @@ function buscarEmpresas(){
   return database.executar(instrucaoSql);
 }
 
+function kpisEmpresa(fkEmpresa){
+  var instrucaoSql = `
+    select count(DISTINCT t.idtanque) AS qtdTanque,
+    count(DISTINCT s.idSensor) AS qtdSensor,
+    (select COUNT(DISTINCT idTanque) from vw_alerta_tanque WHERE t.fkEmpresa = 1) AS qtdAlertas
+    from tanque t 
+    JOIN sensor s ON t.idTanque = s.fktanque  
+    WHERE t.fkEmpresa = ${fkEmpresa};
+  `
+
+  return database.executar(instrucaoSql)
+}
+
 module.exports = {
   buscarPorCnpj,
   cadastrarEmpresa,
   cadastrarLogradouro,
   cadastrarTanqueEmpresa,
-  buscarEmpresas
+  buscarEmpresas,
+  kpisEmpresa
 };
